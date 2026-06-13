@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Champion Digital Media</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Azeret Mono (system type) is free on Google Fonts. Podium Sharp Italic (display)
+     is licensed — drop the webfont @font-face below and it takes over automatically. -->
+<link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#141414;
+    --cream:#F7F3E9;
+    --amber:#F9AC24;
+    --blue:#062D51;
+    --white:#ffffff;
+    --mono:'Azeret Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    /* Display: swap 'Podium Sharp' in via @font-face for the real thing */
+    --display:'Podium Sharp','Arial Narrow','Helvetica Neue',Arial,sans-serif;
+    --stage:340vh; /* scroll distance that drives the 9s clip */
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:auto}
+  body{
+    background:var(--ink); color:var(--cream);
+    font-family:var(--mono); -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  /* ---------- HERO (scroll-scrubbed) ---------- */
+  .hero__stage{ height:var(--stage); position:relative; }
+  .hero__sticky{
+    position:sticky; top:0; height:100vh; width:100%;
+    overflow:hidden; background:#0b0b0b;
+  }
+  .hero__video{
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; object-position:center;
+  }
+  /* left scrim for headline legibility — fades in with the reveal */
+  .hero__scrim{
+    position:absolute; inset:0; pointer-events:none; opacity:0;
+    background:linear-gradient(90deg,
+      rgba(20,20,20,.72) 0%, rgba(20,20,20,.45) 32%,
+      rgba(20,20,20,.10) 55%, rgba(20,20,20,0) 72%);
+  }
+  .hero__content{
+    position:absolute; left:0; top:0; height:100%;
+    width:min(620px,52vw); padding:clamp(28px,6vw,80px);
+    display:flex; flex-direction:column; justify-content:center;
+    gap:22px; opacity:0; transform:translateX(-28px);
+    will-change:opacity,transform;
+  }
+  .eyebrow{
+    font-family:var(--mono); font-weight:600; letter-spacing:.34em;
+    text-transform:uppercase; font-size:12px; color:var(--amber);
+  }
+  .hero h1{
+    font-family:var(--display); font-style:italic; font-weight:700;
+    text-transform:uppercase; line-height:.92; letter-spacing:-.01em;
+    font-size:clamp(54px,8.5vw,120px); color:var(--white);
+    text-shadow:0 2px 40px rgba(0,0,0,.35);
+  }
+  .hero h1 .amber{ color:var(--amber) }
+  .hero .sub{
+    font-size:clamp(15px,1.5vw,18px); line-height:1.5; max-width:34ch;
+    color:var(--cream);
+  }
+  .cta{
+    align-self:flex-start; margin-top:6px;
+    font-family:var(--mono); font-weight:600; letter-spacing:.04em;
+    font-size:14px; text-transform:uppercase; text-decoration:none;
+    color:var(--ink); background:var(--amber);
+    padding:14px 22px; border-radius:2px;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .cta:hover{ transform:translateY(-2px); box-shadow:0 10px 30px rgba(249,172,36,.3) }
+
+  /* scroll cue — visible only at the very top */
+  .cue{
+    position:absolute; left:50%; bottom:34px; transform:translateX(-50%);
+    font-family:var(--mono); font-size:11px; letter-spacing:.3em;
+    text-transform:uppercase; color:rgba(247,243,233,.8);
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+    transition:opacity .4s ease;
+  }
+  .cue .bar{ width:1px; height:42px; background:linear-gradient(var(--amber),transparent); animation:drop 1.8s ease-in-out infinite }
+  @keyframes drop{ 0%{transform:scaleY(.2);transform-origin:top;opacity:.4} 50%{transform:scaleY(1);opacity:1} 100%{transform:scaleY(.2);transform-origin:bottom;opacity:.4} }
+
+  /* tiny top bar */
+  .nav{
+    position:fixed; inset:0 0 auto 0; z-index:10; display:flex;
+    justify-content:space-between; align-items:center;
+    padding:18px clamp(20px,5vw,56px); mix-blend-mode:difference;
+  }
+  .nav .mark{ font-family:var(--display); font-style:italic; font-weight:700;
+    text-transform:uppercase; letter-spacing:.02em; color:#fff; font-size:18px }
+  .nav .links{ display:flex; gap:26px; font-size:12px; letter-spacing:.18em;
+    text-transform:uppercase; color:#fff }
+  .nav a{ color:inherit; text-decoration:none; opacity:.85 }
+  .nav a:hover{ opacity:1 }
+
+  /* ---------- CONTENT below the fold ---------- */
+  .section{ padding:clamp(72px,12vh,160px) clamp(24px,8vw,140px) }
+  .section--ink{ background:var(--ink); color:var(--cream) }
+  .section--cream{ background:var(--cream); color:var(--ink) }
+  .kicker{ font-weight:600; letter-spacing:.3em; text-transform:uppercase;
+    font-size:12px; color:var(--amber); margin-bottom:22px }
+  .section h2{ font-family:var(--display); font-style:italic; font-weight:700;
+    text-transform:uppercase; line-height:.95; letter-spacing:-.01em;
+    font-size:clamp(34px,5.5vw,72px); max-width:16ch }
+  .section p.lead{ margin-top:24px; max-width:52ch; line-height:1.6;
+    font-size:clamp(15px,1.4vw,18px) }
+  .grid{ margin-top:64px; display:grid; gap:1px; background:rgba(247,243,233,.14);
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr)) }
+  .grid .cell{ background:var(--ink); padding:34px 28px }
+  .section--cream .grid{ background:rgba(20,20,20,.12) }
+  .section--cream .grid .cell{ background:var(--cream) }
+  .grid .n{ font-family:var(--display); font-style:italic; font-weight:700;
+    font-size:46px; color:var(--amber); line-height:1 }
+  .grid h3{ margin:14px 0 8px; font-size:15px; letter-spacing:.04em; text-transform:uppercase }
+  .grid p{ font-size:13.5px; line-height:1.55; opacity:.8 }
+  footer{ background:var(--ink); color:var(--cream); padding:40px clamp(24px,8vw,140px);
+    font-size:12px; letter-spacing:.12em; text-transform:uppercase; opacity:.7;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px }
+
+  @media (max-width:720px){
+    :root{ --stage:300vh }
+    .hero__content{ width:88vw }
+    .nav .links{ display:none }
+  }
+  @media (prefers-reduced-motion:reduce){
+    .hero__stage{ height:auto }
+    .hero__sticky{ position:relative; height:100vh }
+    .hero__content{ opacity:1; transform:none }
+    .hero__scrim{ opacity:1 }
+    .cue{ display:none }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <span class="mark">Champion</span>
+  <span class="links"><a href="#work">Work</a><a href="#system">System</a><a href="#contact">Contact</a></span>
+</nav>
+
+<header class="hero">
+  <div class="hero__stage" id="stage">
+    <div class="hero__sticky">
+      <video class="hero__video" id="hero" src="assets/hero.mp4" poster="assets/poster.jpg"
+             muted playsinline preload="auto" disablepictureinpicture></video>
+      <div class="hero__scrim" id="scrim"></div>
+      <div class="hero__content" id="content">
+        <span class="eyebrow">Champion Digital Media</span>
+        <h1>Still at <span class="amber">speed.</span></h1>
+        <p class="sub">We build brand <em>and</em> demand as one system — for B2B brands that move.</p>
+        <a class="cta" href="#work">See the work →</a>
+      </div>
+      <div class="cue" id="cue"><span>Scroll</span><span class="bar"></span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="section section--ink" id="system">
+    <div class="kicker">Brand + Demand, engineered</div>
+    <h2>Most studios make you look good. We make the right people choose you.</h2>
+    <p class="lead">Proof-grade creative on top, a demand engine underneath — built as one system, so the work that earns attention is the same work that warms the pipeline before a sales call ever happens.</p>
+    <div class="grid">
+      <div class="cell"><div class="n">01</div><h3>Position</h3><p>Find the white space competitors can't copy, then commit to it.</p></div>
+      <div class="cell"><div class="n">02</div><h3>Create</h3><p>Film-grade stills and motion that refuse boring-corporate.</p></div>
+      <div class="cell"><div class="n">03</div><h3>Demand</h3><p>Turn attention into a warm, scored pipeline — handed to sales hot.</p></div>
+      <div class="cell"><div class="n">04</div><h3>Prove</h3><p>Show the work and the numbers. No claims we can't demonstrate.</p></div>
+    </div>
+  </section>
+
+  <section class="section section--cream" id="work">
+    <div class="kicker">Selected work</div>
+    <h2>For brands that move.</h2>
+    <p class="lead">Freight, logistics, and the technical B2B world — taste and capability proven, not just promised. (Drop case studies in here.)</p>
+  </section>
+</main>
+
+<footer id="contact">
+  <span>© Champion Digital Media</span>
+  <span>Brand + Demand · Built in Champortal</span>
+</footer>
+
+<script>
+(function(){
+  var video   = document.getElementById('hero');
+  var stage   = document.getElementById('stage');
+  var content = document.getElementById('content');
+  var scrim   = document.getElementById('scrim');
+  var cue     = document.getElementById('cue');
+
+  var duration = 9;           // updated from metadata
+  var targetT  = 0;           // where scroll wants the playhead
+  var curT     = 0;           // smoothed playhead
+  var reduce   = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  video.addEventListener('loadedmetadata', function(){
+    if (isFinite(video.duration) && video.duration > 0) duration = video.duration;
+  });
+  // prime decoding so the first seek is instant (muted autoplay is allowed)
+  function prime(){ var p = video.play(); if (p && p.then) p.then(function(){ video.pause(); video.currentTime = 0; }).catch(function(){}); }
+  prime();
+
+  function clamp(v,a,b){ return v<a?a:(v>b?b:v); }
+  function map(v,a,b){ return clamp((v-a)/(b-a),0,1); }
+
+  function progress(){
+    var r = stage.getBoundingClientRect();
+    var scrollable = r.height - window.innerHeight;
+    return clamp(-r.top / scrollable, 0, 1);
+  }
+
+  function onScroll(){
+    var p = progress();
+    targetT = p * (duration - 0.04);
+
+    // headline + scrim reveal as the jet settles to the right
+    var rev = map(p, 0.60, 0.92);
+    content.style.opacity = rev;
+    content.style.transform = 'translateX(' + (-28 * (1 - rev)) + 'px)';
+    scrim.style.opacity = rev;
+
+    // scroll cue only at the very top
+    cue.style.opacity = (p < 0.04) ? 1 : 0;
+  }
+
+  // smooth the playhead toward the scroll target (buttery scrub)
+  function tick(){
+    curT += (targetT - curT) * 0.18;
+    if (Math.abs(targetT - curT) < 0.002) curT = targetT;
+    if (video.readyState >= 2 && Math.abs(video.currentTime - curT) > 0.005){
+      try { video.currentTime = curT; } catch(e){}
+    }
+    requestAnimationFrame(tick);
+  }
+
+  if (reduce){
+    video.currentTime = 0.0; // show interior; CSS reveals the headline statically
+  } else {
+    window.addEventListener('scroll', onScroll, {passive:true});
+    window.addEventListener('resize', onScroll);
+    onScroll();
+    requestAnimationFrame(tick);
+  }
+})();
+</script>
+</body>
+</html>
