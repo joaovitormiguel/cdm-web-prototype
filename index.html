@@ -8,7 +8,6 @@
 <link rel="icon" href="assets/brand/cream-logo.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Real Champion type: Azeret Mono (Google) + Podium Sharp (their Adobe Fonts kit). -->
 <link rel="stylesheet" href="https://use.typekit.net/qzp2ywl.css">
 <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
@@ -16,7 +15,7 @@
     --ink:#141414; --cream:#F7F3E9; --amber:#F9AC24; --blue:#062D51; --white:#fff;
     --mono:'Azeret Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
     --display:'podium-sharp-variable','Arial Narrow','Helvetica Neue',Arial,sans-serif;
-    --stage:340vh;
+    --stage:340vh; --r-card:24px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{ background:var(--ink); color:var(--cream); font-family:var(--mono);
@@ -25,7 +24,7 @@
   .display{ font-family:var(--display); font-style:italic; font-weight:800;
     text-transform:uppercase; line-height:.92; letter-spacing:-.005em; }
 
-  /* ---------- NAV ---------- */
+  /* ---------- NAV (header — unchanged) ---------- */
   .nav{ position:fixed; inset:0 0 auto 0; z-index:20; display:flex;
     justify-content:space-between; align-items:center;
     padding:16px clamp(20px,5vw,56px);
@@ -35,10 +34,10 @@
     letter-spacing:.18em; text-transform:uppercase }
   .nav a{ color:var(--cream); text-decoration:none; opacity:.82 }
   .nav a:hover{ opacity:1; color:var(--amber) }
-  .nav .pill{ border:1px solid var(--amber); color:var(--amber); padding:8px 16px; border-radius:2px; opacity:1 }
+  .nav .pill{ border:1px solid var(--amber); color:var(--amber); padding:9px 18px; border-radius:999px; opacity:1 }
   .nav .pill:hover{ background:var(--amber); color:var(--ink) }
 
-  /* ---------- HERO (scroll-scrubbed) ---------- */
+  /* ---------- HERO (header — unchanged) ---------- */
   .hero__stage{ height:var(--stage); position:relative }
   .hero__sticky{ position:sticky; top:0; height:100vh; width:100%; overflow:hidden; background:#0b0b0b }
   .hero__video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover }
@@ -52,8 +51,11 @@
   .hero h1 .amber{ color:var(--amber) }
   .hero .sub{ font-size:clamp(15px,1.5vw,18px); line-height:1.5; max-width:40ch; color:var(--cream) }
   .row{ display:flex; gap:14px; flex-wrap:wrap; margin-top:4px }
+
+  /* ---------- BUTTONS (rounded) ---------- */
   .btn{ font-weight:600; letter-spacing:.04em; font-size:13px; text-transform:uppercase;
-    text-decoration:none; padding:14px 22px; border-radius:2px; transition:transform .15s, box-shadow .15s, background .15s, color .15s }
+    text-decoration:none; padding:15px 26px; border-radius:999px;
+    transition:transform .15s, box-shadow .15s, background .15s, color .15s }
   .btn--amber{ color:var(--ink); background:var(--amber) }
   .btn--amber:hover{ transform:translateY(-2px); box-shadow:0 10px 30px rgba(249,172,36,.3) }
   .btn--ghost{ color:var(--cream); border:1px solid rgba(247,243,233,.4) }
@@ -70,18 +72,28 @@
   .ink{ background:var(--ink); color:var(--cream) }
   .cream{ background:var(--cream); color:var(--ink) }
   .kicker{ font-weight:600; letter-spacing:.3em; text-transform:uppercase; font-size:12px; color:var(--amber); margin-bottom:26px }
-  .statement{ font-size:clamp(26px,3.6vw,52px); line-height:1.12; max-width:20ch; letter-spacing:-.01em }
+  .statement{ font-size:clamp(26px,3.6vw,52px); line-height:1.12; max-width:22ch; letter-spacing:-.01em }
   .statement.display{ line-height:.98 }
   .lead{ margin-top:28px; max-width:60ch; line-height:1.65; font-size:clamp(15px,1.4vw,18px); opacity:.92 }
   .amber-text{ color:var(--amber) }
 
-  /* services */
-  .cols{ display:grid; gap:48px; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); margin-top:18px }
-  .col h3{ font-size:12px; letter-spacing:.28em; text-transform:uppercase; color:var(--amber); margin-bottom:22px }
-  .col ul{ list-style:none }
-  .col li{ font-family:var(--display); font-style:italic; font-weight:800; text-transform:uppercase;
-    font-size:clamp(26px,3vw,40px); line-height:1.18; padding:14px 0; border-bottom:1px solid rgba(247,243,233,.14) }
-  .cream .col li{ border-color:rgba(20,20,20,.12) }
+  /* reel */
+  .reel{ margin-top:48px; border-radius:var(--r-card); overflow:hidden; aspect-ratio:16/9;
+    background:#000; box-shadow:0 30px 80px rgba(0,0,0,.45) }
+  .reel video{ width:100%; height:100%; object-fit:cover; display:block }
+
+  /* service cards (paired what-we-do / what-for) */
+  .cards{ margin-top:46px; display:grid; gap:18px; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)) }
+  .card{ background:var(--ink); color:var(--cream); border-radius:var(--r-card);
+    padding:34px 30px 30px; min-height:236px; display:flex; flex-direction:column;
+    transition:transform .18s ease, background .18s ease, color .18s ease }
+  .card__n{ font-size:13px; font-weight:600; letter-spacing:.1em; color:var(--amber); transition:color .18s }
+  .card__t{ font-family:var(--display); font-style:italic; font-weight:800; text-transform:uppercase;
+    font-size:clamp(26px,2.6vw,36px); line-height:1.02; margin-top:18px }
+  .card__s{ margin-top:auto; padding-top:22px; font-size:14px; line-height:1.5; opacity:.82 }
+  .card:hover{ transform:translateY(-6px); background:var(--amber); color:var(--ink) }
+  .card:hover .card__n{ color:var(--ink) }
+  .card:hover .card__s{ opacity:.85 }
 
   /* trusted by */
   .trust{ text-align:center; padding:clamp(48px,8vh,90px) clamp(24px,8vw,140px); background:var(--ink) }
@@ -89,9 +101,9 @@
   .trust img{ width:min(1100px,92vw); height:auto; opacity:.92 }
 
   /* testimonials */
-  .quotes{ display:grid; gap:1px; background:rgba(247,243,233,.14);
-    grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); margin-top:54px }
-  .quote{ background:var(--ink); padding:38px 34px; display:flex; flex-direction:column; gap:20px }
+  .quotes{ display:grid; gap:18px; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); margin-top:54px }
+  .quote{ background:#1c1c1c; border:1px solid rgba(247,243,233,.12); border-radius:22px;
+    padding:34px 30px; display:flex; flex-direction:column; gap:20px }
   .quote p{ font-size:clamp(15px,1.4vw,18px); line-height:1.55 }
   .quote .who{ font-size:12px; letter-spacing:.12em; text-transform:uppercase; opacity:.7; margin-top:auto }
   .quote .who b{ color:var(--amber); font-weight:600 }
@@ -102,7 +114,7 @@
   /* final CTA */
   .final{ background:var(--amber); color:var(--ink); text-align:center; padding:clamp(80px,16vh,180px) 24px }
   .final h2{ font-size:clamp(64px,13vw,180px) }
-  .final .btn--ink{ background:var(--ink); color:var(--cream); margin-top:30px; font-size:14px; padding:16px 30px }
+  .final .btn--ink{ background:var(--ink); color:var(--cream); margin-top:30px; font-size:14px; padding:17px 32px }
   .final .btn--ink:hover{ transform:translateY(-2px) }
 
   footer{ background:var(--ink); color:var(--cream); padding:46px clamp(24px,8vw,140px);
@@ -144,7 +156,7 @@
         <h1 class="display">Still at <span class="amber">speed.</span></h1>
         <p class="sub">Top-notch creative collateral and the systems to make prospects take notice.</p>
         <div class="row">
-          <a class="btn btn--amber" href="#work">View the work →</a>
+          <a class="btn btn--amber" href="#reel">Watch the reel →</a>
           <a class="btn btn--ghost" href="#contact">Let's move</a>
         </div>
       </div>
@@ -162,27 +174,41 @@
     <p class="lead">We pair commercial-grade creative production with a proprietary demand-generation engine that works as one cohesive go-to-market system. The result? Your ideal prospects know who you are, why you matter, and what you solve <em>before your sales team ever picks up the phone.</em></p>
   </section>
 
-  <!-- What we do / What for -->
+  <!-- Reel -->
+  <section class="section ink" id="reel">
+    <div class="kicker">Our reel</div>
+    <h2 class="statement display">Don't take our word for it. <span class="amber-text">Press play.</span></h2>
+    <div class="reel">
+      <video src="assets/reel.mp4" poster="assets/brand/reel-poster.jpg"
+             autoplay muted loop playsinline controls preload="metadata"></video>
+    </div>
+  </section>
+
+  <!-- What we do / what for — paired cards -->
   <section class="section cream" id="work">
-    <div class="cols">
-      <div class="col">
-        <h3>What we do</h3>
-        <ul>
-          <li>Video Production</li>
-          <li>Graphic Design</li>
-          <li>Go-to-Market Campaigns</li>
-          <li>Sales Integration</li>
-        </ul>
-      </div>
-      <div class="col">
-        <h3>What for</h3>
-        <ul>
-          <li>Commercial &amp; Marketing Videos</li>
-          <li>Brand &amp; Website Assets</li>
-          <li>Targeted Digital Advertising</li>
-          <li>Outreach Campaigns</li>
-        </ul>
-      </div>
+    <div class="kicker">What we do — and what it's for</div>
+    <h2 class="statement display">Creative that hits hard. <span class="amber-text">Systems that make it land.</span></h2>
+    <div class="cards">
+      <article class="card">
+        <span class="card__n">01</span>
+        <h3 class="card__t">Video Production</h3>
+        <p class="card__s">Commercial &amp; marketing videos that hit hard.</p>
+      </article>
+      <article class="card">
+        <span class="card__n">02</span>
+        <h3 class="card__t">Graphic Design</h3>
+        <p class="card__s">Brand &amp; website assets, built as a system.</p>
+      </article>
+      <article class="card">
+        <span class="card__n">03</span>
+        <h3 class="card__t">Go-to-Market Campaigns</h3>
+        <p class="card__s">Targeted digital advertising that lands fast.</p>
+      </article>
+      <article class="card">
+        <span class="card__n">04</span>
+        <h3 class="card__t">Sales Integration</h3>
+        <p class="card__s">Outreach campaigns wired straight to your pipeline.</p>
+      </article>
     </div>
   </section>
 
