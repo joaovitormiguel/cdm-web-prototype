@@ -3,161 +3,150 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Champion Digital Media</title>
+<title>Champion Digital Media — For Brands That Move</title>
+<meta name="description" content="Top-notch creative collateral and the systems to make prospects take notice. Creative production paired with a proprietary demand-generation engine, as one go-to-market system." />
+<link rel="icon" href="assets/brand/cream-logo.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Azeret Mono (system type) is free on Google Fonts. Podium Sharp Italic (display)
-     is licensed — drop the webfont @font-face below and it takes over automatically. -->
-<link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- Real Champion type: Azeret Mono (Google) + Podium Sharp (their Adobe Fonts kit). -->
+<link rel="stylesheet" href="https://use.typekit.net/qzp2ywl.css">
+<link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#141414;
-    --cream:#F7F3E9;
-    --amber:#F9AC24;
-    --blue:#062D51;
-    --white:#ffffff;
+    --ink:#141414; --cream:#F7F3E9; --amber:#F9AC24; --blue:#062D51; --white:#fff;
     --mono:'Azeret Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
-    /* Display: swap 'Podium Sharp' in via @font-face for the real thing */
-    --display:'Podium Sharp','Arial Narrow','Helvetica Neue',Arial,sans-serif;
-    --stage:340vh; /* scroll distance that drives the 9s clip */
+    --display:'podium-sharp-variable','Arial Narrow','Helvetica Neue',Arial,sans-serif;
+    --stage:340vh;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:auto}
-  body{
-    background:var(--ink); color:var(--cream);
-    font-family:var(--mono); -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
+  body{ background:var(--ink); color:var(--cream); font-family:var(--mono);
+    -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+  em{font-style:italic}
+  .display{ font-family:var(--display); font-style:italic; font-weight:800;
+    text-transform:uppercase; line-height:.92; letter-spacing:-.005em; }
+
+  /* ---------- NAV ---------- */
+  .nav{ position:fixed; inset:0 0 auto 0; z-index:20; display:flex;
+    justify-content:space-between; align-items:center;
+    padding:16px clamp(20px,5vw,56px);
+    background:linear-gradient(180deg, rgba(20,20,20,.55), rgba(20,20,20,0)); }
+  .nav img{ height:26px; width:auto; display:block }
+  .nav .links{ display:flex; gap:26px; align-items:center; font-size:12px;
+    letter-spacing:.18em; text-transform:uppercase }
+  .nav a{ color:var(--cream); text-decoration:none; opacity:.82 }
+  .nav a:hover{ opacity:1; color:var(--amber) }
+  .nav .pill{ border:1px solid var(--amber); color:var(--amber); padding:8px 16px; border-radius:2px; opacity:1 }
+  .nav .pill:hover{ background:var(--amber); color:var(--ink) }
 
   /* ---------- HERO (scroll-scrubbed) ---------- */
-  .hero__stage{ height:var(--stage); position:relative; }
-  .hero__sticky{
-    position:sticky; top:0; height:100vh; width:100%;
-    overflow:hidden; background:#0b0b0b;
-  }
-  .hero__video{
-    position:absolute; inset:0; width:100%; height:100%;
-    object-fit:cover; object-position:center;
-  }
-  /* left scrim for headline legibility — fades in with the reveal */
-  .hero__scrim{
-    position:absolute; inset:0; pointer-events:none; opacity:0;
-    background:linear-gradient(90deg,
-      rgba(20,20,20,.72) 0%, rgba(20,20,20,.45) 32%,
-      rgba(20,20,20,.10) 55%, rgba(20,20,20,0) 72%);
-  }
-  .hero__content{
-    position:absolute; left:0; top:0; height:100%;
-    width:min(620px,52vw); padding:clamp(28px,6vw,80px);
-    display:flex; flex-direction:column; justify-content:center;
-    gap:22px; opacity:0; transform:translateX(-28px);
-    will-change:opacity,transform;
-  }
-  .eyebrow{
-    font-family:var(--mono); font-weight:600; letter-spacing:.34em;
-    text-transform:uppercase; font-size:12px; color:var(--amber);
-  }
-  .hero h1{
-    font-family:var(--display); font-style:italic; font-weight:700;
-    text-transform:uppercase; line-height:.92; letter-spacing:-.01em;
-    font-size:clamp(54px,8.5vw,120px); color:var(--white);
-    text-shadow:0 2px 40px rgba(0,0,0,.35);
-  }
+  .hero__stage{ height:var(--stage); position:relative }
+  .hero__sticky{ position:sticky; top:0; height:100vh; width:100%; overflow:hidden; background:#0b0b0b }
+  .hero__video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover }
+  .hero__scrim{ position:absolute; inset:0; pointer-events:none; opacity:0;
+    background:linear-gradient(90deg, rgba(20,20,20,.74) 0%, rgba(20,20,20,.46) 32%, rgba(20,20,20,.10) 56%, rgba(20,20,20,0) 72%); }
+  .hero__content{ position:absolute; left:0; top:0; height:100%; width:min(640px,54vw);
+    padding:clamp(28px,6vw,84px); display:flex; flex-direction:column; justify-content:center;
+    gap:22px; opacity:0; transform:translateX(-28px); will-change:opacity,transform }
+  .eyebrow{ font-weight:600; letter-spacing:.34em; text-transform:uppercase; font-size:12px; color:var(--amber) }
+  .hero h1{ font-size:clamp(56px,9vw,128px); color:var(--white); text-shadow:0 2px 40px rgba(0,0,0,.35) }
   .hero h1 .amber{ color:var(--amber) }
-  .hero .sub{
-    font-size:clamp(15px,1.5vw,18px); line-height:1.5; max-width:34ch;
-    color:var(--cream);
-  }
-  .cta{
-    align-self:flex-start; margin-top:6px;
-    font-family:var(--mono); font-weight:600; letter-spacing:.04em;
-    font-size:14px; text-transform:uppercase; text-decoration:none;
-    color:var(--ink); background:var(--amber);
-    padding:14px 22px; border-radius:2px;
-    transition:transform .15s ease, box-shadow .15s ease;
-  }
-  .cta:hover{ transform:translateY(-2px); box-shadow:0 10px 30px rgba(249,172,36,.3) }
+  .hero .sub{ font-size:clamp(15px,1.5vw,18px); line-height:1.5; max-width:40ch; color:var(--cream) }
+  .row{ display:flex; gap:14px; flex-wrap:wrap; margin-top:4px }
+  .btn{ font-weight:600; letter-spacing:.04em; font-size:13px; text-transform:uppercase;
+    text-decoration:none; padding:14px 22px; border-radius:2px; transition:transform .15s, box-shadow .15s, background .15s, color .15s }
+  .btn--amber{ color:var(--ink); background:var(--amber) }
+  .btn--amber:hover{ transform:translateY(-2px); box-shadow:0 10px 30px rgba(249,172,36,.3) }
+  .btn--ghost{ color:var(--cream); border:1px solid rgba(247,243,233,.4) }
+  .btn--ghost:hover{ border-color:var(--cream); transform:translateY(-2px) }
 
-  /* scroll cue — visible only at the very top */
-  .cue{
-    position:absolute; left:50%; bottom:34px; transform:translateX(-50%);
-    font-family:var(--mono); font-size:11px; letter-spacing:.3em;
-    text-transform:uppercase; color:rgba(247,243,233,.8);
-    display:flex; flex-direction:column; align-items:center; gap:10px;
-    transition:opacity .4s ease;
-  }
+  .cue{ position:absolute; left:50%; bottom:32px; transform:translateX(-50%);
+    font-size:11px; letter-spacing:.3em; text-transform:uppercase; color:rgba(247,243,233,.85);
+    display:flex; flex-direction:column; align-items:center; gap:10px; transition:opacity .4s }
   .cue .bar{ width:1px; height:42px; background:linear-gradient(var(--amber),transparent); animation:drop 1.8s ease-in-out infinite }
-  @keyframes drop{ 0%{transform:scaleY(.2);transform-origin:top;opacity:.4} 50%{transform:scaleY(1);opacity:1} 100%{transform:scaleY(.2);transform-origin:bottom;opacity:.4} }
+  @keyframes drop{0%{transform:scaleY(.2);transform-origin:top;opacity:.4}50%{transform:scaleY(1);opacity:1}100%{transform:scaleY(.2);transform-origin:bottom;opacity:.4}}
 
-  /* tiny top bar */
-  .nav{
-    position:fixed; inset:0 0 auto 0; z-index:10; display:flex;
-    justify-content:space-between; align-items:center;
-    padding:18px clamp(20px,5vw,56px); mix-blend-mode:difference;
-  }
-  .nav .mark{ font-family:var(--display); font-style:italic; font-weight:700;
-    text-transform:uppercase; letter-spacing:.02em; color:#fff; font-size:18px }
-  .nav .links{ display:flex; gap:26px; font-size:12px; letter-spacing:.18em;
-    text-transform:uppercase; color:#fff }
-  .nav a{ color:inherit; text-decoration:none; opacity:.85 }
-  .nav a:hover{ opacity:1 }
+  /* ---------- SECTIONS ---------- */
+  .section{ padding:clamp(72px,12vh,150px) clamp(24px,8vw,140px) }
+  .ink{ background:var(--ink); color:var(--cream) }
+  .cream{ background:var(--cream); color:var(--ink) }
+  .kicker{ font-weight:600; letter-spacing:.3em; text-transform:uppercase; font-size:12px; color:var(--amber); margin-bottom:26px }
+  .statement{ font-size:clamp(26px,3.6vw,52px); line-height:1.12; max-width:20ch; letter-spacing:-.01em }
+  .statement.display{ line-height:.98 }
+  .lead{ margin-top:28px; max-width:60ch; line-height:1.65; font-size:clamp(15px,1.4vw,18px); opacity:.92 }
+  .amber-text{ color:var(--amber) }
 
-  /* ---------- CONTENT below the fold ---------- */
-  .section{ padding:clamp(72px,12vh,160px) clamp(24px,8vw,140px) }
-  .section--ink{ background:var(--ink); color:var(--cream) }
-  .section--cream{ background:var(--cream); color:var(--ink) }
-  .kicker{ font-weight:600; letter-spacing:.3em; text-transform:uppercase;
-    font-size:12px; color:var(--amber); margin-bottom:22px }
-  .section h2{ font-family:var(--display); font-style:italic; font-weight:700;
-    text-transform:uppercase; line-height:.95; letter-spacing:-.01em;
-    font-size:clamp(34px,5.5vw,72px); max-width:16ch }
-  .section p.lead{ margin-top:24px; max-width:52ch; line-height:1.6;
-    font-size:clamp(15px,1.4vw,18px) }
-  .grid{ margin-top:64px; display:grid; gap:1px; background:rgba(247,243,233,.14);
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr)) }
-  .grid .cell{ background:var(--ink); padding:34px 28px }
-  .section--cream .grid{ background:rgba(20,20,20,.12) }
-  .section--cream .grid .cell{ background:var(--cream) }
-  .grid .n{ font-family:var(--display); font-style:italic; font-weight:700;
-    font-size:46px; color:var(--amber); line-height:1 }
-  .grid h3{ margin:14px 0 8px; font-size:15px; letter-spacing:.04em; text-transform:uppercase }
-  .grid p{ font-size:13.5px; line-height:1.55; opacity:.8 }
-  footer{ background:var(--ink); color:var(--cream); padding:40px clamp(24px,8vw,140px);
-    font-size:12px; letter-spacing:.12em; text-transform:uppercase; opacity:.7;
-    display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px }
+  /* services */
+  .cols{ display:grid; gap:48px; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); margin-top:18px }
+  .col h3{ font-size:12px; letter-spacing:.28em; text-transform:uppercase; color:var(--amber); margin-bottom:22px }
+  .col ul{ list-style:none }
+  .col li{ font-family:var(--display); font-style:italic; font-weight:800; text-transform:uppercase;
+    font-size:clamp(26px,3vw,40px); line-height:1.18; padding:14px 0; border-bottom:1px solid rgba(247,243,233,.14) }
+  .cream .col li{ border-color:rgba(20,20,20,.12) }
 
-  @media (max-width:720px){
+  /* trusted by */
+  .trust{ text-align:center; padding:clamp(48px,8vh,90px) clamp(24px,8vw,140px); background:var(--ink) }
+  .trust .kicker{ margin-bottom:34px }
+  .trust img{ width:min(1100px,92vw); height:auto; opacity:.92 }
+
+  /* testimonials */
+  .quotes{ display:grid; gap:1px; background:rgba(247,243,233,.14);
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); margin-top:54px }
+  .quote{ background:var(--ink); padding:38px 34px; display:flex; flex-direction:column; gap:20px }
+  .quote p{ font-size:clamp(15px,1.4vw,18px); line-height:1.55 }
+  .quote .who{ font-size:12px; letter-spacing:.12em; text-transform:uppercase; opacity:.7; margin-top:auto }
+  .quote .who b{ color:var(--amber); font-weight:600 }
+  .proof{ display:flex; align-items:baseline; gap:18px; margin-top:54px; flex-wrap:wrap }
+  .proof .n{ font-family:var(--display); font-style:italic; font-weight:800; font-size:clamp(64px,10vw,128px); color:var(--amber); line-height:.9 }
+  .proof .t{ max-width:26ch; line-height:1.4; font-size:15px; opacity:.9 }
+
+  /* final CTA */
+  .final{ background:var(--amber); color:var(--ink); text-align:center; padding:clamp(80px,16vh,180px) 24px }
+  .final h2{ font-size:clamp(64px,13vw,180px) }
+  .final .btn--ink{ background:var(--ink); color:var(--cream); margin-top:30px; font-size:14px; padding:16px 30px }
+  .final .btn--ink:hover{ transform:translateY(-2px) }
+
+  footer{ background:var(--ink); color:var(--cream); padding:46px clamp(24px,8vw,140px);
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px }
+  footer img{ height:24px }
+  footer .fl{ font-size:11px; letter-spacing:.14em; text-transform:uppercase; opacity:.6 }
+
+  @media (max-width:760px){
     :root{ --stage:300vh }
     .hero__content{ width:88vw }
-    .nav .links{ display:none }
+    .nav .links a:not(.pill){ display:none }
   }
   @media (prefers-reduced-motion:reduce){
-    .hero__stage{ height:auto }
-    .hero__sticky{ position:relative; height:100vh }
-    .hero__content{ opacity:1; transform:none }
-    .hero__scrim{ opacity:1 }
-    .cue{ display:none }
+    .hero__stage{ height:auto } .hero__sticky{ position:relative; height:100vh }
+    .hero__content{ opacity:1; transform:none } .hero__scrim{ opacity:1 } .cue{ display:none }
   }
 </style>
 </head>
 <body>
 
 <nav class="nav">
-  <span class="mark">Champion</span>
-  <span class="links"><a href="#work">Work</a><a href="#system">System</a><a href="#contact">Contact</a></span>
+  <a href="#top"><img src="assets/brand/logo-footer.png" alt="Champion Digital Media" /></a>
+  <span class="links">
+    <a href="https://championdigitalmedia.com/video/">Video</a>
+    <a href="https://championdigitalmedia.com/design/">Design</a>
+    <a href="https://championdigitalmedia.com/go-to-market/">Go-to-Market</a>
+    <a class="pill" href="#contact">Contact</a>
+  </span>
 </nav>
 
-<header class="hero">
+<header class="hero" id="top">
   <div class="hero__stage" id="stage">
     <div class="hero__sticky">
       <video class="hero__video" id="hero" src="assets/hero.mp4" poster="assets/poster.jpg"
              muted playsinline preload="auto" disablepictureinpicture></video>
       <div class="hero__scrim" id="scrim"></div>
       <div class="hero__content" id="content">
-        <span class="eyebrow">Champion Digital Media</span>
-        <h1>Still at <span class="amber">speed.</span></h1>
-        <p class="sub">We build brand <em>and</em> demand as one system — for B2B brands that move.</p>
-        <a class="cta" href="#work">See the work →</a>
+        <span class="eyebrow">For brands that move</span>
+        <h1 class="display">Still at <span class="amber">speed.</span></h1>
+        <p class="sub">Top-notch creative collateral and the systems to make prospects take notice.</p>
+        <div class="row">
+          <a class="btn btn--amber" href="#work">View the work →</a>
+          <a class="btn btn--ghost" href="#contact">Let's move</a>
+        </div>
       </div>
       <div class="cue" id="cue"><span>Scroll</span><span class="bar"></span></div>
     </div>
@@ -165,91 +154,118 @@
 </header>
 
 <main>
-  <section class="section section--ink" id="system">
-    <div class="kicker">Brand + Demand, engineered</div>
-    <h2>Most studios make you look good. We make the right people choose you.</h2>
-    <p class="lead">Proof-grade creative on top, a demand engine underneath — built as one system, so the work that earns attention is the same work that warms the pipeline before a sales call ever happens.</p>
-    <div class="grid">
-      <div class="cell"><div class="n">01</div><h3>Position</h3><p>Find the white space competitors can't copy, then commit to it.</p></div>
-      <div class="cell"><div class="n">02</div><h3>Create</h3><p>Film-grade stills and motion that refuse boring-corporate.</p></div>
-      <div class="cell"><div class="n">03</div><h3>Demand</h3><p>Turn attention into a warm, scored pipeline — handed to sales hot.</p></div>
-      <div class="cell"><div class="n">04</div><h3>Prove</h3><p>Show the work and the numbers. No claims we can't demonstrate.</p></div>
+  <!-- Manifesto -->
+  <section class="section ink">
+    <div class="kicker">The manifesto</div>
+    <h2 class="statement display">Your brand doesn't sit still. <span class="amber-text">Neither should your marketing.</span></h2>
+    <p class="lead">Whether you're moving freight across the country, innovating technological solutions, or shaking up an entire industry, you need creative that hits hard, messaging that lands fast, and a system that turns attention into a packed pipeline.</p>
+    <p class="lead">We pair commercial-grade creative production with a proprietary demand-generation engine that works as one cohesive go-to-market system. The result? Your ideal prospects know who you are, why you matter, and what you solve <em>before your sales team ever picks up the phone.</em></p>
+  </section>
+
+  <!-- What we do / What for -->
+  <section class="section cream" id="work">
+    <div class="cols">
+      <div class="col">
+        <h3>What we do</h3>
+        <ul>
+          <li>Video Production</li>
+          <li>Graphic Design</li>
+          <li>Go-to-Market Campaigns</li>
+          <li>Sales Integration</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3>What for</h3>
+        <ul>
+          <li>Commercial &amp; Marketing Videos</li>
+          <li>Brand &amp; Website Assets</li>
+          <li>Targeted Digital Advertising</li>
+          <li>Outreach Campaigns</li>
+        </ul>
+      </div>
     </div>
   </section>
 
-  <section class="section section--cream" id="work">
-    <div class="kicker">Selected work</div>
-    <h2>For brands that move.</h2>
-    <p class="lead">Freight, logistics, and the technical B2B world — taste and capability proven, not just promised. (Drop case studies in here.)</p>
+  <!-- Trusted by -->
+  <section class="trust">
+    <div class="kicker">Trusted by brands on the move</div>
+    <img src="assets/brand/client-logos.png" alt="Bitfreighter, MODE, FleetWorks, T.A.B., Anuvu, Transfix, GLACIS, DeGroot, Enablers, Dock411" />
+  </section>
+
+  <!-- Testimonials + proof -->
+  <section class="section ink" id="results">
+    <div class="kicker">In their words</div>
+    <h2 class="statement display">We don't claim it. <span class="amber-text">Our clients do.</span></h2>
+
+    <div class="proof">
+      <span class="n">30+</span>
+      <span class="t">meetings booked through Champion's automated go-to-market strategy alone. <b style="color:var(--cream)">— Bitfreighter</b></span>
+    </div>
+
+    <div class="quotes">
+      <div class="quote">
+        <p>"Champion Digital's ability to quickly grasp our competitive advantage and transform our vision into compelling, dynamic video was exceptional. Paired with their go-to-market strategy, it's been a game-changer."</p>
+        <span class="who"><b>Brad Perling</b> · Co-Founder/CEO, Bitfreighter</span>
+      </div>
+      <div class="quote">
+        <p>"Their ability to draw concepts together from broad and diverse sources, and weave them into outstanding campaign narratives, is unrivaled."</p>
+        <span class="who"><b>Joe Braidwood</b> · Co-Founder/CEO, GLACIS</span>
+      </div>
+      <div class="quote">
+        <p>"Champion elevated our marketing strategy from the minor leagues to the major leagues. Bringing on experts that already know my customer base made it a no-brainer."</p>
+        <span class="who"><b>Chip Reeves</b> · Founder, Enablers</span>
+      </div>
+      <div class="quote">
+        <p>"Partnering with Champion was one of the best decisions we've made. What started out as a test has evolved to engagement across several of our business units."</p>
+        <span class="who"><b>Brian Aubuchon</b> · VP of Logistics, T.A.B.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="final" id="contact">
+    <h2 class="display">Ready to move?</h2>
+    <a class="btn btn--ink" href="https://championdigitalmedia.com/#contact">Let's make some noise →</a>
   </section>
 </main>
 
-<footer id="contact">
-  <span>© Champion Digital Media</span>
-  <span>Brand + Demand · Built in Champortal</span>
+<footer>
+  <img src="assets/brand/logo-footer.png" alt="Champion Digital Media" />
+  <span class="fl">© Champion Digital Media · For Brands That Move</span>
 </footer>
 
 <script>
 (function(){
-  var video   = document.getElementById('hero');
-  var stage   = document.getElementById('stage');
-  var content = document.getElementById('content');
-  var scrim   = document.getElementById('scrim');
-  var cue     = document.getElementById('cue');
+  var video=document.getElementById('hero'), stage=document.getElementById('stage'),
+      content=document.getElementById('content'), scrim=document.getElementById('scrim'),
+      cue=document.getElementById('cue');
+  var duration=9, targetT=0, curT=0;
+  var reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 
-  var duration = 9;           // updated from metadata
-  var targetT  = 0;           // where scroll wants the playhead
-  var curT     = 0;           // smoothed playhead
-  var reduce   = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  video.addEventListener('loadedmetadata', function(){ if(isFinite(video.duration)&&video.duration>0) duration=video.duration; });
+  (function prime(){ var p=video.play(); if(p&&p.then) p.then(function(){video.pause();video.currentTime=0;}).catch(function(){}); })();
 
-  video.addEventListener('loadedmetadata', function(){
-    if (isFinite(video.duration) && video.duration > 0) duration = video.duration;
-  });
-  // prime decoding so the first seek is instant (muted autoplay is allowed)
-  function prime(){ var p = video.play(); if (p && p.then) p.then(function(){ video.pause(); video.currentTime = 0; }).catch(function(){}); }
-  prime();
-
-  function clamp(v,a,b){ return v<a?a:(v>b?b:v); }
-  function map(v,a,b){ return clamp((v-a)/(b-a),0,1); }
-
-  function progress(){
-    var r = stage.getBoundingClientRect();
-    var scrollable = r.height - window.innerHeight;
-    return clamp(-r.top / scrollable, 0, 1);
-  }
+  function clamp(v,a,b){return v<a?a:(v>b?b:v);}
+  function map(v,a,b){return clamp((v-a)/(b-a),0,1);}
+  function progress(){ var r=stage.getBoundingClientRect(); return clamp(-r.top/(r.height-window.innerHeight),0,1); }
 
   function onScroll(){
-    var p = progress();
-    targetT = p * (duration - 0.04);
-
-    // headline + scrim reveal as the jet settles to the right
-    var rev = map(p, 0.60, 0.92);
-    content.style.opacity = rev;
-    content.style.transform = 'translateX(' + (-28 * (1 - rev)) + 'px)';
-    scrim.style.opacity = rev;
-
-    // scroll cue only at the very top
-    cue.style.opacity = (p < 0.04) ? 1 : 0;
+    var p=progress();
+    targetT=p*(duration-0.04);
+    var rev=map(p,0.60,0.92);
+    content.style.opacity=rev;
+    content.style.transform='translateX('+(-28*(1-rev))+'px)';
+    scrim.style.opacity=rev;
+    cue.style.opacity=(p<0.04)?1:0;
   }
-
-  // smooth the playhead toward the scroll target (buttery scrub)
   function tick(){
-    curT += (targetT - curT) * 0.18;
-    if (Math.abs(targetT - curT) < 0.002) curT = targetT;
-    if (video.readyState >= 2 && Math.abs(video.currentTime - curT) > 0.005){
-      try { video.currentTime = curT; } catch(e){}
-    }
+    curT+=(targetT-curT)*0.18;
+    if(Math.abs(targetT-curT)<0.002) curT=targetT;
+    if(video.readyState>=2 && Math.abs(video.currentTime-curT)>0.005){ try{video.currentTime=curT;}catch(e){} }
     requestAnimationFrame(tick);
   }
-
-  if (reduce){
-    video.currentTime = 0.0; // show interior; CSS reveals the headline statically
-  } else {
-    window.addEventListener('scroll', onScroll, {passive:true});
-    window.addEventListener('resize', onScroll);
-    onScroll();
-    requestAnimationFrame(tick);
-  }
+  if(reduce){ video.currentTime=0; }
+  else{ window.addEventListener('scroll',onScroll,{passive:true}); window.addEventListener('resize',onScroll); onScroll(); requestAnimationFrame(tick); }
 })();
 </script>
 </body>
