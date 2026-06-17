@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Champion Digital Media — For Brands That Move</title>
-<meta name="description" content="Top-notch creative collateral and the systems to make prospects take notice. Creative production paired with a proprietary demand-generation engine, as one go-to-market system." />
+<title>Champion Digital Media — Stop calling strangers</title>
+<meta name="description" content="We make your logistics buyers know you before the call — then hand your reps the named people ready to talk. Brand and demand, one machine, for freight." />
 <link rel="icon" href="assets/brand/cream-logo.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,7 +24,7 @@
   .display{ font-family:var(--display); font-style:italic; font-weight:800;
     text-transform:uppercase; line-height:.92; letter-spacing:-.005em; }
 
-  /* ---------- NAV (header — unchanged) ---------- */
+  /* ---------- NAV ---------- */
   .nav{ position:fixed; inset:0 0 auto 0; z-index:20; display:flex;
     justify-content:space-between; align-items:center;
     padding:16px clamp(20px,5vw,56px);
@@ -37,7 +37,7 @@
   .nav .pill{ border:1px solid var(--amber); color:var(--amber); padding:9px 18px; border-radius:999px; opacity:1 }
   .nav .pill:hover{ background:var(--amber); color:var(--ink) }
 
-  /* ---------- HERO (header — unchanged) ---------- */
+  /* ---------- HERO (jet scroll-scrub — unchanged mechanism) ---------- */
   .hero__stage{ height:var(--stage); position:relative }
   .hero__sticky{ position:sticky; top:0; height:100vh; width:100%; overflow:hidden; background:#0b0b0b }
   .hero__video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover }
@@ -47,12 +47,12 @@
     padding:clamp(28px,6vw,84px); display:flex; flex-direction:column; justify-content:center;
     gap:22px; opacity:0; transform:translateX(-28px); will-change:opacity,transform }
   .eyebrow{ font-weight:600; letter-spacing:.34em; text-transform:uppercase; font-size:12px; color:var(--amber) }
-  .hero h1{ font-size:clamp(56px,9vw,128px); color:var(--white); text-shadow:0 2px 40px rgba(0,0,0,.35) }
+  .hero h1{ font-size:clamp(56px,9vw,118px); color:var(--white); text-shadow:0 2px 40px rgba(0,0,0,.35) }
   .hero h1 .amber{ color:var(--amber) }
-  .hero .sub{ font-size:clamp(15px,1.5vw,18px); line-height:1.5; max-width:40ch; color:var(--cream) }
+  .hero .sub{ font-size:clamp(15px,1.5vw,18px); line-height:1.5; max-width:42ch; color:var(--cream) }
   .row{ display:flex; gap:14px; flex-wrap:wrap; margin-top:4px }
 
-  /* ---------- BUTTONS (rounded) ---------- */
+  /* ---------- BUTTONS ---------- */
   .btn{ font-weight:600; letter-spacing:.04em; font-size:13px; text-transform:uppercase;
     text-decoration:none; padding:15px 26px; border-radius:999px;
     transition:transform .15s, box-shadow .15s, background .15s, color .15s }
@@ -72,48 +72,70 @@
   .ink{ background:var(--ink); color:var(--cream) }
   .cream{ background:var(--cream); color:var(--ink) }
   .kicker{ font-weight:600; letter-spacing:.3em; text-transform:uppercase; font-size:12px; color:var(--amber); margin-bottom:26px }
-  .statement{ font-size:clamp(26px,3.6vw,52px); line-height:1.12; max-width:22ch; letter-spacing:-.01em }
+  .statement{ font-size:clamp(28px,3.8vw,56px); line-height:1.06; max-width:20ch; letter-spacing:-.01em }
   .statement.display{ line-height:.98 }
-  .lead{ margin-top:28px; max-width:60ch; line-height:1.65; font-size:clamp(15px,1.4vw,18px); opacity:.92 }
+  .lead{ margin-top:28px; max-width:56ch; line-height:1.65; font-size:clamp(15px,1.4vw,18px); opacity:.92 }
   .amber-text{ color:var(--amber) }
 
   /* reel */
-  .reel{ margin-top:48px; border-radius:var(--r-card); overflow:hidden; aspect-ratio:16/9;
+  .reel{ margin-top:44px; border-radius:var(--r-card); overflow:hidden; aspect-ratio:16/9;
     background:#000; box-shadow:0 30px 80px rgba(0,0,0,.45) }
   .reel video{ width:100%; height:100%; object-fit:cover; display:block }
 
-  /* service cards (paired what-we-do / what-for) */
-  .cards{ margin-top:46px; display:grid; gap:18px; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)) }
-  .card{ background:var(--ink); color:var(--cream); border-radius:var(--r-card);
-    padding:34px 30px 30px; min-height:236px; display:flex; flex-direction:column;
-    transition:transform .18s ease, background .18s ease, color .18s ease }
-  .card__n{ font-size:13px; font-weight:600; letter-spacing:.1em; color:var(--amber); transition:color .18s }
-  .card__t{ font-family:var(--display); font-style:italic; font-weight:800; text-transform:uppercase;
-    font-size:clamp(26px,2.6vw,36px); line-height:1.02; margin-top:18px }
-  .card__s{ margin-top:auto; padding-top:22px; font-size:14px; line-height:1.5; opacity:.82 }
-  .card:hover{ transform:translateY(-6px); background:var(--amber); color:var(--ink) }
-  .card:hover .card__n{ color:var(--ink) }
-  .card:hover .card__s{ opacity:.85 }
+  /* signal-feed mock (Act 2) */
+  .feedmock{ margin-top:44px; display:flex; flex-direction:column; gap:10px; max-width:660px }
+  .feedmock .ev{ display:flex; gap:14px; align-items:center; background:#1c1c1c;
+    border:1px solid rgba(247,243,233,.12); border-radius:12px; padding:14px 16px }
+  .feedmock .ev .ts{ font-size:12px; color:#8a8a8a; width:64px; flex:none; letter-spacing:.04em }
+  .feedmock .ev .sg{ flex:1; font-size:14px }
+  .feedmock .ev .pt{ color:var(--amber); font-weight:600; font-size:13px }
+
+  /* contact-card mock (Act 3) */
+  .cardmock{ margin-top:44px; max-width:540px; background:#1c1c1c;
+    border:1px solid rgba(249,172,36,.55); border-radius:20px; padding:26px 26px 22px;
+    box-shadow:0 0 60px rgba(249,172,36,.10) }
+  .cardmock .top{ display:flex; align-items:center; gap:14px }
+  .cardmock .av{ width:48px; height:48px; border-radius:11px; background:linear-gradient(135deg,#2a2a2a,#161616);
+    border:1px solid rgba(247,243,233,.14); display:flex; align-items:center; justify-content:center; font-weight:700; color:#8a8a8a; font-size:13px }
+  .cardmock .nm{ font-family:var(--display); font-style:italic; font-weight:800; text-transform:uppercase; font-size:20px }
+  .cardmock .rl{ font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:#8a8a8a; margin-top:5px }
+  .cardmock .pill{ margin-left:auto; font-size:10px; letter-spacing:.14em; text-transform:uppercase; font-weight:600;
+    padding:6px 11px; border-radius:999px; background:rgba(210,86,75,.16); color:#E06A5A; display:flex; align-items:center; gap:7px }
+  .cardmock .pill .dot{ width:7px; height:7px; border-radius:50%; background:currentColor }
+  .cardmock .score{ display:flex; align-items:flex-end; gap:10px; margin-top:18px }
+  .cardmock .score .num{ font-family:var(--display); font-style:italic; font-weight:800; font-size:48px; line-height:.8; color:#fff }
+  .cardmock .score .of{ font-size:12px; color:#8a8a8a; letter-spacing:.1em; text-transform:uppercase; margin-bottom:5px }
+  .cardmock .track{ height:8px; border-radius:5px; background:#262626; margin-top:12px; overflow:hidden }
+  .cardmock .track i{ display:block; height:100%; width:87%; background:linear-gradient(90deg,#D2564B,#e8704f) }
+  .cardmock .sig{ margin-top:14px; font-size:12px; color:#9a9a9a; letter-spacing:.02em; line-height:1.6 }
+
+  /* live demo embed (Act 4) */
+  .demoframe{ margin-top:44px; border-radius:var(--r-card); overflow:hidden;
+    border:1px solid rgba(247,243,233,.14); background:#0e0e0e; height:min(80vh,780px) }
+  .demoframe iframe{ width:100%; height:100%; border:0; display:block }
+  .demolink{ margin-top:16px; display:inline-block; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--amber); text-decoration:none }
 
   /* trusted by */
   .trust{ text-align:center; padding:clamp(48px,8vh,90px) clamp(24px,8vw,140px); background:var(--ink) }
   .trust .kicker{ margin-bottom:34px }
   .trust img{ width:min(1100px,92vw); height:auto; opacity:.92 }
 
-  /* testimonials */
+  /* proof + testimonials */
+  .proof{ display:flex; gap:48px; margin-top:10px; flex-wrap:wrap }
+  .proof .stat{ flex:1; min-width:240px }
+  .proof .n{ font-family:var(--display); font-style:italic; font-weight:800; font-size:clamp(56px,8vw,104px); color:var(--amber); line-height:.9 }
+  .proof .t{ max-width:26ch; line-height:1.45; font-size:15px; opacity:.9; margin-top:10px }
   .quotes{ display:grid; gap:18px; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); margin-top:54px }
   .quote{ background:#1c1c1c; border:1px solid rgba(247,243,233,.12); border-radius:22px;
     padding:34px 30px; display:flex; flex-direction:column; gap:20px }
   .quote p{ font-size:clamp(15px,1.4vw,18px); line-height:1.55 }
   .quote .who{ font-size:12px; letter-spacing:.12em; text-transform:uppercase; opacity:.7; margin-top:auto }
   .quote .who b{ color:var(--amber); font-weight:600 }
-  .proof{ display:flex; align-items:baseline; gap:18px; margin-top:54px; flex-wrap:wrap }
-  .proof .n{ font-family:var(--display); font-style:italic; font-weight:800; font-size:clamp(64px,10vw,128px); color:var(--amber); line-height:.9 }
-  .proof .t{ max-width:26ch; line-height:1.4; font-size:15px; opacity:.9 }
 
   /* final CTA */
   .final{ background:var(--amber); color:var(--ink); text-align:center; padding:clamp(80px,16vh,180px) 24px }
-  .final h2{ font-size:clamp(64px,13vw,180px) }
+  .final h2{ font-size:clamp(40px,8vw,110px); max-width:18ch; margin:0 auto }
+  .final p{ margin-top:18px; font-size:clamp(15px,1.5vw,19px); opacity:.85 }
   .final .btn--ink{ background:var(--ink); color:var(--cream); margin-top:30px; font-size:14px; padding:17px 32px }
   .final .btn--ink:hover{ transform:translateY(-2px) }
 
@@ -138,13 +160,13 @@
 <nav class="nav">
   <a href="#top"><img src="assets/brand/logo-footer.png" alt="Champion Digital Media" /></a>
   <span class="links">
-    <a href="https://championdigitalmedia.com/video/">Video</a>
-    <a href="https://championdigitalmedia.com/design/">Design</a>
-    <a href="https://championdigitalmedia.com/go-to-market/">Go-to-Market</a>
-    <a class="pill" href="#contact">Contact</a>
+    <a href="#how">How it works</a>
+    <a href="#demo">See who's engaging</a>
+    <a class="pill" href="#contact">Get a sample report</a>
   </span>
 </nav>
 
+<!-- ACT 0 — HERO (the result) -->
 <header class="hero" id="top">
   <div class="hero__stage" id="stage">
     <div class="hero__sticky">
@@ -153,11 +175,11 @@
       <div class="hero__scrim" id="scrim"></div>
       <div class="hero__content" id="content">
         <span class="eyebrow">For brands that move</span>
-        <h1 class="display">Still at <span class="amber">speed.</span></h1>
-        <p class="sub">Top-notch creative collateral and the systems to make prospects take notice.</p>
+        <h1 class="display">Stop calling <span class="amber">strangers.</span></h1>
+        <p class="sub">We make your buyers know you before the call — and hand your reps the names already leaning in.</p>
         <div class="row">
-          <a class="btn btn--amber" href="#reel">Watch the reel →</a>
-          <a class="btn btn--ghost" href="#contact">Let's move</a>
+          <a class="btn btn--amber" href="#demo">See it live →</a>
+          <a class="btn btn--ghost" href="#contact">Get a sample report</a>
         </div>
       </div>
       <div class="cue" id="cue"><span>Scroll</span><span class="bar"></span></div>
@@ -166,50 +188,56 @@
 </header>
 
 <main>
-  <!-- Manifesto -->
-  <section class="section ink">
-    <div class="kicker">The manifesto</div>
-    <h2 class="statement display">Your brand doesn't sit still. <span class="amber-text">Neither should your marketing.</span></h2>
-    <p class="lead">Whether you're moving freight across the country, innovating technological solutions, or shaking up an entire industry, you need creative that hits hard, messaging that lands fast, and a system that turns attention into a packed pipeline.</p>
-    <p class="lead">We pair commercial-grade creative production with a proprietary demand-generation engine that works as one cohesive go-to-market system. The result? Your ideal prospects know who you are, why you matter, and what you solve <em>before your sales team ever picks up the phone.</em></p>
-  </section>
-
-  <!-- Reel -->
-  <section class="section ink" id="reel">
-    <div class="kicker">Our reel</div>
-    <h2 class="statement display">Don't take our word for it. <span class="amber-text">Press play.</span></h2>
+  <!-- ACT 1 — HOW (the creative = the bait) -->
+  <section class="section ink" id="how">
+    <div class="kicker">01 — The bait</div>
+    <h2 class="statement display">Your product is ahead of your brand. <span class="amber-text">We fix that — loudly.</span></h2>
+    <p class="lead">Brand film, graphic ads, a brand that finally looks the level you operate at. Not to win awards — to earn the click. <em>Keep scrolling for the trap.</em></p>
     <div class="reel">
       <video src="assets/reel.mp4" poster="assets/brand/reel-poster.jpg"
              autoplay muted loop playsinline controls preload="metadata"></video>
     </div>
   </section>
 
-  <!-- What we do / what for — paired cards -->
-  <section class="section cream" id="work">
-    <div class="kicker">What we do — and what it's for</div>
-    <h2 class="statement display">Creative that hits hard. <span class="amber-text">Systems that make it land.</span></h2>
-    <div class="cards">
-      <article class="card">
-        <span class="card__n">01</span>
-        <h3 class="card__t">Video Production</h3>
-        <p class="card__s">Commercial &amp; marketing videos that hit hard.</p>
-      </article>
-      <article class="card">
-        <span class="card__n">02</span>
-        <h3 class="card__t">Graphic Design</h3>
-        <p class="card__s">Brand &amp; website assets, built as a system.</p>
-      </article>
-      <article class="card">
-        <span class="card__n">03</span>
-        <h3 class="card__t">Go-to-Market Campaigns</h3>
-        <p class="card__s">Targeted digital advertising that lands fast.</p>
-      </article>
-      <article class="card">
-        <span class="card__n">04</span>
-        <h3 class="card__t">Sales Integration</h3>
-        <p class="card__s">Outreach campaigns wired straight to your pipeline.</p>
-      </article>
+  <!-- ACT 2 — WHAT (serve + track = the bite) -->
+  <section class="section ink" id="bite">
+    <div class="kicker">02 — The bite</div>
+    <h2 class="statement display">The bait's set. <span class="amber-text">Now we see who bites.</span></h2>
+    <p class="lead">We put your creative in front of a tight list of your real ICP, on the channels logistics buyers live on — then track every click, scroll, and watch down to the named person. Not "an account." A name.</p>
+    <div class="feedmock">
+      <div class="ev"><span class="ts">09:14</span><span class="sg">Watched 0:40 of the brand film</span><span class="pt">+25</span></div>
+      <div class="ev"><span class="ts">09:15</span><span class="sg">Opened the case study</span><span class="pt">+16</span></div>
+      <div class="ev"><span class="ts">11:02</span><span class="sg">Viewed pricing — twice</span><span class="pt">+20</span></div>
+      <div class="ev"><span class="ts">Thu</span><span class="sg">Came back. Read to the bottom.</span><span class="pt">+13</span></div>
     </div>
+  </section>
+
+  <!-- ACT 3 — THE LIST (the payoff = certainty) -->
+  <section class="section cream" id="list">
+    <div class="kicker" style="color:#b8801a">03 — The list</div>
+    <h2 class="statement display" style="color:var(--ink)">The part your sales team has never had: <span style="color:#b8801a">certainty about who to call.</span></h2>
+    <p class="lead" style="color:#3c382f">Every engaged buyer, named and scored, ranked by how ready they are to buy — handed to your reps warm. No more guessing. No more strangers.</p>
+    <div class="cardmock">
+      <div class="top">
+        <div class="av">NH</div>
+        <div><div class="nm">Nicholas Hale</div><div class="rl">VP of Operations · Pentagon Freight</div></div>
+        <div class="pill"><span class="dot"></span>Hot — call now</div>
+      </div>
+      <div class="score"><span class="num">87</span><span class="of">/ 100 intent</span></div>
+      <div class="track"><i></i></div>
+      <div class="sig">Watched the brand video twice · clicked the pricing email · returned Thursday · 3 colleagues from Pentagon also engaging.</div>
+    </div>
+  </section>
+
+  <!-- ACT 4 — PROOF (try it) -->
+  <section class="section ink" id="demo">
+    <div class="kicker">04 — Proof</div>
+    <h2 class="statement display">Don't take our word for it. <span class="amber-text">Watch your own intent build.</span></h2>
+    <p class="lead">Click around. Watch your own card score in real time. That's the system — running on you, right now.</p>
+    <div class="demoframe">
+      <iframe src="https://joaovitormiguel.github.io/champion-intent-demo/" title="Champion live intent demo" loading="lazy"></iframe>
+    </div>
+    <a class="demolink" href="https://joaovitormiguel.github.io/champion-intent-demo/" target="_blank" rel="noopener">Open the demo full-screen ↗</a>
   </section>
 
   <!-- Trusted by -->
@@ -218,46 +246,37 @@
     <img src="assets/brand/client-logos.png" alt="Bitfreighter, MODE, FleetWorks, T.A.B., Anuvu, Transfix, GLACIS, DeGroot, Enablers, Dock411" />
   </section>
 
-  <!-- Testimonials + proof -->
+  <!-- The evidence -->
   <section class="section ink" id="results">
-    <div class="kicker">In their words</div>
-    <h2 class="statement display">We don't claim it. <span class="amber-text">Our clients do.</span></h2>
-
+    <div class="kicker">The evidence</div>
+    <h2 class="statement display">We argue with results. <span class="amber-text">Not adjectives.</span></h2>
     <div class="proof">
-      <span class="n">30+</span>
-      <span class="t">meetings booked through Champion's automated go-to-market strategy alone. <b style="color:var(--cream)">— Bitfreighter</b></span>
+      <div class="stat"><div class="n">30+</div><div class="t">meetings booked through Champion's GTM system. <b style="color:var(--cream)">— Bitfreighter</b></div></div>
+      <div class="stat"><div class="n">$2M</div><div class="t">in new pipeline value from one campaign. <b style="color:var(--cream)">— EZ</b></div></div>
     </div>
-
     <div class="quotes">
       <div class="quote">
-        <p>"Champion Digital's ability to quickly grasp our competitive advantage and transform our vision into compelling, dynamic video was exceptional. Paired with their go-to-market strategy, it's been a game-changer."</p>
+        <p>"Champion's ability to grasp our advantage and turn it into compelling video was exceptional. Paired with their go-to-market strategy, it's been a game-changer."</p>
         <span class="who"><b>Brad Perling</b> · Co-Founder/CEO, Bitfreighter</span>
       </div>
       <div class="quote">
-        <p>"Their ability to draw concepts together from broad and diverse sources, and weave them into outstanding campaign narratives, is unrivaled."</p>
-        <span class="who"><b>Joe Braidwood</b> · Co-Founder/CEO, GLACIS</span>
-      </div>
-      <div class="quote">
-        <p>"Champion elevated our marketing strategy from the minor leagues to the major leagues. Bringing on experts that already know my customer base made it a no-brainer."</p>
+        <p>"They elevated our marketing from the minor leagues to the major leagues. Bringing on experts who already know my customer base made it a no-brainer."</p>
         <span class="who"><b>Chip Reeves</b> · Founder, Enablers</span>
-      </div>
-      <div class="quote">
-        <p>"Partnering with Champion was one of the best decisions we've made. What started out as a test has evolved to engagement across several of our business units."</p>
-        <span class="who"><b>Brian Aubuchon</b> · VP of Logistics, T.A.B.</span>
       </div>
     </div>
   </section>
 
   <!-- Final CTA -->
   <section class="final" id="contact">
-    <h2 class="display">Ready to move?</h2>
-    <a class="btn btn--ink" href="https://championdigitalmedia.com/#contact">Let's make some noise →</a>
+    <h2 class="display">Your buyers are already raising their hand.</h2>
+    <p>We'll tell you which ones.</p>
+    <a class="btn btn--ink" href="https://championdigitalmedia.com/#contact">Get a sample intent report →</a>
   </section>
 </main>
 
 <footer>
   <img src="assets/brand/logo-footer.png" alt="Champion Digital Media" />
-  <span class="fl">© Champion Digital Media · For Brands That Move</span>
+  <span class="fl">© Champion Digital Media · Brand + demand, for freight</span>
 </footer>
 
 <script>
