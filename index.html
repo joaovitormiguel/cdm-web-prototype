@@ -54,7 +54,7 @@
 
   /* ---------- BUTTONS ---------- */
   .btn{ font-weight:600; letter-spacing:.04em; font-size:13px; text-transform:uppercase;
-    text-decoration:none; padding:15px 26px; border-radius:999px;
+    text-decoration:none; display:inline-block; padding:15px 26px; border-radius:999px;
     transition:transform .15s, box-shadow .15s, background .15s, color .15s }
   .btn--amber{ color:var(--ink); background:var(--amber) }
   .btn--amber:hover{ transform:translateY(-2px); box-shadow:0 10px 30px rgba(249,172,36,.3) }
@@ -133,10 +133,11 @@
   .quote .who b{ color:var(--amber); font-weight:600 }
 
   /* final CTA */
-  .final{ background:var(--amber); color:var(--ink); text-align:center; padding:clamp(80px,16vh,180px) 24px }
-  .final h2{ font-size:clamp(40px,8vw,110px); max-width:18ch; margin:0 auto }
-  .final p{ margin-top:18px; font-size:clamp(15px,1.5vw,19px); opacity:.85 }
-  .final .btn--ink{ background:var(--ink); color:var(--cream); margin-top:30px; font-size:14px; padding:17px 32px }
+  .final{ background:var(--amber); color:var(--ink); text-align:center; padding:clamp(80px,16vh,180px) 24px;
+    display:flex; flex-direction:column; align-items:center }
+  .final h2{ font-size:clamp(40px,8vw,104px); max-width:16ch; line-height:.95 }
+  .final p{ margin-top:20px; font-size:clamp(15px,1.5vw,19px); opacity:.85 }
+  .final .btn--ink{ background:var(--ink); color:var(--cream); margin-top:34px; font-size:14px; padding:17px 32px }
   .final .btn--ink:hover{ transform:translateY(-2px) }
 
   footer{ background:var(--ink); color:var(--cream); padding:46px clamp(24px,8vw,140px);
@@ -187,7 +188,7 @@
 </header>
 
 <main>
-  <!-- ACT 1 — HOW (the creative = the bait) -->
+  <!-- ACT 1 — HOW (the creative) -->
   <section class="section ink" id="how">
     <h2 class="statement display">Your product is ahead of your brand. <span class="amber-text">We fix that — loudly.</span></h2>
     <p class="lead">Brand film, graphic ads, a brand that finally looks the level you operate at. Not to win awards — to earn the click. <em>Keep scrolling — watch what it does.</em></p>
