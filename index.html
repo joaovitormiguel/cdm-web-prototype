@@ -15,7 +15,7 @@
     --ink:#141414; --cream:#F7F3E9; --amber:#F9AC24; --blue:#062D51; --white:#fff;
     --mono:'Azeret Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
     --display:'podium-sharp-variable','Arial Narrow','Helvetica Neue',Arial,sans-serif;
-    --stage:340vh; --r-card:24px;
+    --stage:900vh; --r-card:24px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{ background:var(--ink); color:var(--cream); font-family:var(--mono);
@@ -41,24 +41,27 @@
   .hero__stage{ height:var(--stage); position:relative }
   .hero__sticky{ position:sticky; top:0; height:100vh; width:100%; overflow:hidden; background:#0b0b0b }
   .hero__video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover }
-  .hero__scrim{ position:absolute; inset:0; pointer-events:none; opacity:0;
-    background:linear-gradient(90deg, rgba(20,20,20,.74) 0%, rgba(20,20,20,.46) 32%, rgba(20,20,20,.10) 56%, rgba(20,20,20,0) 72%); }
-  .hero__content{ position:absolute; left:0; top:0; height:100%; width:min(640px,54vw);
-    padding:clamp(28px,6vw,84px); display:flex; flex-direction:column; justify-content:center;
-    gap:22px; opacity:0; transform:translateX(-28px); will-change:opacity,transform }
-  .eyebrow{ font-weight:600; letter-spacing:.34em; text-transform:uppercase; font-size:12px; color:var(--amber) }
-  .hero h1{ font-size:clamp(56px,9vw,118px); color:var(--white); text-shadow:0 2px 40px rgba(0,0,0,.35) }
-  .hero h1 .amber{ color:var(--amber) }
-  .hero .sub{ font-size:clamp(15px,1.5vw,18px); line-height:1.5; max-width:42ch; color:var(--cream) }
-  .row{ display:flex; gap:14px; flex-wrap:wrap; margin-top:4px }
-  .hero__intro{ position:absolute; inset:0; z-index:2; display:flex; align-items:center; justify-content:center;
-    text-align:center; padding:0 6vw; opacity:1; will-change:opacity,transform; pointer-events:none;
-    background:radial-gradient(ellipse 62% 52% at 50% 50%, rgba(14,14,14,.52), transparent 72%) }
-  .hero__intro h1{ font-size:clamp(54px,9vw,118px); color:var(--white); text-shadow:0 2px 44px rgba(0,0,0,.5) }
-  .hero__intro h1 .amber{ color:var(--amber) }
+  .hero__scrim{ position:absolute; inset:0; pointer-events:none; opacity:0; will-change:opacity }
+  .scrim--l{ background:linear-gradient(90deg, rgba(15,15,15,.84) 0%, rgba(15,15,15,.52) 34%, rgba(15,15,15,.08) 60%, transparent 76%) }
+  .scrim--r{ background:linear-gradient(270deg, rgba(15,15,15,.84) 0%, rgba(15,15,15,.52) 34%, rgba(15,15,15,.08) 60%, transparent 76%) }
+  .beat{ position:absolute; top:0; height:100%; width:min(600px,53vw); z-index:3;
+    padding:clamp(28px,6vw,96px); display:flex; flex-direction:column; justify-content:center;
+    gap:20px; opacity:0; will-change:opacity,transform; pointer-events:none }
+  .beat--l{ left:0; align-items:flex-start; text-align:left; transform:translateX(-28px) }
+  .beat--r{ right:0; align-items:flex-end; text-align:right; transform:translateX(28px) }
+  .beat h1{ font-size:clamp(40px,6.4vw,92px); line-height:.98; color:var(--white); text-shadow:0 2px 40px rgba(0,0,0,.45) }
+  .beat h1 .amber{ color:var(--amber) }
+  .bsub{ font-size:clamp(15px,1.5vw,18px); line-height:1.55; max-width:42ch; color:var(--cream) }
+  .btestim{ font-size:13px; line-height:1.5; color:rgba(247,243,233,.8); font-style:italic; max-width:40ch;
+    border-left:2px solid var(--amber); padding-left:14px }
+  .beat--r .btestim{ border-left:none; border-right:2px solid var(--amber); padding-left:0; padding-right:14px }
+  .btestim b{ display:block; margin-top:6px; font-style:normal; font-weight:700; font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:rgba(247,243,233,.55) }
+  .brow{ display:flex; gap:14px; flex-wrap:wrap; margin-top:6px }
+  .beat--r .brow{ justify-content:flex-end }
 
   /* ---------- BUTTONS ---------- */
-  .btn{ font-weight:600; letter-spacing:.04em; font-size:13px; text-transform:uppercase;
+  .btn{ font-weight:600; letter-spacing:.04em; font-size:13px; text-transform:uppercase; font-family:inherit;
+    background:transparent; border:0; cursor:pointer; line-height:1;
     text-decoration:none; display:inline-block; padding:15px 26px; border-radius:999px;
     transition:transform .15s, box-shadow .15s, background .15s, color .15s }
   .btn--amber{ color:var(--ink); background:var(--amber) }
@@ -81,6 +84,28 @@
   .statement.display{ line-height:.98 }
   .lead{ margin-top:28px; max-width:56ch; line-height:1.65; font-size:clamp(15px,1.4vw,18px); opacity:.92 }
   .amber-text{ color:var(--amber) }
+  .section{ position:relative }
+  .qpop{ position:absolute; right:clamp(16px,4vw,56px); top:clamp(110px,20vh,220px); z-index:6; width:min(300px,76vw);
+    background:rgba(44,44,48,.95); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+    border:1px solid rgba(249,172,36,.5); border-radius:16px 16px 4px 16px; padding:16px 18px 15px;
+    box-shadow:0 20px 55px rgba(0,0,0,.5); opacity:0; transform:translateY(18px) scale(.97);
+    transition:opacity .6s cubic-bezier(.2,.7,.2,1), transform .6s cubic-bezier(.2,.7,.2,1); pointer-events:none }
+  .qpop.in{ opacity:1; transform:none }
+  .qpop::after{ content:""; position:absolute; right:24px; bottom:-8px; width:16px; height:16px; background:inherit;
+    border-right:1px solid rgba(249,172,36,.5); border-bottom:1px solid rgba(249,172,36,.5); transform:rotate(45deg) }
+  .qpop .qm{ position:absolute; top:-13px; left:14px; width:27px; height:27px; border-radius:50%; background:var(--amber);
+    color:#141414; display:flex; align-items:center; justify-content:center; font-family:var(--display); font-style:italic; font-weight:800; font-size:20px; line-height:1 }
+  .qpop .q{ font-size:14px; line-height:1.5; color:#fff }
+  .qpop .q b{ color:var(--amber); font-weight:400 }
+  .qpop .a{ margin-top:10px; font-size:10.5px; letter-spacing:.05em; text-transform:uppercase; color:rgba(255,255,255,.55) }
+  .qpop .a b{ color:rgba(255,255,255,.9); font-weight:700 }
+  .qpop--left{ left:clamp(16px,4vw,56px); right:auto; top:auto; bottom:clamp(24px,5vw,48px); border-radius:16px 16px 16px 4px }
+  .qpop--left::after{ left:24px; right:auto }
+  .qpop--br{ top:auto; bottom:clamp(28px,5vw,52px) }
+  .bfstats{ display:flex; flex-wrap:wrap; gap:clamp(22px,5vw,72px); margin-top:38px }
+  .bfstats div{ display:flex; flex-direction:column }
+  .bfstats b{ font-family:var(--display); font-style:italic; font-weight:800; font-size:clamp(32px,5vw,58px); color:#fff; line-height:.9 }
+  .bfstats span{ margin-top:9px; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.55) }
 
   /* reel */
   .reel{ margin-top:44px; border-radius:var(--r-card); overflow:hidden; aspect-ratio:16/9;
@@ -154,13 +179,13 @@
   footer .fl{ font-size:11px; letter-spacing:.14em; text-transform:uppercase; opacity:.6 }
 
   @media (max-width:760px){
-    :root{ --stage:300vh }
+    :root{ --stage:540vh }
     .hero__content{ width:88vw }
     .nav .links a:not(.pill){ display:none }
   }
   @media (prefers-reduced-motion:reduce){
     .hero__stage{ height:auto } .hero__sticky{ position:relative; height:100vh }
-    .hero__content{ opacity:1; transform:none } .hero__scrim{ opacity:1 } .cue{ display:none } .hero__intro{ display:none }
+    .beat{ opacity:1; transform:none } #b1,#b2,#b3{ display:none } .hero__scrim{ opacity:1 } .cue{ display:none }
   }
 </style>
 </head>
@@ -169,9 +194,11 @@
 <nav class="nav">
   <a href="#top"><img src="assets/brand/logo-footer.png" alt="Champion Digital Media" /></a>
   <span class="links">
-    <a href="#how">How we work</a>
-    <a href="#demo">See who's engaging</a>
-    <a class="pill" href="#contact">Get a sample report</a>
+    <a href="#top">How</a>
+    <a href="#see">See</a>
+    <a href="#proof">Proof</a>
+    <a href="#work">Work</a>
+    <a class="pill" href="#contact">Contact</a>
   </span>
 </nav>
 
@@ -179,19 +206,37 @@
 <header class="hero" id="top">
   <div class="hero__stage" id="stage">
     <div class="hero__sticky">
-      <video class="hero__video" id="hero" src="assets/hero.mp4" poster="assets/poster.jpg"
+      <video class="hero__video" id="v1" src="assets/hero-g1.mp4" poster="assets/hero-poster-g.jpg"
              muted playsinline preload="auto" disablepictureinpicture></video>
-      <div class="hero__scrim" id="scrim"></div>
-      <div class="hero__intro" id="intro">
+      <video class="hero__video" id="v2" src="assets/hero-g2.mp4"
+             muted playsinline preload="auto" disablepictureinpicture style="opacity:0"></video>
+      <video class="hero__video" id="v3" src="assets/hero-g3.mp4"
+             muted playsinline preload="auto" disablepictureinpicture style="opacity:0"></video>
+      <div class="hero__scrim scrim--l" id="scrimL"></div>
+      <div class="hero__scrim scrim--r" id="scrimR"></div>
+      <div class="beat beat--l" id="b1">
         <h1 class="display">Stop flying <span class="amber">blind.</span></h1>
-      </div>
-      <div class="hero__content" id="content">
-        <h1 class="display">Put your buyers on the <span class="amber">radar.</span></h1>
-        <p class="sub">We make your buyers know you before the call — and hand your reps the names already leaning in.</p>
-        <div class="row">
-          <a class="btn btn--amber" href="#demo">See it live →</a>
-          <a class="btn btn--ghost" href="#contact">Get a sample report</a>
+        <p class="bsub">Your next buyer just watched your video twice. Want their name?</p>
+        <div class="brow">
+          <a class="btn btn--amber" href="https://championdigitalmedia.com/#contact" target="_blank" rel="noopener">Yes →</a>
+          <button class="btn btn--ghost" type="button" id="heroNo">No</button>
         </div>
+      </div>
+      <div class="beat beat--r" id="b2">
+        <h1 class="display">We make you <span class="amber">impossible to ignore.</span></h1>
+        <p class="bsub">Brand collateral that finally matches the level you operate at. Not for vanity — to earn the click.</p>
+        <p class="btestim">&ldquo;Oh my effing goodness. That is great.&rdquo; <b>Chip Reeves, CEO, Enablers</b></p>
+      </div>
+      <div class="beat beat--l" id="b3">
+        <h1 class="display">Watch <span class="amber">who leans in.</span></h1>
+        <p class="bsub">We put you in front of a tight list of your real buyers, on the channels they live on — then track every click, scroll, and watch down to the named person. Software we built ourselves, because nothing off the shelf could do it.</p>
+        <p class="btestim">&ldquo;We couldn&rsquo;t live without it.&rdquo; <b>Chad O&rsquo;Shields, EZ TMS</b></p>
+      </div>
+      <div class="beat beat--r" id="b4">
+        <h1 class="display">Certainty <span class="amber">for your sales team.</span></h1>
+        <p class="bsub">Every engaged buyer, named and scored. Ranked by how ready they are to buy. Handed to your reps warm, before the first word.</p>
+        <p class="btestim">&ldquo;Champion does what they say they&rsquo;re going to do.&rdquo; <b>Eric Weidl, Dock411</b></p>
+        <div class="brow"><a class="btn btn--amber" href="#contact">Get your custom plan →</a></div>
       </div>
       <div class="cue" id="cue"><span>Scroll</span><span class="bar"></span></div>
     </div>
@@ -199,59 +244,38 @@
 </header>
 
 <main>
-  <!-- ACT 1 — HOW (the creative) -->
-  <section class="section ink" id="how">
-    <h2 class="statement display">Your product is ahead of your brand. <span class="amber-text">We fix that — loudly.</span></h2>
-    <p class="lead">Brand film, graphic ads, a brand that finally looks the level you operate at. Not to win awards — to earn the click. <em>Keep scrolling — watch what it does.</em></p>
+  <!-- SEE — live score -->
+  <section class="section ink" id="see">
+    <h2 class="statement display">See <span class="amber-text">for yourself.</span></h2>
+    <p class="lead">Watch your own score climb in real time. That's the system — running on you, right now.</p>
+    <button class="btn btn--amber" type="button" id="seeScore" style="margin-top:30px">See my score →</button>
+  </section>
+
+  <!-- PROOF — Bitfreighter case study -->
+  <section class="section ink" id="proof">
+    <h2 class="statement display">We did this for <span class="amber-text">Bitfreighter.</span></h2>
+    <div class="bfstats">
+      <div><b>224K</b><span>impressions</span></div>
+      <div><b>133</b><span>conversations</span></div>
+      <div><b>42</b><span>accounts closed</span></div>
+      <div><b>$65,545</b><span>new MRR</span></div>
+    </div>
+    <p class="lead">We found their buyers. Their team closed the deals. Clockwork.</p>
+    <a class="btn btn--amber" href="https://championdigitalmedia.com/#contact" style="margin-top:32px">Read the Bitfreighter story →</a>
+    <div class="qpop" data-pop>
+      <p class="q">Champion&rsquo;s powerful go-to-market strategy has been <b>a game-changer.</b></p>
+      <p class="a"><b>Brad Perling</b> &middot; CEO, Bitfreighter</p>
+    </div>
+  </section>
+
+  <!-- WORK — Select Work -->
+  <section class="section ink" id="work">
+    <h2 class="statement display">Select <span class="amber-text">work.</span></h2>
+    <p class="lead">Brand films, campaign videos, and websites — the collateral that earns the click.</p>
     <div class="reel">
       <video src="assets/reel.mp4" poster="assets/brand/reel-poster.jpg"
              autoplay muted loop playsinline controls preload="metadata"></video>
     </div>
-  </section>
-
-  <!-- ACT 2 — WHAT (serve + track = the bite) -->
-  <section class="section ink" id="bite">
-    <h2 class="statement display">It's in front of them. <span class="amber-text">Now we see who leans in.</span></h2>
-    <p class="lead">We put your creative in front of a tight list of your real ICP, on the channels logistics buyers live on — then track every click, scroll, and watch down to the named person. Not "an account." A name.</p>
-    <div class="feedmock">
-      <div class="ev"><span class="ts">09:14</span><span class="sg">Watched 0:40 of the brand film</span><span class="pt">+25</span></div>
-      <div class="ev"><span class="ts">09:15</span><span class="sg">Opened the case study</span><span class="pt">+16</span></div>
-      <div class="ev"><span class="ts">11:02</span><span class="sg">Viewed pricing — twice</span><span class="pt">+20</span></div>
-      <div class="ev"><span class="ts">Thu</span><span class="sg">Came back. Read to the bottom.</span><span class="pt">+13</span></div>
-    </div>
-  </section>
-
-  <!-- ACT 3 — THE LIST -->
-  <section class="section ink" id="list">
-    <div class="list2">
-      <div>
-        <h2 class="statement display">The part your sales team has never had: <span class="amber-text">certainty about who to call.</span></h2>
-        <p class="lead">Every engaged buyer, named and scored, ranked by how ready they are to buy — handed to your reps warm. No more guessing. No more strangers.</p>
-      </div>
-      <div class="lcard">
-        <div style="display:flex;align-items:center;gap:14px">
-          <div style="width:48px;height:48px;border-radius:11px;background:linear-gradient(135deg,#2a2a2a,#161616);border:1px solid rgba(247,243,233,.14);display:flex;align-items:center;justify-content:center;font-weight:700;color:#8a8a8a;font-size:13px;font-family:var(--mono)">AC</div>
-          <div>
-            <div style="font-family:var(--display);font-style:italic;font-weight:800;text-transform:uppercase;font-size:20px;color:var(--amber)">Alex Carter</div>
-            <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8a8a8a;margin-top:5px">VP of Operations &middot; Pentagon Freight</div>
-          </div>
-          <div style="margin-left:auto;font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;padding:6px 11px;border-radius:999px;background:rgba(210,86,75,.16);color:#E06A5A;display:flex;align-items:center;gap:7px"><span style="width:7px;height:7px;border-radius:50%;background:currentColor"></span>Hot &mdash; call now</div>
-        </div>
-        <div style="display:flex;align-items:flex-end;gap:10px;margin-top:18px"><span style="font-family:var(--display);font-style:italic;font-weight:800;font-size:48px;line-height:.8;color:#fff">87</span><span style="font-size:12px;color:#8a8a8a;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px">/ 100 intent</span></div>
-        <div style="height:8px;border-radius:5px;background:#262626;margin-top:12px;overflow:hidden"><i style="display:block;height:100%;width:87%;background:linear-gradient(90deg,#D2564B,#e8704f)"></i></div>
-        <div style="margin-top:14px;font-size:12px;color:#9a9a9a;letter-spacing:.02em;line-height:1.6">Watched the brand video twice &middot; clicked the pricing email &middot; returned Thursday &middot; 3 colleagues from Pentagon also engaging.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ACT 4 — PROOF (try it) -->
-  <section class="section ink" id="demo">
-    <h2 class="statement display">Don't take our word for it. <span class="amber-text">Watch your own intent build.</span></h2>
-    <p class="lead">Click around. Watch your own card score in real time. That's the system — running on you, right now.</p>
-    <div class="demoframe">
-      <iframe src="https://joaovitormiguel.github.io/champion-intent-demo/" title="Champion live intent demo" loading="lazy"></iframe>
-    </div>
-    <a class="demolink" href="https://joaovitormiguel.github.io/champion-intent-demo/" target="_blank" rel="noopener">Open the demo full-screen ↗</a>
   </section>
 
   <style>
@@ -312,7 +336,7 @@
 </style>
 
 
-<section class="cdm-sec">
+<section class="cdm-sec" id="trusted">
   <div class="cdm-wrap">
     <div class="cdm-head">
       <span class="ti">Trusted by brands that move</span>
@@ -419,9 +443,9 @@
 
   <!-- Final CTA -->
   <section class="final" id="contact">
-    <h2 class="display">Your buyers are already raising their hand.</h2>
-    <p>We'll tell you which ones.</p>
-    <a class="btn btn--ink" href="https://championdigitalmedia.com/#contact">Get a sample intent report →</a>
+    <h2 class="display">Put your buyers on your radar.</h2>
+    <p>Your buyers are already raising their hand. We'll tell you which ones.</p>
+    <a class="btn btn--ink" href="https://championdigitalmedia.com/#contact">Get your sample intent report →</a>
   </section>
 </main>
 
@@ -432,40 +456,142 @@
 
 <script>
 (function(){
-  var video=document.getElementById('hero'), stage=document.getElementById('stage'),
-      content=document.getElementById('content'), scrim=document.getElementById('scrim'),
-      intro=document.getElementById('intro'), cue=document.getElementById('cue');
-  var duration=9, targetT=0, curT=0;
+  var stage=document.getElementById('stage'), cue=document.getElementById('cue'),
+      scrimL=document.getElementById('scrimL'), scrimR=document.getElementById('scrimR'),
+      b1=document.getElementById('b1'), b2=document.getElementById('b2'),
+      b3=document.getElementById('b3'), b4=document.getElementById('b4');
+  var V=[document.getElementById('v1'),document.getElementById('v2'),document.getElementById('v3')];
+  var dur=[5,5,5];
   var reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 
-  video.addEventListener('loadedmetadata', function(){ if(isFinite(video.duration)&&video.duration>0) duration=video.duration; });
-  (function prime(){ var p=video.play(); if(p&&p.then) p.then(function(){video.pause();video.currentTime=0;}).catch(function(){}); })();
+  V.forEach(function(v,i){
+    v.addEventListener('loadedmetadata',function(){ if(isFinite(v.duration)&&v.duration>0) dur[i]=v.duration; });
+    var pp=v.play(); if(pp&&pp.then) pp.then(function(){v.pause();v.currentTime=0;}).catch(function(){});
+  });
 
   function clamp(v,a,b){return v<a?a:(v>b?b:v);}
   function map(v,a,b){return clamp((v-a)/(b-a),0,1);}
   function progress(){ var r=stage.getBoundingClientRect(); return clamp(-r.top/(r.height-window.innerHeight),0,1); }
+  function setbeat(el,o,dir){ el.style.opacity=o; el.style.transform='translateX('+(dir*28*(1-o))+'px)'; el.style.pointerEvents=(o>0.4)?'auto':'none'; }
 
-  function onScroll(){
+  var A=1/3, B=2/3, X=0.045;
+  function frame(){
     var p=progress();
-    targetT=p*(duration-0.04);
-    var io=clamp(1-map(p,0,0.33),0,1);
-    intro.style.opacity=io;
-    intro.style.transform='translateY('+(-30*(1-io))+'px)';
-    var rev=map(p,0.60,0.92);
-    content.style.opacity=rev;
-    content.style.transform='translateX('+(-28*(1-rev))+'px)';
-    scrim.style.opacity=rev;
+    var L=[clamp(p/A,0,1), clamp((p-A)/(B-A),0,1), clamp((p-B)/(1-B),0,1)];
+    var O=[p<A?1:0, (p>=A&&p<B)?1:0, p>=B?1:0]; // hard cut, no crossfade
+    for(var i=0;i<3;i++){
+      V[i].style.opacity=O[i];
+      if(O[i]>0.01 && V[i].readyState>=2){
+        var t=L[i]*(dur[i]-0.05);
+        if(Math.abs(V[i].currentTime-t)>0.005){ try{V[i].currentTime=t;}catch(e){} }
+      }
+    }
+    var t1=clamp(1-map(p,0.05,0.16),0,1);
+    var ta=map(p,A-0.10,A-0.02)*(1-map(p,A+0.04,A+0.12));
+    var tb=map(p,B-0.10,B-0.02)*(1-map(p,B+0.04,B+0.12));
+    var tc=map(p,0.88,0.97);
+    setbeat(b1,t1,-1); setbeat(b2,ta,1); setbeat(b3,tb,-1); setbeat(b4,tc,1);
+    scrimL.style.opacity=Math.max(t1,tb);
+    scrimR.style.opacity=Math.max(ta,tc);
     cue.style.opacity=(p<0.04)?1:0;
+    requestAnimationFrame(frame);
   }
-  function tick(){
-    curT+=(targetT-curT)*0.18;
-    if(Math.abs(targetT-curT)<0.002) curT=targetT;
-    if(video.readyState>=2 && Math.abs(video.currentTime-curT)>0.005){ try{video.currentTime=curT;}catch(e){} }
-    requestAnimationFrame(tick);
-  }
-  if(reduce){ video.currentTime=0; }
-  else{ window.addEventListener('scroll',onScroll,{passive:true}); window.addEventListener('resize',onScroll); onScroll(); requestAnimationFrame(tick); }
+  var noBtn=document.getElementById('heroNo');
+  if(noBtn) noBtn.addEventListener('click',function(){ var s=document.getElementById('see'); if(s) s.scrollIntoView({behavior:'smooth'}); });
+  if(reduce){ V[0].style.opacity=0; V[2].style.opacity=1; }
+  else{ requestAnimationFrame(frame); }
 })();
 </script>
+<script>
+(function(){
+  var pops=[].slice.call(document.querySelectorAll('[data-pop]'));
+  if(!pops.length) return;
+  if(!('IntersectionObserver' in window)){ pops.forEach(function(p){p.classList.add('in');}); return; }
+  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ var el=e.target; setTimeout(function(){ el.classList.add('in'); },240); io.unobserve(el); } }); }, {threshold:0.45});
+  pops.forEach(function(p){ io.observe(p); });
+})();
+</script>
+
+<!-- ===== See-my-score sidebar ===== -->
+<style>
+.ss-overlay{ position:fixed; inset:0; background:rgba(8,8,8,.55); opacity:0; pointer-events:none; transition:opacity .35s; z-index:90 }
+.ss-overlay.open{ opacity:1; pointer-events:auto }
+.ss{ position:fixed; top:0; right:0; height:100%; width:min(420px,92vw); background:#161618; color:#fff;
+  font-family:var(--mono,ui-monospace,monospace); transform:translateX(100%); transition:transform .42s cubic-bezier(.3,.7,.2,1);
+  z-index:91; display:flex; flex-direction:column; box-shadow:-30px 0 80px rgba(0,0,0,.5); border-left:1px solid rgba(249,172,36,.3) }
+.ss.open{ transform:none }
+.ss-head{ display:flex; align-items:center; justify-content:space-between; padding:22px 24px; border-bottom:1px solid rgba(255,255,255,.08) }
+.ss-id{ display:flex; align-items:center; gap:13px }
+.ss-av{ width:46px; height:46px; border-radius:12px; background:linear-gradient(135deg,#2a2a2a,#161616); border:1px solid rgba(249,172,36,.3); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px; color:var(--amber,#F9AC24) }
+.ss-name{ font-family:var(--display,inherit); font-style:italic; font-weight:800; text-transform:uppercase; font-size:19px }
+.ss-role{ font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.5); margin-top:3px }
+.ss-close{ background:none; border:0; color:rgba(255,255,255,.6); font-size:26px; line-height:1; cursor:pointer }
+.ss-score{ padding:24px }
+.ss-num{ display:flex; align-items:flex-end; gap:9px }
+.ss-num span{ font-family:var(--display,inherit); font-style:italic; font-weight:800; font-size:60px; line-height:.8; color:#fff }
+.ss-num i{ font-style:normal; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.5); margin-bottom:6px }
+.ss-bar{ height:8px; border-radius:5px; background:#262626; margin-top:14px; overflow:hidden }
+.ss-bar i{ display:block; height:100%; width:0; background:linear-gradient(90deg,#D2564B,#e8704f); transition:width .6s ease }
+.ss-tier{ margin-top:12px; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--amber,#F9AC24); font-weight:700 }
+.ss-feedhead{ padding:6px 24px; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.4) }
+.ss-feed{ flex:1; overflow-y:auto; padding:8px 24px 24px }
+.ss-ev{ display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid rgba(255,255,255,.06); opacity:0; transform:translateY(8px); transition:opacity .4s, transform .4s }
+.ss-ev.in{ opacity:1; transform:none }
+.ss-ev .t{ font-size:11px; color:rgba(255,255,255,.4); width:40px; flex:none }
+.ss-ev .s{ font-size:13px; flex:1; color:rgba(255,255,255,.9) }
+.ss-ev .p{ font-size:12px; font-weight:700; color:var(--amber,#F9AC24) }
+.ss-foot{ padding:18px 24px; border-top:1px solid rgba(255,255,255,.08); font-size:12px; color:rgba(255,255,255,.55); line-height:1.5 }
+.ss-foot a{ color:var(--amber,#F9AC24); display:inline-block; margin-top:6px; text-decoration:none }
+</style>
+<div class="ss-overlay" id="ssOverlay"></div>
+<aside class="ss" id="scoreSidebar" aria-hidden="true">
+  <div class="ss-head">
+    <div class="ss-id">
+      <div class="ss-av" id="ssAv">YOU</div>
+      <div><div class="ss-name" id="ssName">YOU</div><div class="ss-role" id="ssRole"></div></div>
+    </div>
+    <button class="ss-close" id="ssClose" aria-label="Close">&times;</button>
+  </div>
+  <div class="ss-score">
+    <div class="ss-num"><span id="ssScore">0</span><i>/ 100 intent</i></div>
+    <div class="ss-bar"><i id="ssBar"></i></div>
+    <div class="ss-tier" id="ssTier">Warming up</div>
+  </div>
+  <div class="ss-feedhead">What you've done so far</div>
+  <div class="ss-feed" id="ssFeed"></div>
+  <div class="ss-foot">This is exactly what your reps would see about a real buyer.<br><a href="https://championdigitalmedia.com/#contact">Get your sample report &rarr;</a></div>
+</aside>
+<script>
+(function(){
+  var btn=document.getElementById('seeScore'), side=document.getElementById('scoreSidebar'),
+      ov=document.getElementById('ssOverlay'), closeB=document.getElementById('ssClose');
+  if(!btn||!side) return;
+  var params=new URLSearchParams(location.search);
+  var nm=params.get('name'), co=params.get('company'), role=params.get('role');
+  var name=nm||'YOU';
+  var roleText=nm?[role,co].filter(Boolean).join(' · '):'';
+  function inits(x){ if(x==='YOU')return 'YOU'; var a=x.trim().split(/\s+/); return (((a[0]||'')[0]||'')+((a[1]||'')[0]||'')).toUpperCase(); }
+  document.getElementById('ssName').textContent=name;
+  document.getElementById('ssRole').textContent=roleText;
+  document.getElementById('ssAv').textContent=inits(name);
+  var events=[['now','Landed on championdigitalmedia.com',5],['now','Watched the hero film to the end',22],['now','Scrolled the whole story',14],['now','Opened the Bitfreighter case study',18],['now','Clicked “See my score”',12],['live','Reading this panel right now',16]];
+  var feed=document.getElementById('ssFeed'),scoreEl=document.getElementById('ssScore'),barEl=document.getElementById('ssBar'),tierEl=document.getElementById('ssTier');
+  function tier(v){ return v<35?'Warming up':(v<70?'Engaged — worth a look':'Hot — your reps would call now'); }
+  var started=false;
+  function run(){ if(started)return; started=true; var score=0,i=0;
+    (function step(){ if(i>=events.length)return; var e=events[i++];
+      var r=document.createElement('div'); r.className='ss-ev';
+      r.innerHTML='<span class="t">'+e[0]+'</span><span class="s">'+e[1]+'</span><span class="p">+'+e[2]+'</span>';
+      feed.appendChild(r); requestAnimationFrame(function(){ r.classList.add('in'); });
+      score=Math.min(100,score+e[2]); scoreEl.textContent=score; barEl.style.width=score+'%'; tierEl.textContent=tier(score);
+      setTimeout(step,1100);
+    })(); }
+  function open(){ side.classList.add('open'); ov.classList.add('open'); side.setAttribute('aria-hidden','false'); run(); }
+  function shut(){ side.classList.remove('open'); ov.classList.remove('open'); side.setAttribute('aria-hidden','true'); }
+  btn.addEventListener('click',open); closeB.addEventListener('click',shut); ov.addEventListener('click',shut);
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') shut(); });
+})();
+</script>
+
 </body>
 </html>
