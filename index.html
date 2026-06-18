@@ -44,14 +44,14 @@
   .hero__scrim{ position:absolute; inset:0; pointer-events:none; opacity:0; will-change:opacity }
   .scrim--l{ background:linear-gradient(90deg, rgba(15,15,15,.84) 0%, rgba(15,15,15,.52) 34%, rgba(15,15,15,.08) 60%, transparent 76%) }
   .scrim--r{ background:linear-gradient(270deg, rgba(15,15,15,.84) 0%, rgba(15,15,15,.52) 34%, rgba(15,15,15,.08) 60%, transparent 76%) }
-  .beat{ position:absolute; top:0; height:100%; width:min(1000px,56vw); z-index:3;
+  .beat{ position:absolute; top:0; height:100%; width:min(1240px,54vw); z-index:3;
     padding:clamp(52px,9vw,218px); display:flex; flex-direction:column; justify-content:center;
-    gap:24px; opacity:0; will-change:opacity,transform; pointer-events:none }
+    gap:clamp(20px,1.6vw,34px); opacity:0; will-change:opacity,transform; pointer-events:none }
   .beat--l{ left:0; align-items:flex-start; text-align:left; transform:translateX(-28px) }
   .beat--r{ right:0; align-items:flex-end; text-align:right; transform:translateX(28px) }
-  .beat h1{ font-size:clamp(42px,6vw,118px); line-height:.98; color:var(--white); text-shadow:0 2px 40px rgba(0,0,0,.45) }
+  .beat h1{ font-size:clamp(44px,6.4vw,150px); line-height:.98; color:var(--white); text-shadow:0 2px 40px rgba(0,0,0,.45) }
   .beat h1 .amber{ color:var(--amber) }
-  .bsub{ font-size:clamp(16px,1.4vw,21px); line-height:1.55; max-width:40ch; color:var(--cream) }
+  .bsub{ font-size:clamp(16px,1.5vw,27px); line-height:1.55; max-width:40ch; color:var(--cream) }
   .btestim{ font-size:13px; line-height:1.5; color:rgba(247,243,233,.8); font-style:italic; max-width:40ch;
     border-left:2px solid var(--amber); padding-left:14px }
   .beat--r .btestim{ border-left:none; border-right:2px solid var(--amber); padding-left:0; padding-right:14px }
@@ -60,7 +60,7 @@
   .beat--r .brow{ justify-content:flex-end }
 
   /* ---------- BUTTONS ---------- */
-  .btn{ font-weight:600; letter-spacing:.04em; font-size:13px; text-transform:uppercase; font-family:inherit;
+  .btn{ font-weight:600; letter-spacing:.04em; font-size:clamp(13px,0.85vw,17px); text-transform:uppercase; font-family:inherit;
     background:transparent; border:0; cursor:pointer; line-height:1;
     text-decoration:none; display:inline-block; padding:15px 26px; border-radius:999px;
     transition:transform .15s, box-shadow .15s, background .15s, color .15s }
@@ -181,6 +181,7 @@
   @media (max-width:760px){
     :root{ --stage:540vh }
     .beat{ width:88vw }
+    #v1{ object-position:70% 42% } #v2{ object-position:30% 52% } #v3{ object-position:50% 50% }
     .nav .links a:not(.pill){ display:none }
   }
   @media (prefers-reduced-motion:reduce){
@@ -224,12 +225,12 @@
       </div>
       <div class="beat beat--r" id="b2">
         <h1 class="display">We make you <span class="amber">impossible to ignore.</span></h1>
-        <p class="bsub">Brand collateral that finally matches the level you operate at. Not for vanity — to earn the click.</p>
+        <p class="bsub">Brand collateral that finally matches the level you operate at. Not for vanity. To earn the click.</p>
         <p class="btestim">&ldquo;Oh my effing goodness. That is great.&rdquo; <b>Chip Reeves, CEO, Enablers</b></p>
       </div>
       <div class="beat beat--l" id="b3">
         <h1 class="display">Watch <span class="amber">who leans in.</span></h1>
-        <p class="bsub">We put you in front of a tight list of your real buyers, on the channels they live on — then track every click, scroll, and watch down to the named person. Software we built ourselves, because nothing off the shelf could do it.</p>
+        <p class="bsub">We put you in front of a tight list of your real buyers, on the channels they live on. Then track every click, scroll, and watch down to the named person. Software we built ourselves, because nothing off the shelf could do it.</p>
         <p class="btestim">&ldquo;We couldn&rsquo;t live without it.&rdquo; <b>Chad O&rsquo;Shields, EZ TMS</b></p>
       </div>
       <div class="beat beat--r" id="b4">
@@ -247,7 +248,7 @@
   <!-- SEE — live score -->
   <section class="section ink" id="see">
     <h2 class="statement display">See <span class="amber-text">for yourself.</span></h2>
-    <p class="lead">Watch your own score climb in real time. That's the system — running on you, right now.</p>
+    <p class="lead">Watch your own score in real time. That's the system, running on you right now.</p>
     <button class="btn btn--amber" type="button" id="seeScore" style="margin-top:30px">See my score →</button>
   </section>
 
