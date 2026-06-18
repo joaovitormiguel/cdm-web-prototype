@@ -478,11 +478,12 @@
   function frame(){
     var p=progress();
     var L=[clamp(p/A,0,1), clamp((p-A)/(B-A),0,1), clamp((p-B)/(1-B),0,1)];
-    var O=[1-map(p,A-X,A+X), map(p,A-X,A+X)*(1-map(p,B-X,B+X)), map(p,B-X,B+X)]; // micro-dissolve at joins
+    var O=[p<A?1:0, (p>=A&&p<B)?1:0, p>=B?1:0]; // hard cut
     for(var i=0;i<3;i++){
       V[i].style.opacity=O[i];
       if(O[i]>0.01 && V[i].readyState>=2){
-        var t=L[i]*(dur[i]-0.05);
+        var dd=(isFinite(V[i].duration)&&V[i].duration>0)?V[i].duration:dur[i];
+        var t=L[i]*(dd-0.042);
         if(Math.abs(V[i].currentTime-t)>0.005){ try{V[i].currentTime=t;}catch(e){} }
       }
     }
