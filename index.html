@@ -44,8 +44,8 @@
   .hero__scrim{ position:absolute; inset:0; pointer-events:none; opacity:0; will-change:opacity }
   .scrim--l{ background:linear-gradient(90deg, rgba(15,15,15,.84) 0%, rgba(15,15,15,.52) 34%, rgba(15,15,15,.08) 60%, transparent 76%) }
   .scrim--r{ background:linear-gradient(270deg, rgba(15,15,15,.84) 0%, rgba(15,15,15,.52) 34%, rgba(15,15,15,.08) 60%, transparent 76%) }
-  .beat{ position:absolute; top:0; height:100%; width:min(880px,54vw); z-index:3;
-    padding:clamp(40px,7vw,168px); display:flex; flex-direction:column; justify-content:center;
+  .beat{ position:absolute; top:0; height:100%; width:min(1000px,56vw); z-index:3;
+    padding:clamp(52px,9vw,218px); display:flex; flex-direction:column; justify-content:center;
     gap:24px; opacity:0; will-change:opacity,transform; pointer-events:none }
   .beat--l{ left:0; align-items:flex-start; text-align:left; transform:translateX(-28px) }
   .beat--r{ right:0; align-items:flex-end; text-align:right; transform:translateX(28px) }
@@ -180,7 +180,7 @@
 
   @media (max-width:760px){
     :root{ --stage:540vh }
-    .hero__content{ width:88vw }
+    .beat{ width:88vw }
     .nav .links a:not(.pill){ display:none }
   }
   @media (prefers-reduced-motion:reduce){
@@ -215,7 +215,7 @@
       <div class="hero__scrim scrim--l" id="scrimL"></div>
       <div class="hero__scrim scrim--r" id="scrimR"></div>
       <div class="beat beat--l" id="b1">
-        <h1 class="display">Stop flying <span class="amber">blind.</span></h1>
+        <h1 class="display">Stop<br>flying<br><span class="amber">blind.</span></h1>
         <p class="bsub">Your next buyer just watched your video twice. Want their name?</p>
         <div class="brow">
           <a class="btn btn--amber" href="https://championdigitalmedia.com/#contact" target="_blank" rel="noopener">Yes →</a>
