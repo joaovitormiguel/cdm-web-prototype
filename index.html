@@ -210,7 +210,7 @@
              muted playsinline preload="auto" disablepictureinpicture></video>
       <video class="hero__video" id="v2" src="assets/hero-h2.mp4"
              muted playsinline preload="auto" disablepictureinpicture style="opacity:0"></video>
-      <video class="hero__video" id="v3" src="assets/hero-h3.mp4"
+      <video class="hero__video" id="v3" src="assets/hero-i3.mp4"
              muted playsinline preload="auto" disablepictureinpicture style="opacity:0"></video>
       <div class="hero__scrim scrim--l" id="scrimL"></div>
       <div class="hero__scrim scrim--r" id="scrimR"></div>
@@ -474,11 +474,11 @@
   function progress(){ var r=stage.getBoundingClientRect(); return clamp(-r.top/(r.height-window.innerHeight),0,1); }
   function setbeat(el,o,dir){ el.style.opacity=o; el.style.transform='translateX('+(dir*28*(1-o))+'px)'; el.style.pointerEvents=(o>0.4)?'auto':'none'; }
 
-  var A=1/3, B=2/3, X=0.045;
+  var A=1/3, B=2/3, X=0.012;
   function frame(){
     var p=progress();
     var L=[clamp(p/A,0,1), clamp((p-A)/(B-A),0,1), clamp((p-B)/(1-B),0,1)];
-    var O=[p<A?1:0, (p>=A&&p<B)?1:0, p>=B?1:0]; // hard cut, no crossfade
+    var O=[1-map(p,A-X,A+X), map(p,A-X,A+X)*(1-map(p,B-X,B+X)), map(p,B-X,B+X)]; // micro-dissolve at joins
     for(var i=0;i<3;i++){
       V[i].style.opacity=O[i];
       if(O[i]>0.01 && V[i].readyState>=2){
