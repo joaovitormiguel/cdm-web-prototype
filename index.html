@@ -204,7 +204,7 @@
     <a href="#see">See</a>
     <a href="#proof">Proof</a>
     <a href="#work">Work</a>
-    <a class="pill" href="#contact">Contact</a>
+    <a class="pill" href="#contact" data-contact>Contact</a>
   </span>
 </nav>
 
@@ -224,7 +224,7 @@
         <h1 class="display">Stop<br>flying<br><span class="amber">blind.</span></h1>
         <p class="bsub">Your next buyer just watched your video twice. Want their name?</p>
         <div class="brow">
-          <a class="btn btn--amber" href="https://championdigitalmedia.com/#contact" target="_blank" rel="noopener">Yes →</a>
+          <a class="btn btn--amber" href="#contact" data-contact>Yes →</a>
           <button class="btn btn--ghost" type="button" id="heroNo">How?</button>
         </div>
       </div>
@@ -242,7 +242,7 @@
         <h1 class="display">3. Know <span class="amber">who to call.</span></h1>
         <p class="bsub">Every engaged buyer, named and scored. Ranked by how ready they are to buy. Handed to your reps warm, before the first word.</p>
         <p class="btestim">&ldquo;Champion does what they say<br>they&rsquo;re going to do.&rdquo; <b>Eric Weidl</b><img class="testim-logo" src="assets/logos/dock411.svg" alt="Dock411"></p>
-        <div class="brow"><a class="btn btn--amber" href="#contact">Get your custom plan →</a></div>
+        <div class="brow"><a class="btn btn--amber" href="#contact" data-contact>Get your custom plan →</a></div>
       </div>
       <div class="cue" id="cue"><span>Scroll</span><span class="bar"></span></div>
     </div>
@@ -450,7 +450,7 @@
   <section class="final" id="contact">
     <h2 class="display">Put your buyers on your radar.</h2>
     <p>Your buyers are already circling. Bring them in.</p>
-    <a class="btn btn--ink" href="https://championdigitalmedia.com/#contact">Let's fly →</a>
+    <a class="btn btn--ink" href="#contact" data-contact>Let's fly →</a>
   </section>
 </main>
 
@@ -548,6 +548,34 @@
 .ss-ev .p{ font-size:12px; font-weight:700; color:var(--amber,#F9AC24) }
 .ss-foot{ padding:18px 24px; border-top:1px solid rgba(255,255,255,.08); font-size:12px; color:rgba(255,255,255,.55); line-height:1.5 }
 .ss-foot a{ color:var(--amber,#F9AC24); display:inline-block; margin-top:6px; text-decoration:none }
+/* ── Contact modal (rebuilt from championdigitalmedia.com, Champion-styled) ── */
+.cm-overlay{ position:fixed; inset:0; background:rgba(8,8,8,.66); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); opacity:0; pointer-events:none; transition:opacity .3s; z-index:120 }
+.cm-overlay.open{ opacity:1; pointer-events:auto }
+.cm{ position:fixed; z-index:121; top:50%; left:50%; transform:translate(-50%,-46%); width:min(520px,92vw); max-height:90vh; overflow-y:auto; background:#161618; border:1px solid rgba(255,255,255,.09); border-radius:18px; padding:38px 36px 32px; opacity:0; pointer-events:none; transition:opacity .3s, transform .3s; box-shadow:0 40px 120px rgba(0,0,0,.55) }
+.cm.open{ opacity:1; pointer-events:auto; transform:translate(-50%,-50%) }
+.cm-close{ position:absolute; top:14px; right:20px; background:none; border:0; color:rgba(255,255,255,.5); font-size:28px; line-height:1; cursor:pointer }
+.cm-close:hover{ color:#fff }
+.cm-title{ font-family:var(--display); font-style:italic; font-weight:800; text-transform:uppercase; font-size:clamp(30px,4vw,44px); line-height:.92; color:#fff; margin:0 }
+.cm-title .amber{ color:var(--amber) }
+.cm-sub{ font-size:14px; color:rgba(255,255,255,.6); margin:11px 0 24px; line-height:1.5 }
+.cm-honey{ position:absolute; left:-9999px; width:1px; height:1px; opacity:0 }
+.cm-grid{ display:flex; gap:14px }
+.cm-grid .cm-field{ flex:1 }
+.cm-field{ margin-bottom:15px }
+.cm-field label{ display:block; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,.5); margin-bottom:7px }
+.cm-field input, .cm-field textarea{ width:100%; box-sizing:border-box; background:#1f1f22; border:1px solid rgba(255,255,255,.12); border-radius:10px; padding:13px 15px; color:#fff; font-family:var(--mono); font-size:14px; transition:border-color .2s }
+.cm-field input:focus, .cm-field textarea:focus{ outline:none; border-color:var(--amber) }
+.cm-field input::placeholder, .cm-field textarea::placeholder{ color:rgba(255,255,255,.32) }
+.cm-field textarea{ resize:vertical; min-height:100px }
+.cm-send{ width:100%; justify-content:center; display:inline-flex; align-items:center; gap:9px; margin-top:6px; cursor:pointer; border:0; padding:15px 24px }
+.cm-send:disabled{ opacity:.6; cursor:default }
+.cm-send svg{ width:17px; height:17px; fill:currentColor }
+.cm-status{ margin-top:13px; font-size:13px; text-align:center; min-height:16px; color:#ef8b80 }
+.cm-done{ text-align:center; padding:14px 0 6px }
+.cm-done-ic{ width:54px; height:54px; border-radius:50%; background:var(--amber); color:var(--ink); font-size:27px; display:flex; align-items:center; justify-content:center; margin:0 auto 18px; font-weight:700 }
+.cm-done h4{ font-family:var(--display); font-style:italic; font-weight:800; text-transform:uppercase; font-size:26px; color:#fff; margin:0 0 9px }
+.cm-done p{ font-size:14px; color:rgba(255,255,255,.65); line-height:1.55; margin:0 auto; max-width:34ch }
+@media(max-width:560px){ .cm{ padding:30px 22px } .cm-grid{ flex-direction:column; gap:0 } }
 </style>
 <div class="ss-overlay" id="ssOverlay"></div>
 <aside class="ss" id="scoreSidebar" aria-hidden="true">
@@ -565,7 +593,7 @@
   </div>
   <div class="ss-feedhead">What you've done so far</div>
   <div class="ss-feed" id="ssFeed"></div>
-  <div class="ss-foot">This is exactly what your reps would see about a real buyer.<br><a href="https://championdigitalmedia.com/#contact">Get your sample intent report &rarr;</a></div>
+  <div class="ss-foot">This is exactly what your reps would see about a real buyer.<br><a href="#contact" data-contact>Get your sample intent report &rarr;</a></div>
 </aside>
 <script>
 (function(){
@@ -607,6 +635,53 @@
   el.addEventListener('pointermove',function(e){ if(!dragging) return; el.style.transform='translate('+(ox+e.clientX-sx)+'px,'+(oy+e.clientY-sy)+'px)'; });
   function end(){ if(!dragging) return; dragging=false; el.style.cursor='grab'; var m=/translate\(([-0-9.]+)px,\s*([-0-9.]+)px\)/.exec(el.style.transform); if(m){ ox=parseFloat(m[1]); oy=parseFloat(m[2]); } }
   el.addEventListener('pointerup',end); el.addEventListener('pointercancel',end);
+})();
+</script>
+
+<!-- ══ CONTACT MODAL (rebuilt from championdigitalmedia.com) ══ -->
+<div class="cm-overlay" id="cmOverlay"></div>
+<div class="cm" id="contactModal" role="dialog" aria-modal="true" aria-label="Contact form" aria-hidden="true">
+  <button class="cm-close" id="cmClose" aria-label="Close contact form">&times;</button>
+  <h3 class="cm-title">Let's <span class="amber">fly.</span></h3>
+  <p class="cm-sub">Tell us where you're headed. We'll handle the runway.</p>
+  <form id="cmForm" novalidate>
+    <input type="text" name="_honey" class="cm-honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <div class="cm-grid">
+      <div class="cm-field"><label for="cm-first">First name</label><input type="text" id="cm-first" name="first_name" placeholder="First" required></div>
+      <div class="cm-field"><label for="cm-last">Last name</label><input type="text" id="cm-last" name="last_name" placeholder="Last" required></div>
+    </div>
+    <div class="cm-field"><label for="cm-company">Company</label><input type="text" id="cm-company" name="company" placeholder="Company name"></div>
+    <div class="cm-field"><label for="cm-email">Email</label><input type="email" id="cm-email" name="email" placeholder="you@company.com" required></div>
+    <div class="cm-field"><label for="cm-message">Message</label><textarea id="cm-message" name="message" placeholder="Tell us about your project..." required></textarea></div>
+    <button type="submit" class="btn btn--amber cm-send">Send <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button>
+    <div class="cm-status" id="cmStatus" aria-live="polite"></div>
+  </form>
+</div>
+<script>
+(function(){
+  var ov=document.getElementById('cmOverlay'), modal=document.getElementById('contactModal'),
+      closeB=document.getElementById('cmClose'), form=document.getElementById('cmForm');
+  if(!modal) return;
+  function open(e){ if(e) e.preventDefault();
+    var sb=document.getElementById('scoreSidebar'), sbo=document.getElementById('ssOverlay');
+    if(sb) sb.classList.remove('open'); if(sbo) sbo.classList.remove('open');
+    modal.classList.add('open'); ov.classList.add('open'); modal.setAttribute('aria-hidden','false');
+    setTimeout(function(){ var f=modal.querySelector('input[name="first_name"]'); if(f) f.focus(); },300);
+  }
+  function shut(){ modal.classList.remove('open'); ov.classList.remove('open'); modal.setAttribute('aria-hidden','true'); }
+  document.querySelectorAll('[data-contact]').forEach(function(a){ a.addEventListener('click',open); });
+  closeB.addEventListener('click',shut); ov.addEventListener('click',shut);
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape' && modal.classList.contains('open')) shut(); });
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(form._honey && form._honey.value) return;            // bot trap
+    if(!form.checkValidity()){ form.reportValidity(); return; }
+    var btn=form.querySelector('.cm-send'); btn.disabled=true; btn.textContent='Sending…';
+    // Static prototype — no backend wired. Show success; hook to /api/contact when hosted.
+    setTimeout(function(){
+      form.innerHTML='<div class="cm-done"><div class="cm-done-ic">&#10003;</div><h4>You\'re on the radar.</h4><p>Thanks &mdash; a Champion strategist will reach out within one business day.</p></div>';
+    },650);
+  });
 })();
 </script>
 </body>
