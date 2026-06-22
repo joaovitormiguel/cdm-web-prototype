@@ -298,3 +298,84 @@ a{color:inherit}
 .li-cta{font-size:13px;font-weight:600;color:#fff;border:1px solid #5b7a99;border-radius:999px;padding:6px 16px}
 .li-bar{display:flex;border-top:1px solid rgba(255,255,255,.06)}
 .li-bar span{flex:1;text-align:center;padding:10px;font-size:12px;color:#9aa;font-weight:500}
+
+/* ── tab panels ── */
+.panel{display:none}
+.panel.on{display:block}
+
+/* ── data table (tasks) ── */
+.dtable{width:100%;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--panel);border-collapse:separate;border-spacing:0}
+.dtable th{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--t4);text-align:left;padding:12px 16px;border-bottom:1px solid var(--line);font-weight:500}
+.dtable td{padding:13px 16px;border-bottom:1px solid var(--line);font-size:13.5px;color:var(--t1);vertical-align:middle}
+.dtable tr:last-child td{border-bottom:0}
+.dtable tbody tr:hover td{background:var(--panel-2)}
+.dtable .grp td{background:var(--sunken);font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);padding:9px 16px}
+.tag{display:inline-block;font-size:11px;font-weight:500;border-radius:6px;padding:3px 9px;background:var(--hover);color:var(--t2);border:1px solid var(--line)}
+.prio{font-family:var(--mono);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+.prio.med{color:#FFD166}.prio.urg{color:var(--red)}.prio.low{color:var(--t3)}
+.addrow{display:inline-flex;align-items:center;gap:7px;color:var(--t3);font-size:12.5px;padding:13px 16px;cursor:pointer}
+.addrow svg{width:13px;height:13px;stroke:currentColor;stroke-width:2;fill:none}
+
+/* ── kanban ── */
+.kan{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px}
+.kcol{flex:1;min-width:178px;background:var(--sunken);border:1px solid var(--line);border-radius:12px;padding:12px}
+.kcol h4{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--t3);display:flex;align-items:center;gap:8px;margin-bottom:12px;padding:2px}
+.kcol h4 .n{margin-left:auto;font-family:var(--mono);color:var(--t4)}
+.kcol h4 .d{width:6px;height:6px;border-radius:50%;background:var(--t4)}
+.kcard{background:var(--panel);border:1px solid var(--line-2);border-radius:9px;padding:11px 12px;margin-bottom:8px}
+.kcard .nm{font-size:13px;font-weight:600}
+.kcard .ro{font-size:11.5px;color:var(--t3);margin-top:3px}
+.kcard .src{display:inline-block;margin-top:8px;font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--acc);border:1px solid var(--acc-25);border-radius:4px;padding:2px 6px}
+.kempty{font-size:12px;color:var(--t4);text-align:center;padding:14px 0;font-style:italic}
+
+/* ── integrations ── */
+.intg{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.intg-card{display:flex;align-items:flex-start;gap:13px;background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:18px}
+.intg-card .lg{width:40px;height:40px;border-radius:10px;flex:none;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#fff}
+.intg-card .bd{flex:1;min-width:0}
+.intg-card .nm{font-size:14px;font-weight:600}
+.intg-card .ds{font-size:12px;color:var(--t3);margin-top:3px}
+.intg-card .stt{font-size:11.5px;color:var(--green);margin-top:9px;display:flex;align-items:center;gap:6px}
+.intg-card .stt .d{width:5px;height:5px;border-radius:50%;background:var(--green)}
+.intg-card .act{display:flex;flex-direction:column;align-items:flex-end;gap:9px;white-space:nowrap}
+.intg-card .act a{font-size:12px;color:var(--t2);text-decoration:none;cursor:pointer}
+.intg-card .act a.dc{color:var(--red)}
+.intg-card .act a.cn{color:var(--acc);font-weight:600}
+
+/* ── code snippet / watcher ── */
+.snippet{background:var(--sunken);border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-family:var(--mono);font-size:11px;color:var(--t2);line-height:1.7;overflow-x:auto;white-space:pre}
+.wlinks{display:flex;gap:16px;margin-left:auto;font-size:12.5px}
+.wlinks a{color:var(--acc);text-decoration:none}
+
+/* ── analytics bars ── */
+.abars{display:flex;align-items:flex-end;gap:4px;height:120px;margin-top:4px}
+.abars i{flex:1;border-radius:2px 2px 0 0;background:rgba(187,255,0,.5)}
+.abars.b2 i{background:rgba(43,227,155,.5)}
+.abars.b3 i{background:rgba(120,170,255,.55)}
+.abx{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--t4);margin-top:8px}
+.panelbox{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px}
+.panelbox h3{font-size:13px;font-weight:600;margin-bottom:4px}
+.col3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+
+/* ── ad preview page ── */
+.prevbar{height:56px;flex:none;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;padding:0 24px}
+.prevwrap{flex:1;overflow:auto;display:flex;justify-content:center;padding:32px 24px}
+.prevwrap .lipreview{position:static;width:520px;height:max-content}
+
+/* ── sessions list ── */
+.slist{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.srow{display:flex;align-items:center;gap:13px;padding:14px 18px;border-bottom:1px solid var(--line);cursor:pointer}
+.srow:last-child{border-bottom:0}.srow:hover{background:var(--panel-2)}
+.srow .li{width:24px;height:24px;border-radius:5px;background:#0a66c2;flex:none;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff}
+.srow .nm{font-size:13.5px;font-weight:500}
+.srow .cm{font-family:var(--mono);font-size:11px;color:var(--t4);margin-top:2px}
+.srow .right{margin-left:auto;display:flex;align-items:center;gap:14px}
+.srow .vw{font-size:12.5px;color:var(--acc)}
+
+/* page intro (sub-pages) */
+.pgintro{margin-bottom:22px}
+.pgintro .bk{font-family:var(--mono);font-size:11px;color:var(--t3);text-decoration:none}
+.pgintro h1{font-size:24px;font-weight:700;letter-spacing:-.02em;margin-top:10px}
+.pgintro p{font-size:13.5px;color:var(--t3);margin-top:8px;max-width:64ch;line-height:1.55}
+.pgintro .hd{display:flex;align-items:flex-start}
+.pgintro .hd .btn{margin-left:auto}
