@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Champortal — Compose Email</title>
+<meta name="viewport" content="width=1440, initial-scale=1">
+<link rel="stylesheet" href="champortal.css">
+</head>
+<body>
+  <div class="pshell">
+    <header class="ed-top">
+      <a class="btn" href="client.html"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>Back</a>
+      <span class="sp"></span>
+      <span style="font-size:14px;font-weight:600">Compose Email</span>
+      <span class="sp"></span>
+      <a class="btn acc" href="client.html"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Save &amp; Schedule</a>
+    </header>
+    <div class="editor">
+      <div class="form-col">
+        <div class="fsec">
+          <h3>Sequence</h3>
+          <div class="field"><label>Campaign</label><input value="Small Brokerage — May 2026"></div>
+          <div class="field"><label>Sequence step</label><input value="Step 1 of 5"></div>
+        </div>
+        <div class="fsec">
+          <h3>Sender</h3>
+          <div class="field"><label>From name</label><input value="The Bitfreighter Team"><div class="hint">From client defaults in Settings</div></div>
+          <div class="field"><label>Reply-to</label><input value="hello@bitfreighter.com"></div>
+        </div>
+        <div class="fsec">
+          <h3>Email</h3>
+          <div class="field"><label>Subject</label><input value="Your reps shouldn't babysit the load board"></div>
+          <div class="field"><label>Preheader</label><input value="Auto-bidding built for lean teams — a 20-min look."></div>
+          <div class="field"><label>Body</label><textarea style="min-height:150px">Hi {{first_name}},
+
+Your top reps shouldn't burn 4 hours a day clicking "submit bid." Bitfreighter auto-bids the loads that fit your lanes — so your team closes instead of clicks.
+
+Worth a 20-minute look?</textarea></div>
+          <div class="field"><label>Button label</label><input value="Book a 20-min demo"></div>
+          <div class="field"><label>Button URL</label><input value="https://bitfreighter.com/demo"></div>
+        </div>
+      </div>
+      <div class="preview-col">
+        <div class="pl">Live preview</div>
+        <div style="background:#fff;border-radius:13px;overflow:hidden;border:1px solid var(--line)">
+          <div style="padding:16px 18px;border-bottom:1px solid #ececec">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:36px;height:36px;border-radius:50%;background:#111;color:#BBFF00;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;font-family:var(--mono)">BF</div>
+              <div><div style="font-weight:600;font-size:13px;color:#111">The Bitfreighter Team</div><div style="font-size:11px;color:#888">hello@bitfreighter.com</div></div>
+            </div>
+            <div style="font-weight:700;font-size:15px;margin-top:13px;color:#111">Your reps shouldn't babysit the load board</div>
+            <div style="font-size:12px;color:#9a9a9a;margin-top:3px">Auto-bidding built for lean teams — a 20-min look.</div>
+          </div>
+          <div style="padding:20px 18px;font-size:13.5px;line-height:1.65;color:#333">
+            Hi {{first_name}},<br><br>
+            Your top reps shouldn't burn 4 hours a day clicking "submit bid." Bitfreighter auto-bids the loads that fit your lanes — so your team closes instead of clicks.<br><br>
+            Worth a 20-minute look?<br><br>
+            <a href="#" style="display:inline-block;background:#111;color:#BBFF00;font-weight:600;font-size:13px;padding:11px 20px;border-radius:8px">Book a 20-min demo</a><br><br>
+            <span style="color:#777">— The Bitfreighter Team</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
