@@ -41,6 +41,7 @@
   .hero__stage{ height:var(--stage); position:relative }
   .hero__sticky{ position:fixed; top:0; left:0; z-index:1; height:100vh; width:100%; overflow:hidden; background:#0b0b0b; transform:translateZ(0); -webkit-backface-visibility:hidden }
   main{ position:relative; z-index:2; background:var(--ink); box-shadow:0 -28px 64px rgba(0,0,0,.55) }
+  footer{ position:relative; z-index:2; background:var(--ink) }
   .hero__video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transform:translateZ(0); -webkit-backface-visibility:hidden }
   .hero__scrim{ position:absolute; inset:0; pointer-events:none; opacity:0; will-change:opacity }
   .scrim--l{ background:linear-gradient(90deg, rgba(15,15,15,.84) 0%, rgba(15,15,15,.52) 34%, rgba(15,15,15,.08) 60%, transparent 76%) }
@@ -91,7 +92,7 @@
   .lead{ margin-top:28px; max-width:56ch; line-height:1.65; font-size:clamp(15px,1.4vw,18px); opacity:.92 }
   .amber-text{ color:var(--amber) }
   .section{ position:relative }
-  #see{ min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center }
+  #see{ text-align:center; padding-bottom:clamp(56px,8vh,104px) }
   #see .statement{ font-size:clamp(46px,7vw,108px); max-width:18ch; margin-left:auto; margin-right:auto }
   #see .lead{ max-width:48ch; margin-left:auto; margin-right:auto }
   .see-cta{ position:relative; display:inline-block; margin-top:34px }
@@ -120,9 +121,34 @@
   .bfstats span{ margin-top:9px; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.55) }
 
   /* reel */
-  .reel{ margin-top:44px; border-radius:var(--r-card); overflow:hidden; aspect-ratio:16/9;
+  .reel{ position:relative; margin-top:44px; border-radius:var(--r-card); overflow:hidden; aspect-ratio:16/9;
     background:#000; box-shadow:0 30px 80px rgba(0,0,0,.45) }
   .reel video{ width:100%; height:100%; object-fit:cover; display:block }
+  .reel-play{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); display:inline-flex; align-items:center; gap:10px; background:#062D51; color:#fff; border:0; border-radius:999px; padding:15px 28px; font-family:var(--mono); font-weight:700; font-size:clamp(13px,1vw,16px); letter-spacing:.04em; text-transform:uppercase; cursor:pointer; box-shadow:0 14px 40px rgba(0,0,0,.5); transition:transform .2s, box-shadow .2s; z-index:2 }
+  .reel-play:hover{ transform:translate(-50%,-50%) scale(1.06); box-shadow:0 18px 52px rgba(0,0,0,.6) }
+  .reel-play svg{ width:18px; height:18px; fill:currentColor }
+  .work-more{ text-align:center; margin-top:30px }
+  .gal{ position:fixed; inset:0; z-index:130; background:rgba(8,8,9,.95); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); opacity:0; pointer-events:none; transition:opacity .3s; overflow-y:auto; padding:clamp(40px,8vh,90px) clamp(20px,6vw,80px) }
+  .gal.open{ opacity:1; pointer-events:auto }
+  .gal-head{ display:flex; align-items:center; justify-content:space-between; max-width:1200px; margin:0 auto 26px }
+  .gal-head h3{ font-family:var(--display); font-style:italic; font-weight:800; text-transform:uppercase; font-size:clamp(26px,3.4vw,46px); color:#fff }
+  .gal-close{ background:none; border:0; color:rgba(255,255,255,.6); font-size:32px; line-height:1; cursor:pointer }
+  .gal-close:hover{ color:#fff }
+  .gal-grid{ max-width:1200px; margin:0 auto; display:grid; grid-template-columns:repeat(3,1fr); gap:18px }
+  .gal-tile{ position:relative; aspect-ratio:16/9; border-radius:12px; overflow:hidden; cursor:pointer; background:#161618; border:1px solid rgba(255,255,255,.08) }
+  .gal-tile img{ width:100%; height:100%; object-fit:cover; opacity:.88; transition:transform .3s, opacity .3s }
+  .gal-tile:hover img{ transform:scale(1.06); opacity:1 }
+  .gal-tile .pl{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none }
+  .gal-tile .pl svg{ width:52px; height:52px; fill:#fff; opacity:.95; filter:drop-shadow(0 4px 14px rgba(0,0,0,.5)); transition:transform .2s, fill .2s }
+  .gal-tile:hover .pl svg{ transform:scale(1.12); fill:var(--amber) }
+  .gal-tile .cap{ position:absolute; left:12px; right:12px; top:11px; text-align:left; font-family:var(--mono); font-size:11px; letter-spacing:.04em; line-height:1.3; color:#fff; text-shadow:0 1px 6px rgba(0,0,0,.9); pointer-events:none }
+  @media(max-width:860px){ .gal-grid{ grid-template-columns:repeat(2,1fr) } }
+  @media(max-width:540px){ .gal-grid{ grid-template-columns:1fr } }
+  .vbox{ position:fixed; inset:0; z-index:140; background:rgba(0,0,0,.92); display:flex; align-items:center; justify-content:center; padding:clamp(20px,5vw,60px); opacity:0; pointer-events:none; transition:opacity .25s }
+  .vbox.open{ opacity:1; pointer-events:auto }
+  .vbox-inner{ position:relative; width:min(1100px,100%); aspect-ratio:16/9; background:#000; border-radius:12px; overflow:hidden; box-shadow:0 40px 120px rgba(0,0,0,.6) }
+  .vbox-inner iframe, .vbox-inner video{ position:absolute; inset:0; width:100%; height:100%; border:0 }
+  .vbox-close{ position:absolute; top:-46px; right:0; background:none; border:0; color:#fff; font-size:32px; line-height:1; cursor:pointer }
 
   /* signal-feed mock (Act 2) */
   .feedmock{ margin-top:44px; display:flex; flex-direction:column; gap:10px; max-width:660px }
@@ -293,8 +319,10 @@
     <h2 class="statement display">Select <span class="amber-text">work.</span></h2>
     <div class="reel">
       <video src="assets/reel.mp4" poster="assets/brand/reel-poster.jpg"
-             autoplay muted loop playsinline controls preload="metadata"></video>
+             autoplay muted loop playsinline preload="metadata"></video>
+      <button class="reel-play" type="button" id="reelPlay" aria-label="Play reel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Play reel</button>
     </div>
+    <div class="work-more"><button class="btn btn--ghost" type="button" id="seeMore">See more →</button></div>
   </section>
 
 <style>
@@ -700,6 +728,53 @@
       form.innerHTML='<div class="cm-done"><div class="cm-done-ic">&#10003;</div><h4>You\'re on the radar.</h4><p>Thanks &mdash; a Champion strategist will reach out within one business day.</p></div>';
     },650);
   });
+})();
+</script>
+
+<!-- ══ VIDEO GALLERY + LIGHTBOX ══ -->
+<div class="gal" id="gallery" aria-hidden="true">
+  <div class="gal-head"><h3>Select work</h3><button class="gal-close" id="galClose" aria-label="Close gallery">&times;</button></div>
+  <div class="gal-grid" id="galGrid"></div>
+</div>
+<div class="vbox" id="vbox" aria-hidden="true">
+  <div class="vbox-inner"><button class="vbox-close" id="vboxClose" aria-label="Close video">&times;</button><div id="vboxSlot"></div></div>
+</div>
+<script>
+(function(){
+  var VIDS=[
+    {id:'1139092902',t:'Degroot Logistics - Our Roots'},
+    {id:'1177468778',t:'GLACIS - Launch Video'},
+    {id:'1139093605',t:'Bitfreighter - Brand Video'},
+    {id:'1156938507',t:'Anuvu - By Travelers, For Travelers'},
+    {id:'1177466681',t:'Enablers - Brand Video'},
+    {id:'1180971231',t:'Transfix - The Old Way'},
+    {id:'1139095610',t:'MODE Global - MODE IQ'},
+    {id:'1177467418',t:'Snozu - Warm to Adventure'},
+    {id:'1177466546',t:'FleetWorks - Brand Video'}
+  ];
+  var gallery=document.getElementById('gallery'), grid=document.getElementById('galGrid'),
+      vbox=document.getElementById('vbox'), slot=document.getElementById('vboxSlot'),
+      seeMore=document.getElementById('seeMore'), reelPlay=document.getElementById('reelPlay');
+  var PLAY='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+  VIDS.forEach(function(v){
+    var t=document.createElement('button'); t.type='button'; t.className='gal-tile';
+    t.innerHTML='<img loading="lazy" src="https://vumbnail.com/'+v.id+'.jpg" alt="'+v.t+'"><span class="pl">'+PLAY+'</span><span class="cap">'+v.t+'</span>';
+    t.addEventListener('click',function(){ openVimeo(v.id); });
+    grid.appendChild(t);
+  });
+  function openVimeo(id){ slot.innerHTML='<iframe src="https://player.vimeo.com/video/'+id+'?autoplay=1&title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>'; openVbox(); }
+  function openReel(){ slot.innerHTML='<video src="assets/reel.mp4" controls autoplay playsinline></video>'; openVbox(); }
+  function openVbox(){ vbox.classList.add('open'); vbox.setAttribute('aria-hidden','false'); }
+  function closeVbox(){ vbox.classList.remove('open'); vbox.setAttribute('aria-hidden','true'); slot.innerHTML=''; }
+  function openGal(){ gallery.classList.add('open'); gallery.setAttribute('aria-hidden','false'); }
+  function closeGal(){ gallery.classList.remove('open'); gallery.setAttribute('aria-hidden','true'); }
+  if(seeMore) seeMore.addEventListener('click',openGal);
+  if(reelPlay) reelPlay.addEventListener('click',openReel);
+  document.getElementById('galClose').addEventListener('click',closeGal);
+  gallery.addEventListener('click',function(e){ if(e.target===gallery) closeGal(); });
+  document.getElementById('vboxClose').addEventListener('click',closeVbox);
+  vbox.addEventListener('click',function(e){ if(e.target===vbox) closeVbox(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'){ if(vbox.classList.contains('open')) closeVbox(); else if(gallery.classList.contains('open')) closeGal(); } });
 })();
 </script>
 </body>
