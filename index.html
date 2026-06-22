@@ -96,9 +96,7 @@
   #see{ text-align:center; padding-bottom:clamp(56px,8vh,104px) }
   #see .statement{ font-size:clamp(46px,7vw,108px); max-width:18ch; margin-left:auto; margin-right:auto }
   #see .lead{ max-width:48ch; margin-left:auto; margin-right:auto }
-  .see-cta{ position:relative; display:inline-block; margin-top:34px }
-  .see-arrow{ position:absolute; left:calc(100% + 12px); bottom:-6px; width:clamp(56px,5.4vw,92px); height:auto; opacity:.85; pointer-events:none }
-  @media(max-width:760px){ .see-arrow{ display:none } }
+  .see-cta{ display:inline-block; margin-top:34px }
   .qpop{ position:absolute; right:clamp(16px,4vw,56px); top:clamp(110px,20vh,220px); z-index:6; width:min(300px,76vw);
     background:rgba(44,44,48,.95); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
     border:1px solid rgba(249,172,36,.5); border-radius:16px 16px 4px 16px; padding:16px 18px 15px;
@@ -298,7 +296,6 @@
     <h2 class="statement display">See <span class="amber-text">for yourself.</span></h2>
     <p class="lead">Watch your own score in real time. That's the system, running on you right now.</p>
     <div class="see-cta">
-      <svg class="see-arrow" viewBox="0 0 300 338" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M275.761 47.7174C298.698 88.8168 285.68 140.651 256.057 174.802C223.403 212.552 173.252 230.167 125.797 240.433C93.4708 247.413 60.8515 251.785 27.9966 253.277C19.1451 253.656 18.3929 239.915 27.2444 239.536C54.9969 238.089 82.5539 234.903 109.702 229.65C133.585 225.116 157.215 219.113 179.797 210.058C220.325 193.789 257.59 164.943 269.961 121.459C276.041 99.5535 275.526 75.3947 264.213 55.444C262.353 52.2187 262.947 48.1012 266.23 45.9709C269.242 43.783 273.901 44.4921 275.761 47.7174Z" fill="#F9AC24"/><path d="M56.0021 297.156C41.1581 281.829 25.9858 266.715 10.8135 251.601C7.05922 247.973 8.38476 241.748 13.2916 239.963C20.053 237.442 26.5036 233.722 32.0444 228.961C38.2995 223.502 43.2186 216.345 49.6867 211.215C52.486 208.698 57.5132 210.335 59.1598 213.232C61.2901 216.515 59.8843 220.459 57.1427 222.705C50.617 228.106 45.6401 235.534 39.1144 240.935C32.5887 246.335 25.2686 250.153 17.58 253.042C18.3868 249.253 19.2513 245.193 20.0581 241.404C35.2305 256.518 50.3451 271.902 65.2468 286.958C71.5749 293.116 62.2726 303.584 56.0021 297.156Z" fill="#F9AC24"/></svg>
       <button class="btn btn--amber" type="button" id="seeScore">See my score →</button>
     </div>
   </section>
