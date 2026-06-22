@@ -18,10 +18,10 @@
 
   <!-- ───── NAV ───── -->
   <header class="nav">
-    <div class="nav__brand">
-      <img src="logos/champion-wordmark.svg" alt="Champion" />
-      <img src="logos/digital-media-wordmark.svg" alt="Digital Media" />
-    </div>
+    <a class="nav__brand" href="../">
+      <img class="nav__sym" src="logos/cdm-symbol.svg" alt="" aria-hidden="true" />
+      <img src="logos/champion-wordmark.svg" alt="Champion Digital Media" />
+    </a>
     <div class="nav__meta">Case Study · Bitfreighter</div>
   </header>
 
@@ -76,9 +76,8 @@
   <!-- ───── SECTION 01: THE BRIEF ───── -->
   <section class="section">
     <div class="s-head">
-      <div class="s-head__index">01</div>
+      <div class="s-head__row"><div class="s-head__index">01</div><span class="eyebrow">The brief</span></div>
       <div class="s-head__title">
-        <span class="eyebrow">The brief</span>
         <h2>Strong product. <span class="circled">Quiet</span> brand.</h2>
       </div>
     </div>
@@ -109,9 +108,8 @@
   <!-- ───── SECTION 02: BEFORE ───── -->
   <section class="section section--warm">
     <div class="s-head">
-      <div class="s-head__index">02</div>
+      <div class="s-head__row"><div class="s-head__index">02</div><span class="eyebrow">Before</span></div>
       <div class="s-head__title">
-        <span class="eyebrow">Before</span>
         <h2>The product was leading the brand by a mile.</h2>
       </div>
     </div>
@@ -139,9 +137,8 @@
   <!-- ───── SECTION 03: A NEW BRAND ───── -->
   <section class="section section--dark surface-dark">
     <div class="s-head">
-      <div class="s-head__index">03</div>
+      <div class="s-head__row"><div class="s-head__index">03</div><span class="eyebrow">The rebrand</span></div>
       <div class="s-head__title">
-        <span class="eyebrow">The rebrand</span>
         <h2>Big Freighto. <span class="circled">Best</span> kept secret in freight.</h2>
       </div>
     </div>
@@ -198,9 +195,8 @@
   <!-- ───── SECTION 04: REVAMPED CREATIVE ───── -->
   <section class="section">
     <div class="s-head">
-      <div class="s-head__index">04</div>
+      <div class="s-head__row"><div class="s-head__index">04</div><span class="eyebrow">The revamp, applied</span></div>
       <div class="s-head__title">
-        <span class="eyebrow">The revamp, applied</span>
         <h2>A character with a job to do.</h2>
       </div>
     </div>
@@ -263,9 +259,8 @@
   <!-- ───── SECTION 05: CAMPAIGN ONE ───── -->
   <section class="section section--warm">
     <div class="s-head">
-      <div class="s-head__index">05</div>
+      <div class="s-head__row"><div class="s-head__index">05</div><span class="eyebrow">Campaign One</span></div>
       <div class="s-head__title">
-        <span class="eyebrow">Campaign One</span>
         <h2>A full sales-enablement system, end to end.</h2>
       </div>
     </div>
@@ -330,9 +325,8 @@
   <!-- ───── SECTION 06: THE WATCHER ───── -->
   <section class="section section--dark surface-dark">
     <div class="s-head">
-      <div class="s-head__index">06</div>
+      <div class="s-head__row"><div class="s-head__index">06</div><span class="eyebrow">Custom software</span></div>
       <div class="s-head__title">
-        <span class="eyebrow">Custom software</span>
         <h2>We couldn't buy it. So we built <span class="circled">the&nbsp;Watcher</span>.</h2>
       </div>
     </div>
@@ -404,9 +398,8 @@
 
   <!-- ───── FOOTER ───── -->
   <footer class="foot">
-    <img src="logos/cdm-symbol.svg" alt="Champion Digital Media" />
-    <div>© Champion Digital Media · championdigital.com</div>
-    <div>Still at speed.</div>
+    <img src="../assets/brand/logo-footer.png" alt="Champion Digital Media" />
+    <span class="fl">© Champion Digital Media · Brand + demand, for freight</span>
   </footer>
 
 </div>
@@ -418,12 +411,6 @@
     var BASE = 1440;
     function fit() {
       var w = window.innerWidth;
-      if (w >= BASE) {
-        canvas.style.transform = '';
-        canvas.style.transformOrigin = '';
-        document.body.style.height = '';
-        return;
-      }
       var s = w / BASE;
       canvas.style.transformOrigin = 'top left';
       canvas.style.transform = 'scale(' + s + ')';

@@ -199,16 +199,7 @@ a:hover { opacity: 0.65; }
   display: inline-block;
   padding: 0 0.18em;
 }
-.circled::after {
-  content: "";
-  position: absolute;
-  inset: -0.18em -0.05em -0.12em -0.05em;
-  background-image: url("./brushes/oval-speed.svg");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  pointer-events: none;
-  z-index: -1;
-}
+.circled::after { content: none; }
 
 /* ───── Reset / page frame ───── */
 *, *::before, *::after { box-sizing: border-box; }
@@ -218,10 +209,11 @@ img, svg, video { display: block; max-width: 100%; height: auto; }
 /* 1440px fixed canvas — JS scales to viewport (handled inline at bottom of HTML) */
 .canvas {
   width: 1440px;
-  margin: 0 auto;
+  margin: 0;
   background: var(--bg-1);
   overflow: hidden;
 }
+html { overflow-x: hidden; }
 
 /* ───── Reusable layout primitives ───── */
 .section {
@@ -269,8 +261,9 @@ img, svg, video { display: block; max-width: 100%; height: auto; }
   padding: var(--space-3) 80px;
   border-bottom: var(--border-hairline);
 }
-.nav__brand { display: flex; align-items: center; gap: var(--space-2); }
-.nav__brand img { height: 28px; width: auto; }
+.nav__brand { display: flex; align-items: center; gap: var(--space-2); text-decoration: none; border-bottom: none; }
+.nav__sym { height: 15px; }
+.nav__brand img { height: 14px; width: auto; }
 .nav__meta {
   font-size: var(--type-micro);
   letter-spacing: var(--track-caps-label);
@@ -545,36 +538,36 @@ img, svg, video { display: block; max-width: 100%; height: auto; }
 .cta p { margin: 0 auto var(--space-5); max-width: 50ch; }
 .btn {
   display: inline-block;
-  padding: 18px 36px;
+  padding: 15px 26px;
   background: var(--color-dark);
   color: var(--color-pale);
   font-family: var(--font-body);
   font-weight: 600;
-  font-size: var(--type-body-md);
+  font-size: var(--type-body-sm);
   text-transform: uppercase;
-  letter-spacing: var(--track-caps-label);
+  letter-spacing: 0.04em;
   border: none;
-  border-bottom: none;
-  transition: background var(--duration-fast) var(--ease-default);
+  border-radius: 999px;
+  line-height: 1;
+  transition: transform 0.15s, box-shadow 0.15s, background 0.15s, color 0.15s;
 }
-.btn:hover { background: var(--color-yellow); color: var(--color-dark); opacity: 1; }
-.btn--yellow { background: var(--color-yellow); color: var(--color-dark); }
-.btn--yellow:hover { background: var(--color-dark); color: var(--color-pale); }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(249,172,36,0.3); }
+.btn--yellow { background: var(--color-highlight); color: var(--color-dark); }
+.btn--yellow:hover { background: var(--color-highlight); color: var(--color-dark); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(249,172,36,0.3); }
 
 /* ───── Footer ───── */
 .foot {
   background: var(--color-dark);
-  color: var(--fg-on-inv);
-  padding: var(--space-5) 80px;
+  color: var(--color-pale);
+  padding: 46px 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: var(--type-micro);
-  letter-spacing: var(--track-caps-label);
-  text-transform: uppercase;
+  flex-wrap: wrap;
+  gap: 20px;
 }
-.foot img { height: 22px; }
-.foot a { border-bottom: 1px solid rgba(247,243,233,0.4); }
+.foot img { height: 24px; }
+.foot .fl { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.6; }
 
 /* ───── Signature gesture override (keep yellow oval crisp) ───── */
 .circled { color: var(--fg-1); }
@@ -698,18 +691,27 @@ img, svg, video { display: block; max-width: 100%; height: auto; }
 
 /* ───── Section header (large, with eyebrow + index) ───── */
 .s-head {
-  display: grid;
-  grid-template-columns: 96px 1fr;
-  gap: var(--space-4);
-  align-items: end;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
   margin-bottom: var(--space-6);
 }
+.s-head__row { display: flex; align-items: center; gap: var(--space-2); }
 .s-head__index {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 4rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 0.875rem;
   line-height: 1;
-  color: var(--color-yellow);
+  color: var(--color-dark);
+  background: var(--color-highlight);
+  border-radius: 999px;
+  padding: 0.5em 0.85em;
+  box-shadow: 0 4px 18px rgba(249, 172, 36, 0.26);
 }
 .s-head__title h2 { margin: 0; }
 .s-head__title .eyebrow {
