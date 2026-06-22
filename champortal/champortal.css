@@ -7,7 +7,8 @@
   --t1:#F4F4F5; --t2:#A1A1AA; --t3:#71717A; --t4:#52525B;
   --acc:#BBFF00; --acc-ink:#0C1400; --acc-08:rgba(187,255,0,.08); --acc-12:rgba(187,255,0,.12);
   --acc-25:rgba(187,255,0,.25); --acc-40:rgba(187,255,0,.40);
-  --green:#34D399; --gd:rgba(52,211,153,.30); --gb:rgba(52,211,153,.10);
+  --green:#2BE39B; --gd:rgba(43,227,155,.34); --gb:rgba(43,227,155,.12);
+  --red:#FF5630; --rd:rgba(255,86,48,.36); --rb:rgba(255,86,48,.13);
   --sans:'Inter',-apple-system,system-ui,sans-serif;
   --mono:'Azeret Mono',ui-monospace,monospace;
 }
@@ -15,6 +16,12 @@
 html,body{background:var(--bg);color:var(--t1);font-family:var(--sans);-webkit-font-smoothing:antialiased}
 body{display:flex;min-height:1024px;width:1440px;position:relative}
 a{color:inherit}
+::selection{background:var(--acc);color:var(--acc-ink)}
+::-moz-selection{background:var(--acc);color:var(--acc-ink)}
+.brandlogo{display:block;background:var(--t1);-webkit-mask:url(champortal-logo.svg) left center/contain no-repeat;mask:url(champortal-logo.svg) left center/contain no-repeat;transition:background .15s;cursor:pointer}
+.brandlogo:hover{background:var(--acc)}
+.brand .brandlogo{width:96px;height:22px}
+.phead .brandlogo{width:88px;height:20px}
 
 /* ── App shell: sidebar ── */
 .side{width:236px;flex:none;border-right:1px solid var(--line);background:#0C0C0E;display:flex;flex-direction:column;padding:22px 14px;position:relative;z-index:2}
@@ -62,7 +69,7 @@ a{color:inherit}
 .kpi .v{font-family:var(--mono);font-size:25px;font-weight:600;letter-spacing:-.01em;line-height:1}
 .kpi .v small{font-size:12px;color:var(--t3);font-weight:400;margin-left:6px}
 .kpi .v .up{font-size:12px;color:var(--green);font-weight:500;margin-left:8px}
-.kpi .v .dn{font-size:12px;color:#f0a;font-weight:500;margin-left:8px}
+.kpi .v .dn{font-size:12px;color:var(--red);font-weight:500;margin-left:8px}
 .dot{width:6px;height:6px;border-radius:50%;background:var(--acc)}
 .dot.g{background:var(--green)}
 
@@ -103,8 +110,8 @@ a{color:inherit}
 .card:hover .cfoot .open{color:var(--acc)}
 .cfoot .open svg{width:13px;height:13px;stroke:currentColor;stroke-width:2;fill:none}
 .spark{height:26px;display:flex;align-items:flex-end;gap:3px}
-.spark i{flex:1;background:var(--acc-25);border-radius:2px 2px 0 0}
-.card.feat .spark i{background:rgba(187,255,0,.55)}
+.spark i{flex:1;background:rgba(187,255,0,.6);border-radius:2px 2px 0 0}
+.card.feat .spark i{background:var(--acc)}
 
 /* ── Client header + tabs ── */
 .chdr{display:flex;align-items:center;gap:16px;margin-bottom:20px}
@@ -145,11 +152,11 @@ a{color:inherit}
 .camp .prog .lbl{font-family:var(--mono);font-size:10px;color:var(--t3);margin-top:6px;text-align:right}
 .badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;border:1px solid var(--line);border-radius:999px;padding:4px 10px;color:var(--t2);white-space:nowrap}
 .badge .d{width:5px;height:5px;border-radius:50%;background:var(--green)}
-.badge.appr{color:#bdf5d8;border-color:var(--gd);background:var(--gb)}
+.badge.appr{color:#b9ffe2;border-color:var(--gd);background:var(--gb)}
 .badge.pend{color:var(--acc);border-color:var(--acc-25);background:var(--acc-08)}
 .badge.pend .d{background:var(--acc)}
-.badge.chg{color:#f4b8b8;border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.08)}
-.badge.chg .d{background:#ef4444}
+.badge.chg{color:#ffc3b2;border-color:var(--rd);background:var(--rb)}
+.badge.chg .d{background:var(--red)}
 .badge.draft{color:var(--t3)}.badge.draft .d{background:var(--t4)}
 .ad{background:var(--panel);border:1px solid var(--line);border-radius:13px;overflow:hidden;cursor:pointer;transition:.16s}
 .ad:hover{transform:translateY(-2px);border-color:var(--line-2)}
