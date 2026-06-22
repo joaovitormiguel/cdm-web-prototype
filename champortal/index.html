@@ -4,138 +4,14 @@
 <meta charset="utf-8">
 <title>Champortal — Dashboard</title>
 <meta name="viewport" content="width=1440, initial-scale=1">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Azeret+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#09090B; --panel:#141416; --panel-2:#1A1A1E; --hover:#1E1E22;
-    --line:rgba(255,255,255,.07); --line-2:rgba(255,255,255,.12);
-    --t1:#F4F4F5; --t2:#A1A1AA; --t3:#71717A; --t4:#52525B;
-    --amber:#F9AC24; --green:#34D399;
-    --sans:'Inter',-apple-system,system-ui,sans-serif;
-    --mono:'Azeret Mono',ui-monospace,monospace;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html,body{background:var(--bg);color:var(--t1);font-family:var(--sans);-webkit-font-smoothing:antialiased;font-feature-settings:"cv11","ss01"}
-  body{display:flex;min-height:1024px;width:1440px;position:relative;overflow:hidden}
-  /* ambient depth */
-  body::before{content:"";position:absolute;top:-260px;left:120px;width:760px;height:560px;
-    background:radial-gradient(closest-side,rgba(249,172,36,.10),transparent 70%);filter:blur(20px);pointer-events:none}
-  body::after{content:"";position:absolute;top:-200px;right:-120px;width:620px;height:500px;
-    background:radial-gradient(closest-side,rgba(56,120,220,.08),transparent 70%);pointer-events:none}
-
-  /* ── Sidebar ── */
-  .side{width:236px;flex:none;border-right:1px solid var(--line);background:rgba(12,12,14,.6);
-    backdrop-filter:blur(8px);display:flex;flex-direction:column;padding:22px 14px;position:relative;z-index:2}
-  .brand{display:flex;align-items:center;gap:10px;padding:6px 10px 22px}
-  .brand .mk{width:26px;height:26px;border-radius:7px;background:var(--amber);display:flex;align-items:center;justify-content:center}
-  .brand .mk svg{width:15px;height:15px;display:block}
-  .brand .wm{font-weight:700;font-size:15px;letter-spacing:.14em}
-  .brand .wm small{color:var(--t3);font-weight:500;letter-spacing:.02em}
-  .navlbl{font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--t4);text-transform:uppercase;padding:14px 12px 8px}
-  .nav a{display:flex;align-items:center;gap:11px;padding:9px 12px;border-radius:9px;color:var(--t2);
-    text-decoration:none;font-size:13.5px;font-weight:500;position:relative;transition:.15s}
-  .nav a svg{width:17px;height:17px;flex:none;stroke:currentColor;stroke-width:1.7;fill:none;opacity:.9}
-  .nav a:hover{background:var(--hover);color:var(--t1)}
-  .nav a.on{background:rgba(249,172,36,.10);color:var(--t1)}
-  .nav a.on::before{content:"";position:absolute;left:-14px;top:50%;transform:translateY(-50%);width:3px;height:18px;border-radius:0 3px 3px 0;background:var(--amber)}
-  .nav a .ct{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--t3)}
-  .side .foot{margin-top:auto;display:flex;align-items:center;gap:10px;padding:10px;border-top:1px solid var(--line);margin:0 -2px}
-  .av-sm{width:30px;height:30px;border-radius:8px;background:linear-gradient(140deg,#2a2a2e,#161618);border:1px solid var(--line-2);
-    display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;font-weight:600;color:var(--t1)}
-  .foot .who{font-size:12.5px;font-weight:600;line-height:1.3}
-  .foot .who small{display:block;color:var(--t3);font-weight:400;font-size:11px}
-
-  /* ── Main ── */
-  .main{flex:1;min-width:0;display:flex;flex-direction:column;position:relative;z-index:1}
-  .top{height:60px;flex:none;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:16px;padding:0 28px}
-  .crumb{font-size:13.5px;color:var(--t3)}
-  .crumb b{color:var(--t1);font-weight:600}
-  .search{margin-left:8px;flex:1;max-width:420px;height:34px;border:1px solid var(--line);border-radius:9px;background:rgba(255,255,255,.02);
-    display:flex;align-items:center;gap:9px;padding:0 12px;color:var(--t3);font-size:13px}
-  .search svg{width:15px;height:15px;stroke:currentColor;stroke-width:1.8;fill:none}
-  .search .k{margin-left:auto;font-family:var(--mono);font-size:10.5px;border:1px solid var(--line-2);border-radius:5px;padding:2px 6px;color:var(--t3)}
-  .btn{height:34px;border:1px solid var(--line-2);background:transparent;color:var(--t1);border-radius:9px;padding:0 13px;
-    font-family:var(--sans);font-size:13px;font-weight:500;display:inline-flex;align-items:center;gap:7px;cursor:pointer}
-  .btn svg{width:15px;height:15px;stroke:currentColor;stroke-width:1.9;fill:none}
-  .btn.amber{background:var(--amber);color:#1a1205;border-color:transparent;font-weight:600;box-shadow:0 6px 20px rgba(249,172,36,.22)}
-
-  .body{flex:1;overflow:auto;padding:26px 28px 40px}
-
-  /* KPI strip */
-  .kpis{display:flex;gap:0;border:1px solid var(--line);border-radius:14px;background:var(--panel);overflow:hidden;margin-bottom:26px}
-  .kpi{flex:1;padding:16px 20px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:6px}
-  .kpi:last-child{border-right:0}
-  .kpi .l{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--t3);display:flex;align-items:center;gap:7px}
-  .kpi .v{font-family:var(--mono);font-size:25px;font-weight:600;letter-spacing:-.01em;line-height:1}
-  .kpi .v small{font-size:12px;color:var(--t3);font-weight:400;margin-left:6px}
-  .dot{width:6px;height:6px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 3px rgba(249,172,36,.16)}
-  .dot.g{background:var(--green);box-shadow:0 0 0 3px rgba(52,211,153,.16)}
-
-  /* section head */
-  .shead{display:flex;align-items:center;gap:12px;margin:4px 2px 16px}
-  .shead h2{font-size:15px;font-weight:600;letter-spacing:-.01em}
-  .shead .pill{font-family:var(--mono);font-size:11px;color:var(--t2);border:1px solid var(--line);border-radius:999px;padding:2px 9px}
-  .shead .seg{margin-left:auto;display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
-  .shead .seg span{font-size:12px;color:var(--t3);padding:5px 11px;border-right:1px solid var(--line)}
-  .shead .seg span:last-child{border-right:0}
-  .shead .seg span.on{background:var(--hover);color:var(--t1)}
-
-  /* grid */
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 18px 14px;display:flex;flex-direction:column;gap:16px;
-    transition:.18s;position:relative;cursor:pointer}
-  .card:hover{transform:translateY(-2px);border-color:var(--line-2);background:var(--panel-2)}
-  .card.feat{border-color:rgba(249,172,36,.32);box-shadow:0 0 0 1px rgba(249,172,36,.10),0 18px 50px -28px rgba(249,172,36,.45)}
-  .card.feat::after{content:"";position:absolute;inset:0;border-radius:14px;pointer-events:none;
-    background:radial-gradient(120% 90% at 100% 0,rgba(249,172,36,.07),transparent 55%)}
-  .chead{display:flex;align-items:flex-start;gap:13px}
-  .av{width:46px;height:46px;border-radius:12px;flex:none;display:flex;align-items:center;justify-content:center;
-    font-family:var(--mono);font-size:15px;font-weight:600;color:var(--t1);
-    background:linear-gradient(150deg,#26262b,#161619);border:1px solid var(--line-2)}
-  .card.feat .av{border-color:rgba(249,172,36,.5);box-shadow:0 0 0 3px rgba(249,172,36,.12)}
-  .cname{font-size:15px;font-weight:600;letter-spacing:-.01em;line-height:1.25}
-  .cmeta{font-size:11.5px;color:var(--t3);margin-top:3px;font-family:var(--mono)}
-  .status{margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--t2);
-    border:1px solid var(--line);border-radius:999px;padding:3px 9px;white-space:nowrap}
-  .status.idle{color:var(--t4)}
-  .status .d{width:5px;height:5px;border-radius:50%;background:var(--green)}
-  .status.idle .d{background:var(--t4)}
-
-  .stats{display:flex;gap:8px}
-  .stat{flex:1;background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:10px;padding:11px 12px}
-  .stat .n{font-family:var(--mono);font-size:21px;font-weight:600;line-height:1;letter-spacing:-.02em}
-  .stat .n.z{color:var(--t4)}
-  .stat .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--t3);margin-top:7px}
-
-  /* empty state inside card */
-  .empty{flex:1;display:flex;align-items:center;justify-content:space-between;gap:10px;
-    background:rgba(255,255,255,.015);border:1px dashed var(--line-2);border-radius:10px;padding:14px}
-  .empty span{font-size:12.5px;color:var(--t3)}
-  .empty .add{font-size:12px;color:var(--amber);font-weight:600;display:inline-flex;align-items:center;gap:5px}
-
-  .cfoot{display:flex;align-items:center;gap:8px;border-top:1px solid var(--line);padding-top:12px;margin-top:2px}
-  .cfoot .upd{font-family:var(--mono);font-size:11px;color:var(--t4)}
-  .cfoot .open{margin-left:auto;font-size:12.5px;color:var(--t2);font-weight:500;display:inline-flex;align-items:center;gap:5px}
-  .card:hover .cfoot .open{color:var(--amber)}
-  .cfoot .open svg{width:13px;height:13px;stroke:currentColor;stroke-width:2;fill:none}
-
-  /* sparkline */
-  .spark{height:26px;display:flex;align-items:flex-end;gap:3px}
-  .spark i{flex:1;background:rgba(249,172,36,.28);border-radius:2px 2px 0 0}
-  .card.feat .spark i{background:rgba(249,172,36,.55)}
-</style>
+<link rel="stylesheet" href="champortal.css">
 </head>
 <body>
   <aside class="side">
-    <div class="brand">
-      <span class="mk"><svg viewBox="0 0 24 24" fill="#1a1205"><path d="M5 14c2-6 6-9 14-9-1 9-6 13-12 13-2 0-3-1-2-4z"/></svg></span>
-      <span class="wm">CHAMPORTAL</span>
-    </div>
+    <div class="brand"><img src="champortal-logo.svg" alt="Champortal"></div>
     <div class="navlbl">Workspace</div>
     <nav class="nav">
-      <a class="on" href="#"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Clients<span class="ct">7</span></a>
+      <a class="on" href="index.html"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Clients<span class="ct">8</span></a>
       <a href="#"><svg viewBox="0 0 24 24"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg>Tasks<span class="ct">4</span></a>
       <a href="#"><svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg>Tools</a>
       <a href="#"><svg viewBox="0 0 24 24"><path d="M3 17l5-5 4 3 8-9"/><path d="M16 6h5v5"/></svg>Intent</a>
@@ -143,7 +19,7 @@
     </nav>
     <div class="navlbl">Account</div>
     <nav class="nav">
-      <a href="#"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1l2-1.6-2-3.4-2.4 1a7 7 0 0 0-1.7-1L16.5 2h-4l-.3 2.6a7 7 0 0 0-1.7 1l-2.4-1-2 3.4L5 11a7 7 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7 7 0 0 0 1.7 1l.3 2.4h4l.3-2.6a7 7 0 0 0 1.7-1l2.4 1 2-3.4-2-1.4a7 7 0 0 0 .1-1z"/></svg>Settings</a>
+      <a href="#"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 13a7 7 0 0 0 0-2l2-1.5-2-3.5-2.3 1a7 7 0 0 0-1.7-1L15 3h-4l-.4 2.5a7 7 0 0 0-1.7 1l-2.3-1-2 3.5L6.6 11a7 7 0 0 0 0 2l-2 1.5 2 3.5 2.3-1a7 7 0 0 0 1.7 1L11 21h4l.4-2.5a7 7 0 0 0 1.7-1l2.3 1 2-3.5z"/></svg>Settings</a>
     </nav>
     <div class="foot">
       <span class="av-sm">JC</span>
@@ -156,118 +32,64 @@
       <span class="crumb"><b>Clients</b></span>
       <div class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>Search clients, campaigns, contacts…<span class="k">⌘K</span></div>
       <button class="btn"><svg viewBox="0 0 24 24"><path d="M4 7h16M7 12h10M10 17h4"/></svg>Filter</button>
-      <button class="btn amber"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>New Client</button>
+      <button class="btn acc"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>New Client</button>
     </header>
 
     <div class="body">
       <div class="kpis">
-        <div class="kpi"><span class="l"><span class="dot g"></span>Active clients</span><span class="v">3<small>of 7</small></span></div>
+        <div class="kpi"><span class="l"><span class="dot g"></span>Active clients</span><span class="v">3<small>of 8</small></span></div>
         <div class="kpi"><span class="l">Campaigns live</span><span class="v">1</span></div>
         <div class="kpi"><span class="l">Ads in production</span><span class="v">15</span></div>
         <div class="kpi"><span class="l">Emails sent · 7d</span><span class="v">6</span></div>
       </div>
 
-      <div class="shead">
-        <h2>All clients</h2>
-        <span class="pill">7</span>
-        <div class="seg"><span class="on">Grid</span><span>List</span></div>
-      </div>
+      <div class="shead"><h2>All clients</h2><span class="pill">8</span><div class="seg"><span class="on">Grid</span><span>List</span></div></div>
 
       <div class="grid">
-        <!-- Bitfreighter (featured / most active) -->
-        <div class="card feat">
-          <div class="chead">
-            <span class="av">BF</span>
-            <div><div class="cname">Bitfreighter</div><div class="cmeta">bitfreighter.com</div></div>
-            <span class="status"><span class="d"></span>Active</span>
-          </div>
-          <div class="stats">
-            <div class="stat"><div class="n">1</div><div class="k">Campaign</div></div>
-            <div class="stat"><div class="n">14</div><div class="k">Ads</div></div>
-            <div class="stat"><div class="n">5</div><div class="k">Emails</div></div>
-          </div>
+        <a class="card feat" href="client.html" style="text-decoration:none;color:inherit">
+          <div class="chead"><span class="av">BF</span><div><div class="cname">Bitfreighter</div><div class="cmeta">bitfreighter.com</div></div><span class="status"><span class="d"></span>Active</span></div>
+          <div class="stats"><div class="stat"><div class="n">1</div><div class="k">Campaign</div></div><div class="stat"><div class="n">14</div><div class="k">Ads</div></div><div class="stat"><div class="n">5</div><div class="k">Emails</div></div></div>
           <div class="spark"><i style="height:30%"></i><i style="height:45%"></i><i style="height:40%"></i><i style="height:70%"></i><i style="height:60%"></i><i style="height:90%"></i><i style="height:75%"></i><i style="height:100%"></i></div>
           <div class="cfoot"><span class="upd">Updated 2h ago</span><span class="open">Open<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
-        </div>
-
-        <!-- TAB LLC -->
+        </a>
         <div class="card">
-          <div class="chead">
-            <span class="av">TA</span>
-            <div><div class="cname">TAB LLC</div><div class="cmeta">tab-logistics.com</div></div>
-            <span class="status"><span class="d"></span>Active</span>
-          </div>
-          <div class="stats">
-            <div class="stat"><div class="n z">0</div><div class="k">Campaign</div></div>
-            <div class="stat"><div class="n">1</div><div class="k">Ads</div></div>
-            <div class="stat"><div class="n z">0</div><div class="k">Emails</div></div>
-          </div>
+          <div class="chead"><span class="av">TA</span><div><div class="cname">TAB LLC</div><div class="cmeta">tab-logistics.com</div></div><span class="status"><span class="d"></span>Active</span></div>
+          <div class="stats"><div class="stat"><div class="n z">0</div><div class="k">Campaign</div></div><div class="stat"><div class="n">1</div><div class="k">Ads</div></div><div class="stat"><div class="n z">0</div><div class="k">Emails</div></div></div>
           <div class="spark"><i style="height:20%"></i><i style="height:0"></i><i style="height:0"></i><i style="height:35%"></i><i style="height:0"></i><i style="height:0"></i><i style="height:55%"></i><i style="height:30%"></i></div>
           <div class="cfoot"><span class="upd">Updated 1d ago</span><span class="open">Open<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
         </div>
-
-        <!-- Champion Digital Media -->
         <div class="card">
-          <div class="chead">
-            <span class="av">CH</span>
-            <div><div class="cname">Champion Digital Media</div><div class="cmeta">internal</div></div>
-            <span class="status"><span class="d"></span>Active</span>
-          </div>
-          <div class="stats">
-            <div class="stat"><div class="n z">0</div><div class="k">Campaign</div></div>
-            <div class="stat"><div class="n z">0</div><div class="k">Ads</div></div>
-            <div class="stat"><div class="n">1</div><div class="k">Emails</div></div>
-          </div>
+          <div class="chead"><span class="av">CH</span><div><div class="cname">Champion Digital Media</div><div class="cmeta">internal</div></div><span class="status"><span class="d"></span>Active</span></div>
+          <div class="stats"><div class="stat"><div class="n z">0</div><div class="k">Campaign</div></div><div class="stat"><div class="n z">0</div><div class="k">Ads</div></div><div class="stat"><div class="n">1</div><div class="k">Emails</div></div></div>
           <div class="spark"><i style="height:0"></i><i style="height:0"></i><i style="height:25%"></i><i style="height:0"></i><i style="height:0"></i><i style="height:40%"></i><i style="height:0"></i><i style="height:0"></i></div>
           <div class="cfoot"><span class="upd">Updated 3d ago</span><span class="open">Open<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
         </div>
-
-        <!-- Enablers (empty) -->
         <div class="card">
-          <div class="chead">
-            <span class="av">EN</span>
-            <div><div class="cname">Enablers</div><div class="cmeta">enablers.io</div></div>
-            <span class="status idle"><span class="d"></span>No content</span>
-          </div>
+          <div class="chead"><span class="av">EN</span><div><div class="cname">Enablers</div><div class="cmeta">enablers.io</div></div><span class="status idle"><span class="d"></span>No content</span></div>
           <div class="empty"><span>No content yet</span><span class="add"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>Add campaign</span></div>
           <div class="cfoot"><span class="upd">Created 5d ago</span><span class="open">Set up<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
         </div>
-
-        <!-- XLerate (empty) -->
         <div class="card">
-          <div class="chead">
-            <span class="av">XL</span>
-            <div><div class="cname">XLerate</div><div class="cmeta">xlerate.financial</div></div>
-            <span class="status idle"><span class="d"></span>No content</span>
-          </div>
+          <div class="chead"><span class="av">XL</span><div><div class="cname">XLerate</div><div class="cmeta">xlerate.financial</div></div><span class="status idle"><span class="d"></span>No content</span></div>
           <div class="empty"><span>No content yet</span><span class="add"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>Add campaign</span></div>
           <div class="cfoot"><span class="upd">Created 5d ago</span><span class="open">Set up<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
         </div>
-
-        <!-- GLACIS (empty) -->
         <div class="card">
-          <div class="chead">
-            <span class="av">GL</span>
-            <div><div class="cname">GLACIS</div><div class="cmeta">glacis.com</div></div>
-            <span class="status idle"><span class="d"></span>No content</span>
-          </div>
+          <div class="chead"><span class="av">GL</span><div><div class="cname">GLACIS</div><div class="cmeta">glacis.com</div></div><span class="status idle"><span class="d"></span>No content</span></div>
           <div class="empty"><span>No content yet</span><span class="add"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>Add campaign</span></div>
           <div class="cfoot"><span class="upd">Created 6d ago</span><span class="open">Set up<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
         </div>
-
-        <!-- TAB Import/Export (empty) -->
         <div class="card">
-          <div class="chead">
-            <span class="av">TA</span>
-            <div><div class="cname">TAB LLC Import/Export</div><div class="cmeta">tab-importexport.com</div></div>
-            <span class="status idle"><span class="d"></span>No content</span>
-          </div>
+          <div class="chead"><span class="av">TA</span><div><div class="cname">TAB LLC Import/Export</div><div class="cmeta">tab-importexport.com</div></div><span class="status idle"><span class="d"></span>No content</span></div>
           <div class="empty"><span>No content yet</span><span class="add"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>Add campaign</span></div>
           <div class="cfoot"><span class="upd">Created 6d ago</span><span class="open">Set up<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
         </div>
-
-        <!-- New client ghost -->
-        <a class="card" style="text-decoration:none;align-items:center;justify-content:center;border-style:dashed;color:var(--t3);min-height:210px;gap:10px">
+        <div class="card">
+          <div class="chead"><span class="av">PR</span><div><div class="cname">Precision Safe Sidewalks</div><div class="cmeta">precisionsafesidewalks.com</div></div><span class="status idle"><span class="d"></span>No content</span></div>
+          <div class="empty"><span>No content yet</span><span class="add"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>Add campaign</span></div>
+          <div class="cfoot"><span class="upd">Created 7d ago</span><span class="open">Set up<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+        </div>
+        <a class="card" href="#" style="text-decoration:none;align-items:center;justify-content:center;border-style:dashed;color:var(--t3);min-height:210px;gap:10px">
           <span class="av" style="background:transparent;border-style:dashed"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span>
           <span style="font-size:13.5px;font-weight:500;color:var(--t2)">Add a new client</span>
         </a>
