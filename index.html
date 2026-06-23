@@ -302,7 +302,7 @@
     <div class="see-cta">
       <button class="btn btn--amber" type="button" id="seeScore">See my score →</button>
     </div>
-    <svg class="see-arrow" id="seeArrow" viewBox="0 0 230 255" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <svg class="see-arrow" id="seeArrow" viewBox="0 0 230 255" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <path d="M17.0067 44.3027C1.95895 75.4465 13.7526 112.909 36.9631 136.681C62.552 162.961 100.106 173.712 135.364 179.19C159.381 182.911 183.5 184.706 207.668 184.379C214.177 184.273 214.135 174.16 207.625 174.266C187.202 174.406 166.848 173.261 146.705 170.582C128.987 168.29 111.393 164.909 94.434 159.243C63.9979 149.063 35.4113 129.514 24.4533 98.1497C19.0454 82.3424 18.377 64.5969 25.8128 49.4712C27.0375 47.0245 26.4236 44.0296 23.923 42.6089C21.6185 41.1342 18.2314 41.8561 17.0067 44.3027Z" fill="#F9AC24"/>
       <path d="M189.023 217.781C199.249 205.895 209.726 194.15 220.202 182.406C222.799 179.581 221.557 175.072 217.88 173.975C212.811 172.418 207.918 169.969 203.647 166.715C198.822 162.982 194.903 157.944 189.936 154.46C187.773 152.736 184.156 154.154 183.074 156.35C181.653 158.851 182.855 161.684 184.964 163.212C189.985 166.892 193.957 172.126 198.978 175.806C204 179.485 209.535 181.969 215.3 183.756C214.544 181.011 213.735 178.07 212.979 175.325C202.502 187.069 192.08 199.01 181.8 210.7C177.424 215.491 184.701 222.768 189.023 217.781Z" fill="#F9AC24"/>
     </svg>
@@ -732,18 +732,20 @@
   if(!arrow||!btn||!see) return;
   function place(){
     var sr=see.getBoundingClientRect(), br=btn.getBoundingClientRect();
-    // arrowhead tip ~ (0.95 across, 0.72 down) of the SVG -> just left of the button, at its mid-height
-    var HX=(br.left-sr.left)-16;
-    var HY=(br.top-sr.top)+br.height*0.5;
-    // tail (~0.074 across) should land under the right side of the word "See"
-    var wr=word?word.getBoundingClientRect():null;
-    var TX=wr?((wr.left-sr.left)+wr.width*0.7):(HX-200);
-    var W=(HX-TX)/0.876;                       // size the arrow so it spans from under "See" to the button
-    W=Math.max(160,Math.min(320,W));
-    var ah=W*255/230;
-    arrow.style.width=W+'px';
-    arrow.style.left=(HX-0.95*W)+'px';
-    arrow.style.top=(HY-0.72*ah)+'px';
+    var h2=word?word.parentElement:null;
+    var wr=word?word.getBoundingClientRect():null, h2r=h2?h2.getBoundingClientRect():null;
+    // SVG anchor points in viewBox units: tail start (17,44), arrowhead tip (216,183)
+    var TXvb=17,TYvb=44,HXvb=216,HYvb=183,VBW=230,VBH=255;
+    var TX=wr?((wr.left-sr.left)+wr.width*0.72):((br.left-sr.left)-200); // tail under right of "See"
+    var TY=h2r?((h2r.bottom-sr.top)+10):((br.top-sr.top)-90);            // just below the headline (no overlap)
+    var HX=(br.left-sr.left)-16;                                        // arrowhead just left of the button
+    var HY=(br.top-sr.top)+br.height*0.5;                              // at the button's mid-height
+    var sx=(HX-TX)/(HXvb-TXvb), sy=(HY-TY)/(HYvb-TYvb);                // px per viewBox unit (allowed to differ)
+    if(sx<=0||sy<=0) return;
+    arrow.style.width=(sx*VBW)+'px';
+    arrow.style.height=(sy*VBH)+'px';
+    arrow.style.left=(TX-TXvb*sx)+'px';
+    arrow.style.top=(TY-TYvb*sy)+'px';
     arrow.classList.add('in');
   }
   place(); window.addEventListener('resize',place); window.addEventListener('load',place);
