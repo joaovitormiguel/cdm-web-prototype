@@ -101,6 +101,8 @@
   #see > h2, #see > .lead, #see > .see-cta{ position:relative; z-index:1 }
   .see-bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.2; z-index:0; pointer-events:none;
     -webkit-mask-image:radial-gradient(125% 95% at 50% 42%, #000 28%, transparent 82%); mask-image:radial-gradient(125% 95% at 50% 42%, #000 28%, transparent 82%) }
+  .see-arrow{ position:absolute; left:0; top:0; width:clamp(80px,9vw,138px); height:auto; pointer-events:none; z-index:1; opacity:0; transition:opacity .5s ease }
+  .see-arrow.in{ opacity:.95 }
   .qpop{ position:absolute; right:clamp(16px,4vw,56px); top:clamp(110px,20vh,220px); z-index:6; width:min(300px,76vw);
     background:rgba(44,44,48,.95); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
     border:1px solid rgba(249,172,36,.5); border-radius:16px 16px 4px 16px; padding:16px 18px 15px;
@@ -300,6 +302,10 @@
     <div class="see-cta">
       <button class="btn btn--amber" type="button" id="seeScore">See my score →</button>
     </div>
+    <svg class="see-arrow" id="seeArrow" viewBox="0 0 230 255" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M17.0067 44.3027C1.95895 75.4465 13.7526 112.909 36.9631 136.681C62.552 162.961 100.106 173.712 135.364 179.19C159.381 182.911 183.5 184.706 207.668 184.379C214.177 184.273 214.135 174.16 207.625 174.266C187.202 174.406 166.848 173.261 146.705 170.582C128.987 168.29 111.393 164.909 94.434 159.243C63.9979 149.063 35.4113 129.514 24.4533 98.1497C19.0454 82.3424 18.377 64.5969 25.8128 49.4712C27.0375 47.0245 26.4236 44.0296 23.923 42.6089C21.6185 41.1342 18.2314 41.8561 17.0067 44.3027Z" fill="#F9AC24"/>
+      <path d="M189.023 217.781C199.249 205.895 209.726 194.15 220.202 182.406C222.799 179.581 221.557 175.072 217.88 173.975C212.811 172.418 207.918 169.969 203.647 166.715C198.822 162.982 194.903 157.944 189.936 154.46C187.773 152.736 184.156 154.154 183.074 156.35C181.653 158.851 182.855 161.684 184.964 163.212C189.985 166.892 193.957 172.126 198.978 175.806C204 179.485 209.535 181.969 215.3 183.756C214.544 181.011 213.735 178.07 212.979 175.325C202.502 187.069 192.08 199.01 181.8 210.7C177.424 215.491 184.701 222.768 189.023 217.781Z" fill="#F9AC24"/>
+    </svg>
   </section>
 
   <!-- PROOF — Bitfreighter case study -->
@@ -612,6 +618,7 @@
 .ss-ev .s{ font-size:13px; flex:1; color:rgba(255,255,255,.9) }
 .ss-ev .p{ font-size:12px; font-weight:700; color:var(--amber,#F9AC24) }
 .ss-foot{ padding:18px 24px; border-top:1px solid rgba(255,255,255,.08); font-size:12px; color:rgba(255,255,255,.55); line-height:1.5 }
+.ss-foot b{ color:#fff; font-weight:700 }
 .ss-foot a{ color:var(--amber,#F9AC24); display:inline-block; margin-top:6px; text-decoration:none }
 .ss-foot a.ss-cta{ display:inline-block; margin-top:14px; color:var(--ink,#141414); background:var(--amber,#F9AC24);
   font-family:inherit; font-weight:600; letter-spacing:.04em; font-size:15px; text-transform:uppercase; line-height:1;
@@ -662,7 +669,7 @@
   </div>
   <div class="ss-feedhead">What you've done so far</div>
   <div class="ss-feed" id="ssFeed"></div>
-  <div class="ss-foot">This is exactly what your reps would see about a real buyer.<br><a href="#contact" class="ss-cta" data-contact data-report>Get your report &rarr;</a></div>
+  <div class="ss-foot">This is exactly what your reps would see about a real buyer. <b>Want to see what a full report looks like?</b><br><a href="#contact" class="ss-cta" data-contact data-report>Get your report &rarr;</a></div>
 </aside>
 <script>
 (function(){
@@ -714,6 +721,27 @@
   if(btn) btn.addEventListener('click',open);
   closeB.addEventListener('click',shut); ov.addEventListener('click',shut);
   document.addEventListener('keydown',function(e){ if(e.key==='Escape') shut(); });
+})();
+</script>
+
+<script>
+(function(){
+  // keep the hand-drawn arrow glued between "See for yourself" and the "See my score" button at any size
+  var arrow=document.getElementById('seeArrow'), btn=document.getElementById('seeScore'), see=document.getElementById('see');
+  if(!arrow||!btn||!see) return;
+  function place(){
+    var sr=see.getBoundingClientRect(), br=btn.getBoundingClientRect(), ar=arrow.getBoundingClientRect();
+    var aw=ar.width, ah=ar.height;            // SVG elements have no offsetWidth — use the rendered box
+    if(!aw){ return; }
+    // SVG arrowhead tip ~ (0.95 across, 0.72 down) — point it just left of the button, at the button's mid-height
+    var tipX=(br.left-sr.left)-14;
+    var tipY=(br.top-sr.top)+br.height*0.5;
+    arrow.style.left=(tipX-aw*0.95)+'px';
+    arrow.style.top=(tipY-ah*0.72)+'px';
+    arrow.classList.add('in');
+  }
+  place(); window.addEventListener('resize',place); window.addEventListener('load',place);
+  setTimeout(place,200); setTimeout(place,800);
 })();
 </script>
 
