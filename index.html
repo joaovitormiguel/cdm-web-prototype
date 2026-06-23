@@ -123,8 +123,7 @@
   .bfstats b{ font-family:var(--display); font-style:italic; font-weight:800; font-size:clamp(32px,5vw,58px); color:#fff; line-height:.9 }
   .bfstats span{ margin-top:9px; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.55) }
   #proof{ background:linear-gradient(90deg, rgba(13,13,14,.96) 0%, rgba(13,13,14,.88) 30%, rgba(13,13,14,.55) 58%, rgba(13,13,14,.22) 100%), url('assets/brand/bitfreighter-bg.jpg') 70% 42%/cover no-repeat #0d0d0e; min-height:80vh; display:flex; flex-direction:column; justify-content:center; align-items:flex-start; overflow:hidden }
-  #proof .qpop{ right:clamp(340px,38vw,600px); top:clamp(54px,8.5vh,90px); border-radius:16px 16px 16px 16px }
-  #proof .qpop::after{ right:calc(50% - 8px); left:auto }
+  #proof .qpop{ right:clamp(340px,38vw,600px); top:clamp(54px,8.5vh,90px) }
   @media(max-width:760px){ #proof{ background:linear-gradient(180deg, rgba(13,13,14,.85), rgba(13,13,14,.74)), url('assets/brand/bitfreighter-bg.jpg') 60% 36%/cover no-repeat #0d0d0e; min-height:auto } }
 
   /* reel */
@@ -599,8 +598,11 @@
 .ss-num{ display:flex; align-items:flex-end; gap:9px }
 .ss-num span{ font-family:var(--display,inherit); font-style:italic; font-weight:800; font-size:60px; line-height:.8; color:#fff }
 .ss-num i{ font-style:normal; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.5); margin-bottom:6px }
-.ss-bar{ height:8px; border-radius:5px; background:#262626; margin-top:14px; overflow:hidden }
-.ss-bar i{ display:block; height:100%; width:0; background:linear-gradient(90deg,#D2564B,#e8704f); transition:width .6s ease }
+.ss-track{ position:relative; margin-top:14px; padding-right:24px }
+.ss-bar{ height:8px; border-radius:5px; background:#262626; overflow:hidden }
+.ss-bar i{ display:block; height:100%; width:0; background:linear-gradient(90deg,#F9AC24,#ff6a3d,#D2564B); transition:width .6s ease }
+.ss-fire{ position:absolute; right:0; top:50%; transform:translateY(-50%); font-size:16px; line-height:1; filter:grayscale(1); opacity:.35; transition:opacity .4s, filter .4s }
+.ss-fire.lit{ filter:none; opacity:1; text-shadow:0 0 10px rgba(255,120,40,.85) }
 .ss-tier{ margin-top:12px; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--amber,#F9AC24); font-weight:700 }
 .ss-feedhead{ padding:6px 24px; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.4) }
 .ss-feed{ flex:1; overflow-y:auto; padding:8px 24px 24px }
@@ -611,10 +613,10 @@
 .ss-ev .p{ font-size:12px; font-weight:700; color:var(--amber,#F9AC24) }
 .ss-foot{ padding:18px 24px; border-top:1px solid rgba(255,255,255,.08); font-size:12px; color:rgba(255,255,255,.55); line-height:1.5 }
 .ss-foot a{ color:var(--amber,#F9AC24); display:inline-block; margin-top:6px; text-decoration:none }
-.ss-foot a.ss-cta{ display:inline-flex; align-items:center; gap:7px; margin-top:14px; background:var(--amber,#F9AC24); color:#141414;
-  font-family:var(--display,inherit); font-style:italic; font-weight:800; text-transform:uppercase; font-size:15px; letter-spacing:.02em;
-  padding:15px 26px; border-radius:999px; box-shadow:0 10px 28px rgba(249,172,36,.28); transition:transform .2s, box-shadow .2s }
-.ss-foot a.ss-cta:hover{ transform:translateY(-2px); box-shadow:0 14px 34px rgba(249,172,36,.36) }
+.ss-foot a.ss-cta{ display:inline-block; margin-top:14px; color:var(--ink,#141414); background:var(--amber,#F9AC24);
+  font-family:inherit; font-weight:600; letter-spacing:.04em; font-size:15px; text-transform:uppercase; line-height:1;
+  padding:15px 26px; border-radius:999px; text-decoration:none; transition:transform .15s, box-shadow .15s }
+.ss-foot a.ss-cta:hover{ transform:translateY(-2px); box-shadow:0 10px 30px rgba(249,172,36,.3) }
 /* ── Contact modal (rebuilt from championdigitalmedia.com, Champion-styled) ── */
 .cm-overlay{ position:fixed; inset:0; background:rgba(8,8,8,.66); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); opacity:0; pointer-events:none; transition:opacity .3s; z-index:120 }
 .cm-overlay.open{ opacity:1; pointer-events:auto }
@@ -655,7 +657,7 @@
   </div>
   <div class="ss-score">
     <div class="ss-num"><span id="ssScore">0</span><i>intent score</i></div>
-    <div class="ss-bar"><i id="ssBar"></i></div>
+    <div class="ss-track"><div class="ss-bar"><i id="ssBar"></i></div><span class="ss-fire" id="ssFire">🔥</span></div>
     <div class="ss-tier" id="ssTier">Warming up</div>
   </div>
   <div class="ss-feedhead">What you've done so far</div>
@@ -675,13 +677,13 @@
   document.getElementById('ssName').textContent=name;
   document.getElementById('ssRole').textContent=roleText;
   document.getElementById('ssAv').textContent=inits(name);
-  var feed=document.getElementById('ssFeed'),scoreEl=document.getElementById('ssScore'),barEl=document.getElementById('ssBar'),tierEl=document.getElementById('ssTier');
+  var feed=document.getElementById('ssFeed'),scoreEl=document.getElementById('ssScore'),barEl=document.getElementById('ssBar'),tierEl=document.getElementById('ssTier'),fireEl=document.getElementById('ssFire');
   // Real Champortal Watcher weights — page_view 5 · 30s on page 10 · 75% scroll 15 · video 20 · CTA 25 · form 30. HOT at 50.
   var score=0, events=[], isOpen=false;
   function z(n){ return (n<10?'0':'')+n; }
   function nowStr(){ var d=new Date(); return z(d.getHours())+':'+z(d.getMinutes())+':'+z(d.getSeconds()); }
   function tierName(v){ return v<25?'New visitor':(v<50?'Warming up':'Hot → your reps would call now'); }
-  function paint(){ scoreEl.textContent=score; barEl.style.width=Math.min(100,score)+'%'; tierEl.textContent=tierName(score); }
+  function paint(){ scoreEl.textContent=score; var hot=score>=50; barEl.style.width=Math.min(100,score/50*100)+'%'; if(fireEl) fireEl.classList.toggle('lit',hot); tierEl.textContent=tierName(score); }
   function rowEl(ev){ var r=document.createElement('div'); r.className='ss-ev'; r.innerHTML='<span class="t">'+ev.t+'</span><span class="s">'+ev.s+'</span><span class="p">+'+ev.p+'</span>'; return r; }
   function track(kind,label,pts){
     var ev={t:nowStr(),s:label,p:pts}; events.push(ev); score+=pts;
@@ -724,8 +726,8 @@
     if(!anchor||!proof) return;
     if(window.innerWidth<=760){ el.style.left=el.style.top=el.style.right=el.style.bottom=''; return; }
     var pr=proof.getBoundingClientRect(), ar=anchor.getBoundingClientRect();
-    var left=(ar.left-pr.left)+ar.width/2-el.offsetWidth/2;
-    var top=(ar.top-pr.top)-el.offsetHeight-18;
+    var left=(ar.left-pr.left)+ar.width/2-el.offsetWidth+32; // tail (bottom-right) points down at the figure; bubble sits up-left
+    var top=(ar.top-pr.top)-el.offsetHeight-34;
     el.style.left=Math.max(16,left)+'px'; el.style.top=Math.max(12,top)+'px'; el.style.right='auto'; el.style.bottom='auto';
   }
   place(); window.addEventListener('resize',place); setTimeout(place,300); setTimeout(place,1200);
