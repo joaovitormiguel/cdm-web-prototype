@@ -828,7 +828,7 @@
     grid.appendChild(t);
   });
   function openVimeo(id){ slot.innerHTML='<iframe src="https://player.vimeo.com/video/'+id+'?autoplay=1&title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>'; openVbox(); }
-  function openReel(){ slot.innerHTML='<video src="assets/reel.mp4" controls autoplay playsinline></video>'; openVbox(); }
+  function openReel(){ openVimeo('1176623050'); }
   function openVbox(){ vbox.classList.add('open'); vbox.setAttribute('aria-hidden','false'); }
   function closeVbox(){ vbox.classList.remove('open'); vbox.setAttribute('aria-hidden','true'); slot.innerHTML=''; }
   function openGal(){ gallery.classList.add('open'); gallery.setAttribute('aria-hidden','false'); }
