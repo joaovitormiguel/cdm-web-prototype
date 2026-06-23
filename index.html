@@ -97,6 +97,10 @@
   #see .statement{ font-size:clamp(46px,7vw,108px); max-width:18ch; margin-left:auto; margin-right:auto }
   #see .lead{ max-width:48ch; margin-left:auto; margin-right:auto }
   .see-cta{ display:inline-block; margin-top:34px }
+  #see{ overflow:hidden }
+  #see > h2, #see > .lead, #see > .see-cta{ position:relative; z-index:1 }
+  .see-bg{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.2; z-index:0; pointer-events:none;
+    -webkit-mask-image:radial-gradient(125% 95% at 50% 42%, #000 28%, transparent 82%); mask-image:radial-gradient(125% 95% at 50% 42%, #000 28%, transparent 82%) }
   .qpop{ position:absolute; right:clamp(16px,4vw,56px); top:clamp(110px,20vh,220px); z-index:6; width:min(300px,76vw);
     background:rgba(44,44,48,.95); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
     border:1px solid rgba(249,172,36,.5); border-radius:16px 16px 4px 16px; padding:16px 18px 15px;
@@ -290,6 +294,7 @@
 <main>
   <!-- SEE — live score -->
   <section class="section ink" id="see">
+    <video class="see-bg" src="assets/watcher-bg.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
     <h2 class="statement display">See <span class="amber-text">for yourself.</span></h2>
     <p class="lead">Watch your own score in real time. That's the system, running on you right now.</p>
     <div class="see-cta">
@@ -633,7 +638,7 @@
     <button class="ss-close" id="ssClose" aria-label="Close">&times;</button>
   </div>
   <div class="ss-score">
-    <div class="ss-num"><span id="ssScore">0</span><i>/ 100 intent</i></div>
+    <div class="ss-num"><span id="ssScore">0</span><i>intent score</i></div>
     <div class="ss-bar"><i id="ssBar"></i></div>
     <div class="ss-tier" id="ssTier">Warming up</div>
   </div>
@@ -654,21 +659,42 @@
   document.getElementById('ssName').textContent=name;
   document.getElementById('ssRole').textContent=roleText;
   document.getElementById('ssAv').textContent=inits(name);
-  var events=[['now','Landed on championdigitalmedia.com',5],['now','Watched the hero film to the end',22],['now','Scrolled the whole story',14],['now','Opened the Bitfreighter case study',18],['now','Clicked “See my score”',12],['live','Reading this panel right now',16]];
   var feed=document.getElementById('ssFeed'),scoreEl=document.getElementById('ssScore'),barEl=document.getElementById('ssBar'),tierEl=document.getElementById('ssTier');
-  function tier(v){ return v<35?'Warming up':(v<70?'Engaged — worth a look':'Hot — your reps would call now'); }
-  var started=false;
-  function run(){ if(started)return; started=true; var score=0,i=0;
-    (function step(){ if(i>=events.length)return; var e=events[i++];
-      var r=document.createElement('div'); r.className='ss-ev';
-      r.innerHTML='<span class="t">'+e[0]+'</span><span class="s">'+e[1]+'</span><span class="p">+'+e[2]+'</span>';
-      feed.appendChild(r); requestAnimationFrame(function(){ r.classList.add('in'); });
-      score=Math.min(100,score+e[2]); scoreEl.textContent=score; barEl.style.width=score+'%'; tierEl.textContent=tier(score);
-      setTimeout(step,1100);
-    })(); }
-  function open(){ side.classList.add('open'); ov.classList.add('open'); side.setAttribute('aria-hidden','false'); run(); }
-  function shut(){ side.classList.remove('open'); ov.classList.remove('open'); side.setAttribute('aria-hidden','true'); }
-  btn.addEventListener('click',open); closeB.addEventListener('click',shut); ov.addEventListener('click',shut);
+  // Real Champortal Watcher weights — page_view 5 · 30s on page 10 · 75% scroll 15 · video 20 · CTA 25 · form 30. HOT at 50.
+  var score=0, events=[], isOpen=false;
+  function z(n){ return (n<10?'0':'')+n; }
+  function nowStr(){ var d=new Date(); return z(d.getHours())+':'+z(d.getMinutes())+':'+z(d.getSeconds()); }
+  function tierName(v){ return v<25?'New visitor':(v<50?'Warming up':'Hot — your reps would call now'); }
+  function paint(){ scoreEl.textContent=score; barEl.style.width=Math.min(100,score)+'%'; tierEl.textContent=tierName(score); }
+  function rowEl(ev){ var r=document.createElement('div'); r.className='ss-ev'; r.innerHTML='<span class="t">'+ev.t+'</span><span class="s">'+ev.s+'</span><span class="p">+'+ev.p+'</span>'; return r; }
+  function track(kind,label,pts){
+    var ev={t:nowStr(),s:label,p:pts}; events.push(ev); score+=pts;
+    if(isOpen){ var r=rowEl(ev); feed.insertBefore(r,feed.firstChild); requestAnimationFrame(function(){ r.classList.add('in'); }); paint(); }
+  }
+  function renderAll(){ feed.innerHTML=''; events.forEach(function(ev){ var r=rowEl(ev); r.classList.add('in'); feed.insertBefore(r,feed.firstChild); }); paint(); }
+  // ---- real-action signals ----
+  setTimeout(function(){ track('page_view','Landed on the page',5); },500);
+  setTimeout(function(){ track('time_on_page','Spent 30 seconds on the page',10); },30000);
+  var s75=false, vidHero=false, stage=document.getElementById('stage');
+  window.addEventListener('scroll',function(){
+    var de=document.documentElement, sc=de.scrollTop||document.body.scrollTop, h=de.scrollHeight-de.clientHeight;
+    if(!s75 && h>0 && sc/h>=0.75){ s75=true; track('scroll_depth','Scrolled 75% down the page',15); }
+    if(!vidHero && stage){ var r=stage.getBoundingClientRect(); var p=Math.max(0,Math.min(1,-r.top/(r.height-innerHeight))); if(p>=0.5){ vidHero=true; track('video_play','Watched the hero film',20); } }
+  },{passive:true});
+  document.addEventListener('click',function(e){
+    var t=e.target;
+    var rp=t.closest('.reel-play'); if(rp){ track('video_play','Played the showreel',20); return; }
+    var gt=t.closest('.gal-tile'); if(gt){ track('video_play','Watched a project video',20); return; }
+    var c=t.closest('a.btn,button.btn,a.pill,[data-contact],#seeMore');
+    if(c){ var label=(c.textContent||'a CTA').replace(/\s+/g,' ').replace(/[→›]/g,'').trim(); track('cta_click','Clicked “'+label+'”',25); }
+  },true);
+  var formDone=false;
+  document.addEventListener('input',function(e){ if(!formDone && e.target.closest && e.target.closest('#cmForm')){ formDone=true; track('form_interaction','Started the report form',30); } });
+  // ---- panel ----
+  function open(){ isOpen=true; side.classList.add('open'); ov.classList.add('open'); side.setAttribute('aria-hidden','false'); renderAll(); }
+  function shut(){ isOpen=false; side.classList.remove('open'); ov.classList.remove('open'); side.setAttribute('aria-hidden','true'); }
+  if(btn) btn.addEventListener('click',open);
+  closeB.addEventListener('click',shut); ov.addEventListener('click',shut);
   document.addEventListener('keydown',function(e){ if(e.key==='Escape') shut(); });
 })();
 </script>
