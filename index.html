@@ -526,10 +526,21 @@
 
   V.forEach(function(v,i){
     v.addEventListener('loadedmetadata',function(){ if(isFinite(v.duration)&&v.duration>0) dur[i]=v.duration; });
-    // A brief play() is what loads + decodes the clip so the scrub can seek frames. Pause the instant
-    // playback begins so it doesn't visibly run before the user scrolls (Safari was showing that window).
-    v.addEventListener('playing', function(){ v.pause(); }, {once:true});
+    var loaded=false;
+    // A brief play() is only to load + decode the clip so the scrub can seek frames. Once decoded we
+    // hold it paused — and re-pause if Safari tries to resume (the auto-play that "won't stop").
+    v.addEventListener('loadeddata', function(){ loaded=true; v.pause(); });
+    v.addEventListener('play', function(){ if(loaded && !v._reprime) v.pause(); });
     var pp=v.play(); if(pp&&pp.catch) pp.catch(function(){});
+  });
+  // Returning from another page (e.g. the case study) restores from Safari's bfcache and drops the
+  // video decode context, which froze the scrub. Re-decode the clips briefly on restore.
+  window.addEventListener('pageshow', function(e){
+    if(!e.persisted) return;
+    V.forEach(function(v){ v._reprime=true; var pp=v.play();
+      var done=function(){ setTimeout(function(){ v.pause(); v._reprime=false; }, 60); };
+      if(pp&&pp.then){ pp.then(done).catch(function(){ v._reprime=false; }); } else { done(); }
+    });
   });
 
   function clamp(v,a,b){return v<a?a:(v>b?b:v);}
