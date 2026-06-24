@@ -35,6 +35,32 @@ server.py          tiny static server for smooth local preview
 - `--stage` — scroll distance that drives the clip (bigger = slower pull-out).
 - `map(p, 0.60, 0.92)` in the script — when the headline reveals.
 
+## Contact form → Slack
+
+The contact modal posts to a serverless function that forwards the submission to a
+Slack channel via an Incoming Webhook. The webhook URL is a **secret** — it lives only
+in an env var, never in `index.html`.
+
+- `api/contact.js` — serverless endpoint (Vercel). Validates the post, drops honeypot
+  hits, and POSTs a formatted Block Kit message to Slack.
+- The frontend (`#cmForm` in `index.html`) sends JSON to `/api/contact` and shows the
+  success / error state inline.
+
+**Setup**
+
+1. In Slack: create an app → enable **Incoming Webhooks** → add one for the target
+   channel → copy the `https://hooks.slack.com/services/...` URL.
+2. Set `SLACK_WEBHOOK_URL` in your host's env vars (Vercel → Project → Settings →
+   Environment Variables). For local dev, copy `.env.example` to `.env` and run
+   `vercel dev`.
+3. Deploy. Submit the form — the lead lands in Slack.
+
+> **Netlify?** Move `api/contact.js` to `netlify/functions/contact.js`, change
+> `export default async function handler(req,res)` to the Netlify
+> `export async function handler(event)` signature (read `event.body`, return
+> `{ statusCode, body }`), and either post the form to `/.netlify/functions/contact`
+> or add a redirect from `/api/contact`.
+
 ## Type
 
 - **Azeret Mono** (system) loads from Google Fonts.

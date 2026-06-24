@@ -804,11 +804,33 @@
     e.preventDefault();
     if(form._honey && form._honey.value) return;            // bot trap
     if(!form.checkValidity()){ form.reportValidity(); return; }
-    var btn=form.querySelector('.cm-send'); btn.disabled=true; btn.textContent='Sending…';
-    // Static prototype — no backend wired. Show success; hook to /api/contact when hosted.
-    setTimeout(function(){
-      form.innerHTML='<div class="cm-done"><div class="cm-done-ic">&#10003;</div><h4>You\'re on the radar.</h4><p>Thanks &mdash; a Champion strategist will reach out within one business day.</p></div>';
-    },650);
+    var btn=form.querySelector('.cm-send'),
+        statusEl=document.getElementById('cmStatus'),
+        reportMode=msgField && msgField.style.display==='none';
+    btn.disabled=true; btn.textContent='Sending…';
+    if(statusEl) statusEl.textContent='';
+    var payload={
+      first_name: form.first_name ? form.first_name.value : '',
+      last_name:  form.last_name  ? form.last_name.value  : '',
+      company:    form.company    ? form.company.value    : '',
+      email:      form.email      ? form.email.value      : '',
+      message:    reportMode ? '' : (msgInput ? msgInput.value : ''),
+      form_type:  reportMode ? 'report' : 'contact',
+      _honey:     form._honey ? form._honey.value : ''
+    };
+    fetch('/api/contact',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(payload)
+    }).then(function(r){ return r.json().catch(function(){ return {ok:r.ok}; }); })
+      .then(function(d){
+        if(!d || !d.ok) throw new Error((d && d.error) || 'Something went wrong.');
+        form.innerHTML='<div class="cm-done"><div class="cm-done-ic">&#10003;</div><h4>You\'re on the radar.</h4><p>Thanks &mdash; a Champion strategist will reach out within one business day.</p></div>';
+      })
+      .catch(function(err){
+        btn.disabled=false; btn.innerHTML='Send <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>';
+        if(statusEl) statusEl.textContent=(err && err.message) || 'Something went wrong. Please try again.';
+      });
   });
 })();
 </script>
