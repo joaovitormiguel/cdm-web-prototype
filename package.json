@@ -1,0 +1,10 @@
+{
+  "name": "cdm-web-prototype",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Champion Digital Media landing-page prototype with a Slack-webhook contact form.",
+  "engines": {
+    "node": ">=18"
+  }
+}
