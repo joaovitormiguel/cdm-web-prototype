@@ -526,8 +526,10 @@
 
   V.forEach(function(v,i){
     v.addEventListener('loadedmetadata',function(){ if(isFinite(v.duration)&&v.duration>0) dur[i]=v.duration; });
-    // prime each clip for frame-seeking; don't reset currentTime here (the scrub loop owns it)
-    var pp=v.play(); if(pp&&pp.then) pp.then(function(){v.pause();}).catch(function(){});
+    // A brief play() is what loads + decodes the clip so the scrub can seek frames. Pause the instant
+    // playback begins so it doesn't visibly run before the user scrolls (Safari was showing that window).
+    v.addEventListener('playing', function(){ v.pause(); }, {once:true});
+    var pp=v.play(); if(pp&&pp.catch) pp.catch(function(){});
   });
 
   function clamp(v,a,b){return v<a?a:(v>b?b:v);}
