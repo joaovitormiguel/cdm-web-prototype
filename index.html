@@ -698,6 +698,8 @@
   var feed=document.getElementById('ssFeed'),scoreEl=document.getElementById('ssScore'),barEl=document.getElementById('ssBar'),tierEl=document.getElementById('ssTier'),fireEl=document.getElementById('ssFire');
   // Real Champortal Watcher weights — page_view 5 · 30s on page 10 · 75% scroll 15 · video 20 · CTA 25 · form 30. HOT at 50.
   var score=0, events=[], isOpen=false;
+  // Expose the live intent score + activity feed so the contact form can attach it to the Slack lead.
+  window.cdmGetScore=function(){ return { score:score, tier:tierName(score), events:events.slice() }; };
   function z(n){ return (n<10?'0':'')+n; }
   function nowStr(){ var d=new Date(); return z(d.getHours())+':'+z(d.getMinutes())+':'+z(d.getSeconds()); }
   function tierName(v){ return v<25?'New visitor':(v<50?'Warming up':'Hot → your reps would call now'); }
@@ -818,6 +820,14 @@
       form_type:  reportMode ? 'report' : 'contact',
       _honey:     form._honey ? form._honey.value : ''
     };
+    if(typeof window.cdmGetScore==='function'){
+      var sc=window.cdmGetScore();
+      if(sc && sc.events && sc.events.length){
+        payload.score=sc.score;
+        payload.score_tier=sc.tier;
+        payload.activity=sc.events.map(function(ev){ return {time:ev.t, label:ev.s, points:ev.p}; });
+      }
+    }
     fetch('/api/contact',{
       method:'POST',
       headers:{'Content-Type':'application/json'},

@@ -63,6 +63,38 @@ export default async function handler(req, res) {
       text: { type: 'mrkdwn', text: `*Message:*\n${message}` },
     });
   }
+
+  // Intent score + activity feed (present when the lead converted from the score sidebar)
+  const score = Number.isFinite(Number(body.score)) ? Number(body.score) : null;
+  const scoreTier = clean(body.score_tier, 120);
+  const activity = Array.isArray(body.activity) ? body.activity.slice(0, 20) : [];
+
+  if (score !== null) {
+    blocks.push({ type: 'divider' });
+    blocks.push({
+      type: 'section',
+      text: {
+        type: 'mrkdwn',
+        text: `*Intent score:* *${score}*${scoreTier ? `  ·  ${scoreTier}` : ''}`,
+      },
+    });
+  }
+  if (activity.length) {
+    const lines = activity
+      .map((a) => {
+        const t = clean(a && a.time, 20);
+        const label = clean(a && a.label, 200);
+        const pts = Number.isFinite(Number(a && a.points)) ? Number(a.points) : null;
+        return `• ${t ? `\`${t}\`  ` : ''}${label}${pts !== null ? `  *+${pts}*` : ''}`;
+      })
+      .join('\n')
+      .slice(0, 2900); // Slack section text cap is 3000 chars
+    blocks.push({
+      type: 'section',
+      text: { type: 'mrkdwn', text: `*What they did:*\n${lines}` },
+    });
+  }
+
   blocks.push({
     type: 'context',
     elements: [{ type: 'mrkdwn', text: `Submitted via championdigitalmedia.com` }],
