@@ -59,6 +59,7 @@
   .btestim{ font-size:13px; line-height:1.5; color:rgba(247,243,233,.8); font-style:italic; max-width:40ch;
     border-left:2px solid var(--amber); padding-left:14px }
   .beat--r .btestim{ border-left:none; border-right:2px solid var(--amber); padding-left:0; padding-right:14px }
+  .br-m{ display:none }   /* mobile-only line break */
   .testim-logo{ display:block; height:22px; width:auto; max-width:150px; margin-top:10px; opacity:.92 }
   .beat--r .testim-logo{ margin-left:auto }
   .testim-logo[src*="enablers"], .testim-logo[src*="ez"]{ height:13px }
@@ -228,7 +229,7 @@
   @media (max-width:760px){
     :root{ --stage:540vh }
     .beat{ width:88vw }
-    .btestim br{ display:none }
+    .br-d{ display:none } .br-m{ display:inline }
     .hero__video{ object-position:60% 42% }
     #proof .qpop{ position:relative; right:auto; left:auto; top:auto; bottom:auto; width:auto; max-width:340px; margin:30px 0 0 }
     .nav .links a:not(.pill){ display:none }
@@ -275,17 +276,17 @@
       <div class="beat beat--r" id="b2">
         <h1 class="display"><span class="bnum">1</span>Become <span class="amber">impossible to ignore.</span></h1>
         <p class="bsub">Brand creative that finally matches the level you operate at. Not for vanity. To earn the click from your ideal buyer.</p>
-        <p class="btestim">&ldquo;Oh my effing goodness.<br>That is great.&rdquo; <b>Chip Reeves</b><img class="testim-logo" src="assets/logos/enablers.svg" alt="Enablers"></p>
+        <p class="btestim">&ldquo;Oh my effing goodness.<br class="br-d">That is great.&rdquo; <b>Chip Reeves</b><img class="testim-logo" src="assets/logos/enablers.svg" alt="Enablers"></p>
       </div>
       <div class="beat beat--l" id="b3">
         <h1 class="display"><span class="bnum">2</span>Watch <span class="amber">who leans in.</span></h1>
         <p class="bsub">Clicks, scrolls, and watches, tracked to the name. Software we built ourselves, because nothing off the shelf could do it.</p>
-        <p class="btestim">&ldquo;We couldn&rsquo;t live without it.&rdquo; <b>Chad O&rsquo;Shields</b><img class="testim-logo" src="assets/logos/ez-white.png" alt="EZ TMS"></p>
+        <p class="btestim">&ldquo;We couldn&rsquo;t live <br class="br-m">without it.&rdquo; <b>Chad O&rsquo;Shields</b><img class="testim-logo" src="assets/logos/ez-white.png" alt="EZ TMS"></p>
       </div>
       <div class="beat beat--r" id="b4">
         <h1 class="display"><span class="bnum">3</span>Know <span class="amber">who to call.</span></h1>
         <p class="bsub">Every engaged buyer, named and scored. Ranked by how ready they are to buy. Handed to your reps warm, before the first word.</p>
-        <p class="btestim">&ldquo;Champion does what they say<br>they&rsquo;re going to do.&rdquo; <b>Eric Weidl</b><img class="testim-logo" src="assets/logos/dock411.svg" alt="Dock411"></p>
+        <p class="btestim">&ldquo;Champion does what they say<br class="br-d">they&rsquo;re going to do.&rdquo; <b>Eric Weidl</b><img class="testim-logo" src="assets/logos/dock411.svg" alt="Dock411"></p>
         <div class="brow"><a class="btn btn--amber" href="#contact" data-contact>Get your custom plan →</a></div>
       </div>
       <div class="cue" id="cue"><span>Scroll</span><span class="bar"></span></div>
