@@ -713,7 +713,7 @@
   document.getElementById('ssRole').textContent=roleText;
   document.getElementById('ssAv').textContent=inits(name);
   var feed=document.getElementById('ssFeed'),scoreEl=document.getElementById('ssScore'),barEl=document.getElementById('ssBar'),tierEl=document.getElementById('ssTier'),fireEl=document.getElementById('ssFire');
-  // Real Champortal Watcher weights — page_view 5 · 30s on page 10 · 75% scroll 15 · video 20 · CTA 25 · form 30. HOT at 50.
+  // Lightweight intent scoring for this demo — each signal adds points; "hot" at 50.
   var score=0, events=[], isOpen=false;
   // Expose the live intent score + activity feed so the contact form can attach it to the Slack lead.
   window.cdmGetScore=function(){ return { score:score, tier:tierName(score), events:events.slice() }; };
